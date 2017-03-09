@@ -109,8 +109,11 @@ class MainPage extends Component {
     });
   }
 
+  componentDidMount() {
+    
+  }
 
-  renderForm(components) {
+  async renderForm(components) {
     console.log('components', components);
 
     var menuOptions;
