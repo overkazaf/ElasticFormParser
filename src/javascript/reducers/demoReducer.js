@@ -1,13 +1,17 @@
 import Immutable from 'immutable';
 
-const $$initState = Immutable.fromJS({
-    body: null,
-});
+const $$initState = {
+    formData: null,
+};
 
 export const demoReducer = (state = $$initState, action) => {
     switch (action.type) {
-        case 'UPDATE':{
-            return state.set('body', state.get('payload'));
+        case 'UPDATE_VIEW':{
+        	let newState = Object.assign({}, state);
+        	newState.formData = action.payload;
+
+        	console.log('newState', newState);
+            return newState;
         }
         default: return state;
     }

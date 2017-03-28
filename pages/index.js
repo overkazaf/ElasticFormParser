@@ -6,154 +6,127 @@ import NoSSR from 'react-no-ssr';
 import Immutable from 'immutable';
 import Rx from 'rxjs/Rx';
 import antdStyle from '../src/css/index.min.css';
+import RenderEngine from '../src/javascript/engine/RenderEngine';
 
-import { Menu, Dropdown, Button, Icon, message } from 'antd';
+import mock from '../src/javascript/mock/data';
 
-
-const esprima = require('esprima');
+import { 
+ Row,
+ Col,
+} from 'antd';
 
 class MainPage extends Component {
-  static async getInitialProps ({ store, isServer }) {
-
-    const res = await fetch('https://api.github.com/repos/developit/preact');
-    const json = await res.json();
+  static getInitialProps ({ store, isServer }) {
 
     store.subscribe(() => {
       console.log(store.getState());
     });
 
-    return Immutable.fromJS({ 
+
+    let that = this;
+
+    return { 
       isServer, 
       counter: 0,
-      components: [
-      {
-        key: 'comp1',
-        type: 'input',
-        props: {
-          id: 'comp1',
-            name: 'comp1',
-            label: "数量",
-            defaultValue: "0",
-            value: 1,
-            ctrlType: 'int',
-            style: 'border: 2px solid #ddd;color: #666;padding: 5px;',
-          actions: [
-            {
-              name: 'onUpdate',
-              action: 'setToTarget',
-              params: ['comp1', 'comp2'],
-              expr: '$comp1*0.55 + $comp2*0.44',
-              target: 'comp3'
-            }
-          ]
-        },
-        children: []
-      },
-      {
-        key: 'comp2',
-        type: 'input',
-        props: {
-          id: 'comp2',
-            name: 'comp2',
-            label: "单价",
-            defaultValue: "0.00",
-            value: 3.44,
-            style: 'border: 2px solid #ddd;color: #666;padding: 5px;',
-            ctrlType: 'double',
-          actions: [
-            {
-              name: 'onUpdate',
-              action: 'setToTarget',
-              params: ['comp1', 'comp2'],
-              expr: 'MUL',
-              target: 'comp3'
-            }
-          ],
-        },
-        children: []
-      },
-      {
-        key: 'comp3',
-        type: 'input',
-        props: {
-          id: 'comp3',
-            name: 'comp3',
-            label: "总价",
-            defaultValue: "0.00",
-            value: 3.44,
-            ctrlType: 'double',
-            style: 'border: 2px solid #f00;color: #666; background: #ccc;padding: 5px;',
-            locked: true,
-            readOnly: true,
-          actions: [
-          ]
-        },
-        children: []
-      },
-      {
-        key: 'comp4',
-        type: 'select',
-        props: {
-          id: 'comp4',
-            name: 'comp4',
-            label: "房租",
-            defaultValue: "0",
-            value: 0,
-            style: 'border: 2px solid #ddd;color: #666;padding: 5px;',
-            ctrlType: 'dropdown',
-          actions: [],
-        },
-        children: []
-      }
-    ]
-    });
+      data: mock.data,
+      formData: null,
+    };
   }
 
   componentDidMount() {
-    
   }
 
-  async renderForm(components) {
-    console.log('components', components);
+  componentWillReceiveProps(nextProps) {
+  }
 
-    var menuOptions;
+  renderFormView() {
 
-    components && components.map(function(comp) {
-      let { actions } = comp.props;
-      if (actions.length) {
-        menuOptions = actions[0].params.map(function(ac, i) {
-          return (
-            <Menu.Item key="${i}">${i+1}st menu item</Menu.Item>
-          )
-        });
-      }
-    });
-  
-    console.log(menuOptions);
+    let {
+      data,
+    } = this.props;
 
-    let menu = (
-      <Menu onClick={null}>
-        {menuOptions}
-      </Menu>
-    )
+    let {
+      id,
+      name,
+      label,
+      creater,
+      createTS,
+      style,
+      eventList,
+      header,
+      body,
+      footer,
+    } = data;
+
+    let formProps = { eventList, header, body, footer };
+
+    console.log(data);
+
+    const userMap = {
+      'u-001': 'Admin',
+    };
 
     return (
-      <Dropdown overlay={menu}>
-        <Button style={{ marginLeft: 8 }}>
-          Button <Icon type="down" />
-        </Button>
-      </Dropdown>
+      <div id="form-view" 
+        style={style} 
+      >
+        <div className="form-header">
+          <h1 style={{textAlign: 'center'}}>{label}</h1>
+          <b>{id}, {name}, {userMap[creater]}</b>
+          <Row type="flex">
+          {
+            header.components.map((item, index) => {
+              let {
+                type,
+                props,
+              } = item;
+
+              return (
+                <Col span={8}>
+                  <div key={`comp-${index}`}>
+                    {RenderEngine.renderComponent(type, props)}
+                  </div>
+                </Col>
+              )
+            })
+          }
+          </Row>
+        </div>
+        <div className="form-body">
+          FormViewBody, 
+          {
+            body.components.map((item, index) => {
+              return (
+                <span>${index}</span>
+              )
+            })
+          }
+        </div>
+        <div className="form-footer">
+          {
+            footer.components.map((item, index) => {
+              let {
+                type,
+                props,
+              } = item;
+
+              return (
+                <span key={`comp-${index}`}>
+                  {RenderEngine.renderComponent(type, props)}
+                </span>
+              )
+            })
+          }
+        </div>
+      </div>
     )
   }
 
   render() {
-
-
-
     return (
       <div className="p-main">
         <style dangerouslySetInnerHTML={{ __html: antdStyle}} />
-        {this.renderForm(this.props.components)}
+        {this.renderFormView()}
       </div>
     )
   }

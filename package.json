@@ -1,5 +1,5 @@
 {
-  "name": "IntelliViewer",
+  "name": "IntelliParser",
   "version": "1.0.0",
   "description": "One of the components for IntelliForm, which allows user to view and controll existing IntelliForm instances",
   "main": "index.js",

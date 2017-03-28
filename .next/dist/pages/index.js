@@ -4,14 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = require('babel-runtime/regenerator');
-
-var _regenerator2 = _interopRequireDefault(_regenerator);
-
-var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
-
-var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -62,11 +54,20 @@ var _indexMin = require('../src/css/index.min.css');
 
 var _indexMin2 = _interopRequireDefault(_indexMin);
 
+var _RenderEngine = require('../src/javascript/engine/RenderEngine');
+
+var _RenderEngine2 = _interopRequireDefault(_RenderEngine);
+
+var _data = require('../src/javascript/mock/data');
+
+var _data2 = _interopRequireDefault(_data);
+
 var _antd = require('antd');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var esprima = require('esprima');
+var _jsxFileName = '/Users/overkazaf/Desktop/codes/git/playGround/IntelliParser/pages/index.js?entry';
+
 
 var MainPage = function (_Component) {
   (0, _inherits3.default)(MainPage, _Component);
@@ -78,150 +79,128 @@ var MainPage = function (_Component) {
   }
 
   (0, _createClass3.default)(MainPage, [{
-    key: 'renderForm',
-    value: function renderForm(components) {
-      console.log('components', components);
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {}
+  }, {
+    key: 'renderFormView',
+    value: function renderFormView() {
+      var data = this.props.data;
+      var id = data.id,
+          name = data.name,
+          label = data.label,
+          creater = data.creater,
+          createTS = data.createTS,
+          style = data.style,
+          eventList = data.eventList,
+          header = data.header,
+          body = data.body,
+          footer = data.footer;
 
-      var menuOptions;
+      var formProps = { eventList: eventList, header: header, body: body, footer: footer };
 
-      components && components.map(function (comp) {
-        var actions = comp.props.actions;
+      console.log(data);
 
-        if (actions.length) {
-          menuOptions = actions[0].params.map(function (ac, i) {
-            return _react2.default.createElement(_antd.Menu.Item, { key: '${i}' }, '$', i + 1, 'st menu item');
-          });
+      var userMap = {
+        'u-001': 'Admin'
+      };
+
+      return _react2.default.createElement('div', { id: 'form-view',
+        style: style,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 70
         }
-      });
+      }, _react2.default.createElement('div', { className: 'form-header', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 73
+        }
+      }, _react2.default.createElement('h1', { style: { textAlign: 'center' }, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 74
+        }
+      }, label), _react2.default.createElement('b', {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 75
+        }
+      }, id, ', ', name, ', ', userMap[creater]), _react2.default.createElement(_antd.Row, { type: 'flex', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 76
+        }
+      }, header.components.map(function (item, index) {
+        var type = item.type,
+            props = item.props;
 
-      console.log(menuOptions);
+        return _react2.default.createElement(_antd.Col, { span: 8, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 85
+          }
+        }, _react2.default.createElement('div', { key: 'comp-' + index, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 86
+          }
+        }, _RenderEngine2.default.renderComponent(type, props)));
+      }))), _react2.default.createElement('div', { className: 'form-body', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 95
+        }
+      }, 'FormViewBody,', body.components.map(function (item, index) {
+        return _react2.default.createElement('span', {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 100
+          }
+        }, '$', index);
+      })), _react2.default.createElement('div', { className: 'form-footer', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 105
+        }
+      }, footer.components.map(function (item, index) {
+        var type = item.type,
+            props = item.props;
 
-      var menu = _react2.default.createElement(_antd.Menu, { onClick: null }, menuOptions);
-
-      return _react2.default.createElement(_antd.Dropdown, { overlay: menu }, _react2.default.createElement(_antd.Button, { style: { marginLeft: 8 } }, 'Button ', _react2.default.createElement(_antd.Icon, { type: 'down' })));
+        return _react2.default.createElement('span', { key: 'comp-' + index, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 114
+          }
+        }, _RenderEngine2.default.renderComponent(type, props));
+      })));
     }
   }, {
     key: 'render',
     value: function render() {
-
-      return _react2.default.createElement('div', { className: 'p-main' }, _react2.default.createElement('style', { dangerouslySetInnerHTML: { __html: _indexMin2.default } }), this.renderForm(this.props.components));
+      return _react2.default.createElement('div', { className: 'p-main', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 127
+        }
+      }, _react2.default.createElement('style', { dangerouslySetInnerHTML: { __html: _indexMin2.default }, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 128
+        }
+      }), this.renderFormView());
     }
   }], [{
     key: 'getInitialProps',
-    value: function () {
-      var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(_ref2) {
-        var store = _ref2.store,
-            isServer = _ref2.isServer;
-        var res, json;
-        return _regenerator2.default.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return (0, _isomorphicFetch2.default)('https://api.github.com/repos/developit/preact');
+    value: function getInitialProps(_ref) {
+      var store = _ref.store,
+          isServer = _ref.isServer;
 
-              case 2:
-                res = _context.sent;
-                _context.next = 5;
-                return res.json();
+      store.subscribe(function () {
+        console.log(store.getState());
+      });
 
-              case 5:
-                json = _context.sent;
+      var that = this;
 
-                store.subscribe(function () {
-                  console.log(store.getState());
-                });
-
-                return _context.abrupt('return', _immutable2.default.fromJS({
-                  isServer: isServer,
-                  counter: 0,
-                  components: [{
-                    key: 'comp1',
-                    type: 'input',
-                    props: {
-                      id: 'comp1',
-                      name: 'comp1',
-                      label: "数量",
-                      defaultValue: "0",
-                      value: 1,
-                      ctrlType: 'int',
-                      style: 'border: 2px solid #ddd;color: #666;padding: 5px;',
-                      actions: [{
-                        name: 'onUpdate',
-                        action: 'setToTarget',
-                        params: ['comp1', 'comp2'],
-                        expr: '$comp1*0.55 + $comp2*0.44',
-                        target: 'comp3'
-                      }]
-                    },
-                    children: []
-                  }, {
-                    key: 'comp2',
-                    type: 'input',
-                    props: {
-                      id: 'comp2',
-                      name: 'comp2',
-                      label: "单价",
-                      defaultValue: "0.00",
-                      value: 3.44,
-                      style: 'border: 2px solid #ddd;color: #666;padding: 5px;',
-                      ctrlType: 'double',
-                      actions: [{
-                        name: 'onUpdate',
-                        action: 'setToTarget',
-                        params: ['comp1', 'comp2'],
-                        expr: 'MUL',
-                        target: 'comp3'
-                      }]
-                    },
-                    children: []
-                  }, {
-                    key: 'comp3',
-                    type: 'input',
-                    props: {
-                      id: 'comp3',
-                      name: 'comp3',
-                      label: "总价",
-                      defaultValue: "0.00",
-                      value: 3.44,
-                      ctrlType: 'double',
-                      style: 'border: 2px solid #f00;color: #666; background: #ccc;padding: 5px;',
-                      locked: true,
-                      readOnly: true,
-                      actions: []
-                    },
-                    children: []
-                  }, {
-                    key: 'comp4',
-                    type: 'select',
-                    props: {
-                      id: 'comp4',
-                      name: 'comp4',
-                      label: "房租",
-                      defaultValue: "0",
-                      value: 0,
-                      style: 'border: 2px solid #ddd;color: #666;padding: 5px;',
-                      ctrlType: 'dropdown',
-                      actions: []
-                    },
-                    children: []
-                  }]
-                }));
-
-              case 8:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function getInitialProps(_x) {
-        return _ref.apply(this, arguments);
-      }
-
-      return getInitialProps;
-    }()
+      return {
+        isServer: isServer,
+        counter: 0,
+        data: _data2.default.data,
+        formData: null
+      };
+    }
   }]);
 
   return MainPage;
