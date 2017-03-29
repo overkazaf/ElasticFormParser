@@ -12,10 +12,10 @@ var pageJson = {
 		label: '测试表单',
 		creater: 'u-001',
 		createTS: 1488133454806,
+		contentMinHeight: 480,
 		style: {
 			position: 'relative',
 			width: '960px',
-			height: '600px',
 			margin: '20px auto',
 			padding: '10px',
 			border: '2px solid #ccc',
@@ -36,14 +36,17 @@ var pageJson = {
 				props: {
 					id: 'comp1',
 					name: 'comp1',
-					label: "数量",
+					addonBefore: "数量",
+					addonAfter: "个",
+					prefix: "数量",
+					subfix: "个",
 					defaultValue: "0",
 					value: 1,
 					ctrlType: 'int',
 					style: {},
 					eventList: [{
 						type: 'onChange',
-						optoins: {
+						options: {
 							action: 'setToTarget',
 							params: ['comp1', 'comp2'],
 							operator: 'MUL',
@@ -58,7 +61,10 @@ var pageJson = {
 				props: {
 					id: 'comp2',
 					name: 'comp2',
-					label: "单价",
+					addonBefore: "单价",
+					addonAfter: "元",
+					prefix: "单价",
+					subfix: "元",
 					defaultValue: "0.00",
 					value: 3.44,
 					style: {},
@@ -80,7 +86,10 @@ var pageJson = {
 				props: {
 					id: 'comp3',
 					name: 'comp3',
-					label: "总价",
+					addonBefore: "总价",
+					addonAfter: "元",
+					prefix: "总价",
+					subfix: "元",
 					defaultValue: "0.00",
 					value: 3.44,
 					ctrlType: 'double',
@@ -96,10 +105,41 @@ var pageJson = {
 				props: {
 					id: 'comp4',
 					name: 'comp4',
-					label: "房租",
+					label: "==== 房租 ====",
 					defaultValue: "0",
 					value: 0,
 					style: {},
+					baseData: [{ label: '水费', value: 1 }, { label: '电费', value: 2 }, { label: '网费', value: 3 }],
+					ctrlType: 'dropdown',
+					eventList: []
+				},
+				children: []
+			}, {
+				key: 'comp5',
+				type: 'rangePicker',
+				props: {
+					id: 'comp4',
+					name: 'comp4',
+					label: "==== 房租 ====",
+					defaultValue: "0",
+					value: 0,
+					style: {},
+					baseData: [{ label: '水费', value: 1 }, { label: '电费', value: 2 }, { label: '网费', value: 3 }],
+					ctrlType: 'dropdown',
+					eventList: []
+				},
+				children: []
+			}, {
+				key: 'comp6',
+				type: 'treeSelect',
+				props: {
+					id: 'comp4',
+					name: 'comp4',
+					label: "==== 房租 ====",
+					defaultValue: "0",
+					value: 0,
+					style: {},
+					baseData: [{ label: '水费', value: 1 }, { label: '电费', value: 2 }, { label: '网费', value: 3 }],
 					ctrlType: 'dropdown',
 					eventList: []
 				},
@@ -108,13 +148,28 @@ var pageJson = {
 		},
 		body: {
 			compKeys: ['comp3'],
-			components: []
+			components: [{
+				key: 'comp7',
+				type: 'editableTable',
+				props: {
+					id: 'comp4',
+					name: 'comp4',
+					label: "==== 房租 ====",
+					defaultValue: "0",
+					value: 0,
+					style: {},
+					baseData: [{ label: '水费', value: 1 }, { label: '电费', value: 2 }, { label: '网费', value: 3 }],
+					ctrlType: 'dropdown',
+					eventList: []
+				},
+				children: []
+			}]
 		},
 		footer: {
 			compKeys: ['comp5'],
 			components: [{
 				key: 'comp5',
-				type: 'button',
+				type: 'submit',
 				props: {
 					id: 'comp5',
 					name: 'comp5',

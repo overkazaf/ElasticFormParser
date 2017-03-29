@@ -1,0 +1,7 @@
+;
+
+(function () {
+  "use strict";
+
+  module.exports = ".editable-cell {\n  position: relative; }\n\n.editable-cell-input-wrapper,\n.editable-cell-text-wrapper {\n  padding-right: 24px; }\n\n.editable-cell-text-wrapper {\n  padding: 5px 24px 5px 5px; }\n\n.editable-cell-icon,\n.editable-cell-icon-check {\n  position: absolute;\n  right: 0;\n  width: 20px;\n  cursor: pointer; }\n\n.editable-cell-icon {\n  line-height: 18px;\n  display: none; }\n\n.editable-cell-icon-check {\n  line-height: 28px; }\n\n.editable-cell:hover .editable-cell-icon {\n  display: inline-block; }\n\n.editable-cell-icon:hover,\n.editable-cell-icon-check:hover {\n  color: #108ee9; }\n\n.editable-add-btn {\n  margin-bottom: 8px; }\n";
+})();

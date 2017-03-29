@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -80,105 +84,33 @@ var MainPage = function (_Component) {
 
   (0, _createClass3.default)(MainPage, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        (0, _keys2.default)(_this2.refs).map(function (compId) {
+          console.log(_this2.refs[compId].props.value);
+        });
+      }, 5000);
+    }
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {}
   }, {
     key: 'renderFormView',
     value: function renderFormView() {
-      var data = this.props.data;
-      var id = data.id,
-          name = data.name,
-          label = data.label,
-          creater = data.creater,
-          createTS = data.createTS,
-          style = data.style,
-          eventList = data.eventList,
-          header = data.header,
-          body = data.body,
-          footer = data.footer;
-
-      var formProps = { eventList: eventList, header: header, body: body, footer: footer };
-
-      console.log(data);
-
-      var userMap = {
-        'u-001': 'Admin'
-      };
-
-      return _react2.default.createElement('div', { id: 'form-view',
-        style: style,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 70
-        }
-      }, _react2.default.createElement('div', { className: 'form-header', __source: {
-          fileName: _jsxFileName,
-          lineNumber: 73
-        }
-      }, _react2.default.createElement('h1', { style: { textAlign: 'center' }, __source: {
-          fileName: _jsxFileName,
-          lineNumber: 74
-        }
-      }, label), _react2.default.createElement('b', {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 75
-        }
-      }, id, ', ', name, ', ', userMap[creater]), _react2.default.createElement(_antd.Row, { type: 'flex', __source: {
-          fileName: _jsxFileName,
-          lineNumber: 76
-        }
-      }, header.components.map(function (item, index) {
-        var type = item.type,
-            props = item.props;
-
-        return _react2.default.createElement(_antd.Col, { span: 8, __source: {
-            fileName: _jsxFileName,
-            lineNumber: 85
-          }
-        }, _react2.default.createElement('div', { key: 'comp-' + index, __source: {
-            fileName: _jsxFileName,
-            lineNumber: 86
-          }
-        }, _RenderEngine2.default.renderComponent(type, props)));
-      }))), _react2.default.createElement('div', { className: 'form-body', __source: {
-          fileName: _jsxFileName,
-          lineNumber: 95
-        }
-      }, 'FormViewBody,', body.components.map(function (item, index) {
-        return _react2.default.createElement('span', {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 100
-          }
-        }, '$', index);
-      })), _react2.default.createElement('div', { className: 'form-footer', __source: {
-          fileName: _jsxFileName,
-          lineNumber: 105
-        }
-      }, footer.components.map(function (item, index) {
-        var type = item.type,
-            props = item.props;
-
-        return _react2.default.createElement('span', { key: 'comp-' + index, __source: {
-            fileName: _jsxFileName,
-            lineNumber: 114
-          }
-        }, _RenderEngine2.default.renderComponent(type, props));
-      })));
+      return _RenderEngine2.default.renderPageView(this.props.data);
     }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement('div', { className: 'p-main', __source: {
           fileName: _jsxFileName,
-          lineNumber: 127
+          lineNumber: 55
         }
       }, _react2.default.createElement('style', { dangerouslySetInnerHTML: { __html: _indexMin2.default }, __source: {
           fileName: _jsxFileName,
-          lineNumber: 128
+          lineNumber: 56
         }
       }), this.renderFormView());
     }

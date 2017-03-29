@@ -54,10 +54,8 @@ var eventMap = {
 	},
 	'onChange': function onChange(options) {
 		var params = options;
-		return function () {
-			var _console2;
-
-			(_console2 = console).log.apply(_console2, ['onChange'].concat((0, _toConsumableArray3.default)(params)));
+		return function (ev) {
+			console.log('onChange', ev.target.value);
 		};
 	}
 };

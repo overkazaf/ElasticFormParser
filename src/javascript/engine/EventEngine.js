@@ -26,8 +26,8 @@ const eventMap = {
 	},
 	'onChange': (options) => {
 		let params = options;
-		return () => {
-			console.log('onChange', ...params);
+		return (ev) => {
+			console.log('onChange', ev.target.value);
 		}
 	},
 }
