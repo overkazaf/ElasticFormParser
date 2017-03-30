@@ -36,6 +36,9 @@ var EventEngine = function () {
 
 			return handler;
 		}
+	}, {
+		key: 'subscribeEvent',
+		value: function subscribeEvent(refs) {}
 	}]);
 
 	return EventEngine;

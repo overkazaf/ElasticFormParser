@@ -26,11 +26,38 @@ const pageJson = {
 			}
 		],
 		header: {
-			compKeys: ['comp1', 'comp2', 'comp3'],
 			components: [
 				{
+					key: 'comp0',
+					type: 'inputNumber',
+					props: {
+						id: 'comp0',
+					    name: 'comp0',
+					    addonBefore: "数量",
+					    addonAfter: "只",
+					    prefix: "",
+					    subfix: "",
+	  					defaultValue: 0,
+	  					value: 1,
+
+	  					visibility: 1,
+	  					locked: 1,
+	  					mustInput: 1,
+	  					needToSum: 0,
+	  					lookUpType: null,
+	  					lookUpStretagy: 'DROP_DOWN',
+	  					filterRules: [],
+
+	  					style: {
+	  					},
+						eventList: [
+						]
+					},
+					children: []
+				},
+				{
 					key: 'comp1',
-					type: 'input',
+					type: 'inputNumber',
 					props: {
 						id: 'comp1',
 					    name: 'comp1',
@@ -40,12 +67,20 @@ const pageJson = {
 					    subfix: "个",
 	  					defaultValue: "0",
 	  					value: 1,
-	  					ctrlType: 'int',
+
+	  					visibility: 1,
+	  					locked: 1,
+	  					mustInput: 1,
+	  					needToSum: 0,
+	  					lookUpType: null,
+	  					lookUpStretagy: 'DROP_DOWN',
+	  					filterRules: [],
+
 	  					style: {
 	  					},
 						eventList: [
 							{
-								type: 'onChange',
+								eventType: 'onChange',
 								options: {
 									action: 'setToTarget',
 									params: ['comp1', 'comp2'],
@@ -59,7 +94,7 @@ const pageJson = {
 				},
 				{
 					key: 'comp2',
-					type: 'input',
+					type: 'inputNumber',
 					props: {
 						id: 'comp2',
 					    name: 'comp2',
@@ -69,15 +104,25 @@ const pageJson = {
 					    subfix: "元",
 	  					defaultValue: "0.00",
 	  					value: 3.44,
+
+	  					visibility: 1,
+	  					locked: 1,
+	  					mustInput: 1,
+	  					needToSum: 0,
+	  					lookUpType: null,
+	  					lookUpStretagy: 'DROP_DOWN',
+	  					filterRules: [],
+
+
 	  					style: {},
 	  					ctrlType: 'double',
 						eventList: [
 							{
-								type: 'onChange',
+								eventType: 'onChange',
 								options: {
 									action: 'setToTarget',
 									params: ['comp1', 'comp2'],
-									operator: 'MUL',
+									expression: '${comp1}*${comp2}',
 									target: 'comp3'
 								}
 							}
@@ -87,7 +132,7 @@ const pageJson = {
 				},
 				{
 					key: 'comp3',
-					type: 'input',
+					type: 'inputNumber',
 					props: {
 						id: 'comp3',
 					    name: 'comp3',
@@ -97,6 +142,15 @@ const pageJson = {
 					    subfix: "元",
 	  					defaultValue: "0.00",
 	  					value: 3.44,
+
+	  					visibility: 1,
+	  					locked: 1,
+	  					mustInput: 1,
+	  					needToSum: 0,
+	  					lookUpType: null,
+	  					lookUpStretagy: 'DROP_DOWN',
+	  					filterRules: [],
+
 	  					ctrlType: 'double',
 	  					style: {},
 	  					locked: true,
@@ -130,11 +184,21 @@ const pageJson = {
 					key: 'comp5',
 					type: 'rangePicker',
 					props: {
-						id: 'comp4',
-					    name: 'comp4',
+						id: 'comp5',
+					    name: 'comp5',
+
 					    label: "==== 房租 ====",
 	  					defaultValue: "0",
 	  					value: 0,
+
+	  					visibility: 1,
+	  					locked: 1,
+	  					mustInput: 1,
+	  					needToSum: 0,
+	  					lookUpType: null,
+	  					lookUpStretagy: 'DROP_DOWN',
+	  					filterRules: [],
+
 	  					style: {},
 	  					baseData: [
 	  						{label: '水费', value: 1},
@@ -150,11 +214,21 @@ const pageJson = {
 					key: 'comp6',
 					type: 'treeSelect',
 					props: {
-						id: 'comp4',
-					    name: 'comp4',
+						id: 'comp6',
+					    name: 'comp6',
+
 					    label: "==== 房租 ====",
 	  					defaultValue: "0",
 	  					value: 0,
+
+	  					visibility: 1,
+	  					locked: 1,
+	  					mustInput: 1,
+	  					needToSum: 0,
+	  					lookUpType: null,
+	  					lookUpStretagy: 'DROP_DOWN',
+	  					filterRules: [],
+
 	  					style: {},
 	  					baseData: [
 	  						{label: '水费', value: 1},
@@ -175,11 +249,18 @@ const pageJson = {
 					key: 'comp7',
 					type: 'editableTable',
 					props: {
-						id: 'comp4',
-					    name: 'comp4',
 					    label: "==== 房租 ====",
 	  					defaultValue: "0",
 	  					value: 0,
+
+	  					visibility: 1,
+	  					locked: 1,
+	  					mustInput: 1,
+	  					needToSum: 0,
+	  					lookUpType: null,
+	  					lookUpStretagy: 'DROP_DOWN',
+	  					filterRules: [],
+
 	  					style: {},
 	  					baseData: [
 	  						{label: '水费', value: 1},
@@ -194,15 +275,21 @@ const pageJson = {
 			],
 		},
 		footer: {
-			compKeys: ['comp5'],
 			components: [
 				{
 					key: 'comp5',
 					type: 'submit',
 					props: {
-						id: 'comp5',
-					    name: 'comp5',
 					    label: "提交",
+
+					    visibility: 1,
+	  					locked: 1,
+	  					mustInput: 1,
+	  					needToSum: 0,
+	  					lookUpType: null,
+	  					lookUpStretagy: null,
+	  					filterRules: [],
+
 						eventList: [
 							{
 								type: 'onClick',

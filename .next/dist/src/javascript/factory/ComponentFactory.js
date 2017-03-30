@@ -22,6 +22,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = require('antd');
 
+var _IFComponentManager = require('../manager/IFComponentManager.js');
+
+var _IFComponentManager2 = _interopRequireDefault(_IFComponentManager);
+
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -34,6 +38,10 @@ var _index = require('../components/EditableTable/index.js');
 
 var _index2 = _interopRequireDefault(_index);
 
+var _index3 = require('../components/IFComponents/IFInputNumber/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/Users/overkazaf/Desktop/codes/git/playGround/IntelliParser/src/javascript/factory/ComponentFactory.js';
@@ -42,14 +50,9 @@ var _jsxFileName = '/Users/overkazaf/Desktop/codes/git/playGround/IntelliParser/
 var RangePicker = _antd.DatePicker.RangePicker;
 var TreeNode = _antd.TreeSelect.TreeNode;
 
-var componentList = [];
-var componentMap = {};
-
 var AntdComponents = {
 	input: function input(option) {
 		var evtHandlers = _EventEngine2.default.buildEventHandlers(option);
-
-		console.log('evtHandlers', evtHandlers);
 
 		var prefix = option.prefix,
 		    subfix = option.subfix,
@@ -69,9 +72,16 @@ var AntdComponents = {
 		}, evtHandlers, {
 			__source: {
 				fileName: _jsxFileName,
-				lineNumber: 48
+				lineNumber: 45
 			}
 		}));
+	},
+	inputNumber: function inputNumber(option) {
+		return _react2.default.createElement(_index4.default, { ref: option.id, option: option, __source: {
+				fileName: _jsxFileName,
+				lineNumber: 57
+			}
+		});
 	},
 	select: function select(option) {
 		function handleMenuClick(_ref) {
@@ -80,38 +90,36 @@ var AntdComponents = {
 			_antd.message.info('Click on menu item ' + key + '.');
 		}
 
-		console.log('option.baseData', option.baseData);
-
 		var menu = _react2.default.createElement(_antd.Menu, {
 			ref: option.id,
 			defaultSelectedKeys: ['2'],
 			onClick: handleMenuClick,
 			__source: {
 				fileName: _jsxFileName,
-				lineNumber: 68
+				lineNumber: 64
 			}
 		}, option.baseData.map(function (item, index) {
 			return _react2.default.createElement(_antd.Menu.Item, { key: index, value: item.value, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 75
+					lineNumber: 71
 				}
 			}, item.label);
 		}));
 
 		return _react2.default.createElement(_antd.Dropdown, { overlay: menu, __source: {
 				fileName: _jsxFileName,
-				lineNumber: 82
+				lineNumber: 78
 			}
 		}, _react2.default.createElement(_antd.Button, {
 			ref: option.id,
 			size: 'large',
 			style: { marginLeft: 8 }, __source: {
 				fileName: _jsxFileName,
-				lineNumber: 83
+				lineNumber: 79
 			}
 		}, option.label, ' ', _react2.default.createElement(_antd.Icon, { type: 'down', __source: {
 				fileName: _jsxFileName,
-				lineNumber: 87
+				lineNumber: 83
 			}
 		})));
 	},
@@ -125,7 +133,7 @@ var AntdComponents = {
 		}, evtHandlers, {
 			__source: {
 				fileName: _jsxFileName,
-				lineNumber: 95
+				lineNumber: 91
 			}
 		}), option.label);
 	},
@@ -144,7 +152,7 @@ var AntdComponents = {
 			onClick: handleSubmit,
 			__source: {
 				fileName: _jsxFileName,
-				lineNumber: 112
+				lineNumber: 108
 			}
 		}, option.label);
 	},
@@ -158,7 +166,7 @@ var AntdComponents = {
 			format: dateFormat,
 			__source: {
 				fileName: _jsxFileName,
-				lineNumber: 127
+				lineNumber: 123
 			}
 		});
 	},
@@ -180,35 +188,35 @@ var AntdComponents = {
 			onChange: onChange,
 			__source: {
 				fileName: _jsxFileName,
-				lineNumber: 142
+				lineNumber: 138
 			}
 		}, _react2.default.createElement(TreeNode, { value: 'parent 1', title: 'parent 1', key: '0-1', __source: {
 				fileName: _jsxFileName,
-				lineNumber: 153
+				lineNumber: 149
 			}
 		}, _react2.default.createElement(TreeNode, { value: 'parent 1-0', title: 'parent 1-0', key: '0-1-1', __source: {
 				fileName: _jsxFileName,
-				lineNumber: 154
+				lineNumber: 150
 			}
 		}, _react2.default.createElement(TreeNode, { value: 'leaf1', title: 'my leaf', key: 'random', __source: {
 				fileName: _jsxFileName,
-				lineNumber: 155
+				lineNumber: 151
 			}
 		}), _react2.default.createElement(TreeNode, { value: 'leaf2', title: 'your leaf', key: 'random1', __source: {
 				fileName: _jsxFileName,
-				lineNumber: 156
+				lineNumber: 152
 			}
 		})), _react2.default.createElement(TreeNode, { value: 'parent 1-1', title: 'parent 1-1', key: 'random2', __source: {
 				fileName: _jsxFileName,
-				lineNumber: 158
+				lineNumber: 154
 			}
 		}, _react2.default.createElement(TreeNode, { value: 'sss', title: _react2.default.createElement('b', { style: { color: '#08c' }, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 159
+					lineNumber: 155
 				}
 			}, 'sss'), key: 'random3', __source: {
 				fileName: _jsxFileName,
-				lineNumber: 159
+				lineNumber: 155
 			}
 		}))));
 	},
@@ -216,7 +224,7 @@ var AntdComponents = {
 		return _react2.default.createElement(_index2.default, {
 			__source: {
 				fileName: _jsxFileName,
-				lineNumber: 167
+				lineNumber: 163
 			}
 		});
 	}
@@ -230,16 +238,7 @@ var ComponentFactory = function () {
 	(0, _createClass3.default)(ComponentFactory, null, [{
 		key: 'create',
 		value: function create(type, option) {
-			var comp = AntdComponents[type](option);
-
-			componentList.push(comp);
-
-			if (!componentMap[type]) {
-				componentMap[type] = [];
-			}
-			componentMap[type].push(comp);
-
-			return comp;
+			return AntdComponents[type](option);
 		}
 	}]);
 

@@ -66,12 +66,22 @@ var _data = require('../src/javascript/mock/data');
 
 var _data2 = _interopRequireDefault(_data);
 
+var _mitt = require('mitt');
+
+var _mitt2 = _interopRequireDefault(_mitt);
+
+var _IFComponentManager = require('../src/javascript/manager/IFComponentManager.js');
+
+var _IFComponentManager2 = _interopRequireDefault(_IFComponentManager);
+
 var _antd = require('antd');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/Users/overkazaf/Desktop/codes/git/playGround/IntelliParser/pages/index.js?entry';
 
+
+var emitter = (0, _mitt2.default)();
 
 var MainPage = function (_Component) {
   (0, _inherits3.default)(MainPage, _Component);
@@ -87,11 +97,36 @@ var MainPage = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      setTimeout(function () {
-        (0, _keys2.default)(_this2.refs).map(function (compId) {
-          console.log(_this2.refs[compId].props.value);
-        });
-      }, 5000);
+      (0, _keys2.default)(this.refs).map(function (compId, index) {
+        _IFComponentManager2.default.register(compId, _this2.refs[compId]);
+      });
+
+      // setTimeout(() => {
+      //   Object.keys(this.refs).map( (compId, index) => {
+      //     //console.log(this.refs[compId].props.value);
+
+      //     // if (!index) {
+      //     //   let eventType = `${compId}-sub`;
+      //     //   emitter.on(eventType, function(options) {
+      //     //     console.log('aaaaaaaa', JSON.stringify(options));
+      //     //   });
+
+      //     //   setTimeout(() => {
+      //     //     emitter.emit(eventType, {a: 123});
+      //     //   }, 5000);
+      //     // }
+      //     window.__REFS__ = this.refs;
+      //     window.__DATA__ = mock.data;
+      //     window.__EMITTER__ = emitter;
+
+      //   });
+
+      //   window.__REFS__ = this.refs;
+      //   window.__DATA__ = mock.data;
+      //   window.__EMITTER__ = emitter;
+
+
+      // }, 500)
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -106,11 +141,11 @@ var MainPage = function (_Component) {
     value: function render() {
       return _react2.default.createElement('div', { className: 'p-main', __source: {
           fileName: _jsxFileName,
-          lineNumber: 55
+          lineNumber: 88
         }
       }, _react2.default.createElement('style', { dangerouslySetInnerHTML: { __html: _indexMin2.default }, __source: {
           fileName: _jsxFileName,
-          lineNumber: 56
+          lineNumber: 89
         }
       }), this.renderFormView());
     }

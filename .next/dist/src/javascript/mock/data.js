@@ -3,6 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _props;
+
 var pageJson = {
 	code: 0,
 	errorMsg: '',
@@ -29,10 +38,34 @@ var pageJson = {
 			target: 'comp4'
 		}],
 		header: {
-			compKeys: ['comp1', 'comp2', 'comp3'],
 			components: [{
+				key: 'comp0',
+				type: 'inputNumber',
+				props: {
+					id: 'comp0',
+					name: 'comp0',
+					addonBefore: "数量",
+					addonAfter: "只",
+					prefix: "",
+					subfix: "",
+					defaultValue: 0,
+					value: 1,
+
+					visibility: 1,
+					locked: 1,
+					mustInput: 1,
+					needToSum: 0,
+					lookUpType: null,
+					lookUpStretagy: 'DROP_DOWN',
+					filterRules: [],
+
+					style: {},
+					eventList: []
+				},
+				children: []
+			}, {
 				key: 'comp1',
-				type: 'input',
+				type: 'inputNumber',
 				props: {
 					id: 'comp1',
 					name: 'comp1',
@@ -42,10 +75,18 @@ var pageJson = {
 					subfix: "个",
 					defaultValue: "0",
 					value: 1,
-					ctrlType: 'int',
+
+					visibility: 1,
+					locked: 1,
+					mustInput: 1,
+					needToSum: 0,
+					lookUpType: null,
+					lookUpStretagy: 'DROP_DOWN',
+					filterRules: [],
+
 					style: {},
 					eventList: [{
-						type: 'onChange',
+						eventType: 'onChange',
 						options: {
 							action: 'setToTarget',
 							params: ['comp1', 'comp2'],
@@ -57,7 +98,7 @@ var pageJson = {
 				children: []
 			}, {
 				key: 'comp2',
-				type: 'input',
+				type: 'inputNumber',
 				props: {
 					id: 'comp2',
 					name: 'comp2',
@@ -67,14 +108,23 @@ var pageJson = {
 					subfix: "元",
 					defaultValue: "0.00",
 					value: 3.44,
+
+					visibility: 1,
+					locked: 1,
+					mustInput: 1,
+					needToSum: 0,
+					lookUpType: null,
+					lookUpStretagy: 'DROP_DOWN',
+					filterRules: [],
+
 					style: {},
 					ctrlType: 'double',
 					eventList: [{
-						type: 'onChange',
+						eventType: 'onChange',
 						options: {
 							action: 'setToTarget',
 							params: ['comp1', 'comp2'],
-							operator: 'MUL',
+							expression: '${comp1}*${comp2}',
 							target: 'comp3'
 						}
 					}]
@@ -82,8 +132,8 @@ var pageJson = {
 				children: []
 			}, {
 				key: 'comp3',
-				type: 'input',
-				props: {
+				type: 'inputNumber',
+				props: (_props = {
 					id: 'comp3',
 					name: 'comp3',
 					addonBefore: "总价",
@@ -92,12 +142,18 @@ var pageJson = {
 					subfix: "元",
 					defaultValue: "0.00",
 					value: 3.44,
+
+					visibility: 1,
+					locked: 1,
+					mustInput: 1,
+					needToSum: 0,
+					lookUpType: null,
+					lookUpStretagy: 'DROP_DOWN',
+					filterRules: [],
+
 					ctrlType: 'double',
-					style: {},
-					locked: true,
-					readOnly: true,
-					eventList: []
-				},
+					style: {}
+				}, (0, _defineProperty3.default)(_props, 'locked', true), (0, _defineProperty3.default)(_props, 'readOnly', true), (0, _defineProperty3.default)(_props, 'eventList', []), _props),
 				children: []
 			}, {
 				key: 'comp4',
@@ -118,11 +174,21 @@ var pageJson = {
 				key: 'comp5',
 				type: 'rangePicker',
 				props: {
-					id: 'comp4',
-					name: 'comp4',
+					id: 'comp5',
+					name: 'comp5',
+
 					label: "==== 房租 ====",
 					defaultValue: "0",
 					value: 0,
+
+					visibility: 1,
+					locked: 1,
+					mustInput: 1,
+					needToSum: 0,
+					lookUpType: null,
+					lookUpStretagy: 'DROP_DOWN',
+					filterRules: [],
+
 					style: {},
 					baseData: [{ label: '水费', value: 1 }, { label: '电费', value: 2 }, { label: '网费', value: 3 }],
 					ctrlType: 'dropdown',
@@ -133,11 +199,21 @@ var pageJson = {
 				key: 'comp6',
 				type: 'treeSelect',
 				props: {
-					id: 'comp4',
-					name: 'comp4',
+					id: 'comp6',
+					name: 'comp6',
+
 					label: "==== 房租 ====",
 					defaultValue: "0",
 					value: 0,
+
+					visibility: 1,
+					locked: 1,
+					mustInput: 1,
+					needToSum: 0,
+					lookUpType: null,
+					lookUpStretagy: 'DROP_DOWN',
+					filterRules: [],
+
 					style: {},
 					baseData: [{ label: '水费', value: 1 }, { label: '电费', value: 2 }, { label: '网费', value: 3 }],
 					ctrlType: 'dropdown',
@@ -152,11 +228,18 @@ var pageJson = {
 				key: 'comp7',
 				type: 'editableTable',
 				props: {
-					id: 'comp4',
-					name: 'comp4',
 					label: "==== 房租 ====",
 					defaultValue: "0",
 					value: 0,
+
+					visibility: 1,
+					locked: 1,
+					mustInput: 1,
+					needToSum: 0,
+					lookUpType: null,
+					lookUpStretagy: 'DROP_DOWN',
+					filterRules: [],
+
 					style: {},
 					baseData: [{ label: '水费', value: 1 }, { label: '电费', value: 2 }, { label: '网费', value: 3 }],
 					ctrlType: 'dropdown',
@@ -166,14 +249,20 @@ var pageJson = {
 			}]
 		},
 		footer: {
-			compKeys: ['comp5'],
 			components: [{
 				key: 'comp5',
 				type: 'submit',
 				props: {
-					id: 'comp5',
-					name: 'comp5',
 					label: "提交",
+
+					visibility: 1,
+					locked: 1,
+					mustInput: 1,
+					needToSum: 0,
+					lookUpType: null,
+					lookUpStretagy: null,
+					filterRules: [],
+
 					eventList: [{
 						type: 'onClick',
 						options: ['comp1', 'comp2']

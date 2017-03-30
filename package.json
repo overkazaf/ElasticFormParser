@@ -47,6 +47,7 @@
     "less-loader": "^2.2.3",
     "lodash": "^4.17.4",
     "lru-cache": "^4.0.2",
+    "mitt": "^1.1.0",
     "mocha": "^3.2.0",
     "moment": "^2.18.1",
     "mongoose": "^4.8.5",

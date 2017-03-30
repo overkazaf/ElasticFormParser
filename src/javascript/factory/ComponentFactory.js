@@ -13,10 +13,12 @@ import {
 } from 'antd';
 
 
-
+import ComponentManager from '../manager/IFComponentManager.js';
 import moment from 'moment';
 import EventEngine from '../engine/EventEngine';
 import EditableTable from '../components/EditableTable/index.js';
+
+import IFInputNumber from '../components/IFComponents/IFInputNumber/index.js';
 
 let { 
 	RangePicker,
@@ -26,14 +28,9 @@ let {
 	TreeNode, 
 } = TreeSelect;
 
-const componentList = [];
-const componentMap = {};
-
 const AntdComponents = {
 	input: (option) => {
 		let evtHandlers = EventEngine.buildEventHandlers(option);
-
-		console.log('evtHandlers', evtHandlers);
 
 		let {
 			prefix,
@@ -57,12 +54,11 @@ const AntdComponents = {
 			/>
 		)
 	},
+	inputNumber: (option) => <IFInputNumber ref={option.id} option={option} />,
 	select: (option) => {
 		function handleMenuClick({ key }) {
 		  message.info(`Click on menu item ${key}.`);
 		}
-
-		console.log('option.baseData', option.baseData);
 
 		const menu = (
 		  <Menu 
@@ -175,16 +171,7 @@ export default
 class ComponentFactory {
 
 	static create(type, option) {
-		let comp = AntdComponents[type](option);
-
-		componentList.push(comp);
-		
-		if (!componentMap[type]) {
-			componentMap[type] = [];
-		}
-		componentMap[type].push(comp);
-
-		return comp;
+		return AntdComponents[type](option);
 	}
 
 }

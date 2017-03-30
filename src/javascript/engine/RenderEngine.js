@@ -84,12 +84,13 @@ class RenderEngine {
 		      <Layout>
 		        <Header>
 		        	<h1 style={{textAlign: 'center', color: '#fff'}}>{label}</h1>
-		          	<b>{id}, {name}, {userMap[creater]}</b>
 		        </Header>
 		        <Content>
+		        	<div>
+		        		<b>{id}, {name}, {userMap[creater]}</b>
+		        	</div>
 					<div style={contentStyle}>
 						{headerContent}
-
 						{bodyContent}
 					</div>
 		        </Content>
@@ -104,7 +105,7 @@ class RenderEngine {
 							  } = item;
 
 							  return (
-							    <span key={`comp-${index}`}>
+							    <span key={`footer-comp-${index}`}>
 							      {RenderEngine.renderComponent(type, props)}
 							    </span>
 							  )

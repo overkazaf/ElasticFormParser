@@ -8,12 +8,15 @@ export default class EventEngine {
 
 		let handler = {};
 
-
 		eventList.map((evtObj) => {
 			handler[evtObj.type] = EventFactory.create(evtObj.type, evtObj.options)
 		});
 
 		return handler;
+	}
+
+	static subscribeEvent(refs) {
+		
 	}
 }
 

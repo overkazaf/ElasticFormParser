@@ -114,40 +114,45 @@ var RenderEngine = function () {
 					fileName: _jsxFileName,
 					lineNumber: 86
 				}
-			}, label), _react2.default.createElement('b', {
+			}, label)), _react2.default.createElement(Content, {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 87
+					lineNumber: 88
 				}
-			}, id, ', ', name, ', ', userMap[creater])), _react2.default.createElement(Content, {
+			}, _react2.default.createElement('div', {
 				__source: {
 					fileName: _jsxFileName,
 					lineNumber: 89
 				}
-			}, _react2.default.createElement('div', { style: contentStyle, __source: {
+			}, _react2.default.createElement('b', {
+				__source: {
 					fileName: _jsxFileName,
 					lineNumber: 90
+				}
+			}, id, ', ', name, ', ', userMap[creater])), _react2.default.createElement('div', { style: contentStyle, __source: {
+					fileName: _jsxFileName,
+					lineNumber: 92
 				}
 			}, headerContent, bodyContent)), _react2.default.createElement(Footer, {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 96
+					lineNumber: 97
 				}
 			}, _react2.default.createElement(_antd.Row, { type: 'flex', justify: 'end', __source: {
 					fileName: _jsxFileName,
-					lineNumber: 97
+					lineNumber: 98
 				}
 			}, _react2.default.createElement(_antd.Col, { span: 4, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 98
+					lineNumber: 99
 				}
 			}, footer.components.map(function (item, index) {
 				var type = item.type,
 				    props = item.props;
 
-				return _react2.default.createElement('span', { key: 'comp-' + index, __source: {
+				return _react2.default.createElement('span', { key: 'footer-comp-' + index, __source: {
 						fileName: _jsxFileName,
-						lineNumber: 107
+						lineNumber: 108
 					}
 				}, RenderEngine.renderComponent(type, props));
 			}))))));
@@ -158,7 +163,7 @@ var RenderEngine = function () {
 			var componentContent = _ComponentFactory2.default.create(type, props);
 			return _react2.default.createElement('div', { style: props.style, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 124
+					lineNumber: 125
 				}
 			}, componentContent);
 		}
