@@ -31,7 +31,7 @@ var EventEngine = function () {
 			var handler = {};
 
 			eventList.map(function (evtObj) {
-				handler[evtObj.type] = EventFactory.create(evtObj.type, evtObj.options);
+				handler[evtObj.eventType] = EventFactory.create(evtObj.eventType, evtObj.options);
 			});
 
 			return handler;
@@ -73,6 +73,7 @@ var EventFactory = function () {
 		value: function create(type) {
 			var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
+			console.log('creating event:', type);
 			return eventMap[type](options);
 		}
 	}]);

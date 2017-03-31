@@ -46,6 +46,10 @@ var _mitt = require('mitt');
 
 var _mitt2 = _interopRequireDefault(_mitt);
 
+var _mathjs = require('mathjs');
+
+var _mathjs2 = _interopRequireDefault(_mathjs);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/Users/overkazaf/Desktop/codes/git/playGround/IntelliParser/src/javascript/components/IFComponents/IFInputNumber/index.js';
@@ -105,19 +109,27 @@ var IFInputNumber = function (_Component) {
 							    expression = options.expression,
 							    target = options.target;
 
-							if (action === 'setToTarget') {
-								var values = params.map(function (compId) {
-									return _IFComponentManager2.default.getComponent(compId).getValue();
-								});
+							target.map(function (t) {
+								if (action === 'SetToTarget') {
+									// let values = params.map((compId) => {
+									// 	return ComponentManager.getComponent(compId).getValue();
+									// });
+									// let sum = values.reduce((prev, current) => {
+									// 	return prev * current;
+									// }, 1);
 
-								console.log('values', values);
+									var expRE = /\$\{(.*?)\}/g;
+									if (expression && expRE.test(expression)) {
+										expression = expression.replace(expRE, function (matched, compId) {
+											return _IFComponentManager2.default.getComponent(compId).getValue() || 0;
+										});
 
-								var sum = values.reduce(function (prev, current) {
-									return prev * current;
-								}, 1);
+										console.log('expression', expression);
 
-								_IFComponentManager2.default.getComponent(target).setValue(sum);
-							}
+										_IFComponentManager2.default.getComponent(t).setValue(_mathjs2.default.eval(expression));
+									}
+								}
+							});
 						}
 					};
 				}
@@ -143,20 +155,35 @@ var IFInputNumber = function (_Component) {
 			});
 		}
 	}, {
-		key: 'getValue',
-		value: function getValue() {
-			return this.state.option.value;
-		}
-	}, {
-		key: 'setValue',
-		value: function setValue(value, callback) {
+		key: 'setFieldValue',
+		value: function setFieldValue(json, callback) {
 			var newOption = _Util2.default.deepClone(this.state.option);
-			newOption.value = value;
+			for (var field in json) {
+				newOption[field] = json[field];
+			}
+
 			this.setState({
 				option: newOption
 			}, function () {
 				callback && callback();
 			});
+		}
+	}, {
+		key: 'getFieldValue',
+		value: function getFieldValue(field) {
+			return this.state.option[field];
+		}
+	}, {
+		key: 'getValue',
+		value: function getValue() {
+			return this.getFieldValue('value');
+		}
+	}, {
+		key: 'setValue',
+		value: function setValue(value, callback) {
+			this.setFieldValue({
+				value: value
+			}, callback);
 		}
 	}, {
 		key: 'getDataModel',
@@ -172,16 +199,28 @@ var IFInputNumber = function (_Component) {
 			    addonBefore = option.addonBefore,
 			    addonAfter = option.addonAfter,
 			    defaultValue = option.defaultValue,
-			    value = option.value;
+			    value = option.value,
+			    locked = option.locked,
+			    visibility = option.visibility;
 			var onClick = ifEventMap.onClick,
 			    onChange = ifEventMap.onChange,
 			    onKeyUp = ifEventMap.onKeyUp,
 			    onKeyDown = ifEventMap.onKeyDown;
 
+			if (!visibility) {
+				return _react2.default.createElement('div', {
+					__source: {
+						fileName: _jsxFileName,
+						lineNumber: 169
+					}
+				});
+			}
+
 			return _react2.default.createElement(_antd.Input, {
 				placeholder: 'input search text',
 				addonBefore: addonBefore,
 				addonAfter: addonAfter,
+				disabled: !!locked,
 				size: 'large',
 				value: value,
 				defaultValue: defaultValue,
@@ -192,7 +231,7 @@ var IFInputNumber = function (_Component) {
 				onKeyDown: onKeyDown || null,
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 143
+					lineNumber: 173
 				}
 			});
 		}

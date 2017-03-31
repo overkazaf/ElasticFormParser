@@ -11,6 +11,7 @@ import Util from '../../../../javascript/util/Util.js';
 import Immutable from 'immutable';
 
 import mitt from 'mitt';
+import mathjs from 'mathjs';
 
 let emmiter = mitt();
 export default
@@ -57,19 +58,30 @@ class IFInputNumber extends Component {
 							target,
 						} = options;
 
-						if (action === 'setToTarget') {
-							let values = params.map((compId) => {
-								return ComponentManager.getComponent(compId).getValue();
-							});
+						target.map((t) => {
+							if (action === 'SetToTarget') {
+								// let values = params.map((compId) => {
+								// 	return ComponentManager.getComponent(compId).getValue();
+								// });
+								// let sum = values.reduce((prev, current) => {
+								// 	return prev * current;
+								// }, 1);
+								
+								let expRE = /\$\{(.*?)\}/g;
+								if (expression && expRE.test(expression)) {
+									expression = expression.replace(expRE, function(matched, compId) {
+										return ComponentManager.getComponent(compId).getValue() || 0;
+									})
 
-							console.log('values', values);
+									console.log('expression', expression);
 
-							let sum = values.reduce((prev, current) => {
-								return prev * current;
-							}, 1);
+									ComponentManager.getComponent(t).setValue(mathjs.eval(expression));
 
-							ComponentManager.getComponent(target).setValue(sum);
-						}
+								}
+							}
+						});
+
+						
 					}
 				}
 			}
@@ -97,18 +109,31 @@ class IFInputNumber extends Component {
 
 	}
 
-	getValue() {
-		return this.state.option.value;
-	}
-
-	setValue(value, callback) {
+	setFieldValue(json, callback) {
 		let newOption = Util.deepClone(this.state.option);
-		newOption.value = value;
+		for (let field in json) {
+			newOption[field] = json[field];
+		}
+
 		this.setState({
 			option: newOption,
 		}, () => {
 			callback && callback();
 		});
+	}
+
+	getFieldValue(field) {
+		return this.state.option[field];
+	}
+
+	getValue() {
+		return this.getFieldValue('value');
+	}
+
+	setValue(value, callback) {
+		this.setFieldValue({
+			value,
+		}, callback);
 	}
 
 	getDataModel() {
@@ -129,6 +154,8 @@ class IFInputNumber extends Component {
 			addonAfter,
 			defaultValue,
 			value,
+			locked,
+			visibility,
 		} = option;
 
 		let {
@@ -138,12 +165,16 @@ class IFInputNumber extends Component {
 			onKeyDown,
 		} = ifEventMap;
 
+		if (!visibility) {
+			return <div></div>;
+		}
 
 		return (
 			<Input 
 				 placeholder="input search text"
 				 addonBefore={addonBefore}
 				 addonAfter={addonAfter}
+				 disabled={!!locked}
 				 size={'large'}
 				 value={value}
 				 defaultValue={defaultValue}

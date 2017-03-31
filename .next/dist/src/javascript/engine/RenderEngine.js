@@ -129,7 +129,7 @@ var RenderEngine = function () {
 					fileName: _jsxFileName,
 					lineNumber: 90
 				}
-			}, id, ', ', name, ', ', userMap[creater])), _react2.default.createElement('div', { style: contentStyle, __source: {
+			}, 'form id: ', id, ', creater: ', userMap[creater], ', created at: ', createTS)), _react2.default.createElement('div', { style: contentStyle, __source: {
 					fileName: _jsxFileName,
 					lineNumber: 92
 				}

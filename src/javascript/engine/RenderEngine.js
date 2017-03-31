@@ -87,7 +87,7 @@ class RenderEngine {
 		        </Header>
 		        <Content>
 		        	<div>
-		        		<b>{id}, {name}, {userMap[creater]}</b>
+		        		<b>form id: {id}, creater: {userMap[creater]}, created at: {createTS}</b>
 		        	</div>
 					<div style={contentStyle}>
 						{headerContent}

@@ -9,14 +9,14 @@ export default class EventEngine {
 		let handler = {};
 
 		eventList.map((evtObj) => {
-			handler[evtObj.type] = EventFactory.create(evtObj.type, evtObj.options)
+			handler[evtObj.eventType] = EventFactory.create(evtObj.eventType, evtObj.options)
 		});
 
 		return handler;
 	}
 
 	static subscribeEvent(refs) {
-		
+
 	}
 }
 
@@ -37,6 +37,7 @@ const eventMap = {
 
 class EventFactory {
 	static create(type, options = []) {
+		console.log('creating event:', type);
 		return eventMap[type](options);
 	}
 }

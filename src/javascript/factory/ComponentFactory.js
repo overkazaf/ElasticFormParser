@@ -10,6 +10,7 @@ import {
 	TreeSelect,
 	Table,
 	Popconfirm,
+	Radio,
 } from 'antd';
 
 
@@ -19,14 +20,21 @@ import EventEngine from '../engine/EventEngine';
 import EditableTable from '../components/EditableTable/index.js';
 
 import IFInputNumber from '../components/IFComponents/IFInputNumber/index.js';
+import IFButton from '../components/IFComponents/IFButton/index.js';
+import IFDropdown from '../components/IFComponents/IFDropdown/index.js';
 
 let { 
 	RangePicker,
 } = DatePicker;
 
+let RadioGroup = Radio.Group;
+
 let { 
 	TreeNode, 
 } = TreeSelect;
+
+
+let treeValue = undefined;
 
 const AntdComponents = {
 	input: (option) => {
@@ -54,37 +62,8 @@ const AntdComponents = {
 			/>
 		)
 	},
-	inputNumber: (option) => <IFInputNumber ref={option.id} option={option} />,
-	select: (option) => {
-		function handleMenuClick({ key }) {
-		  message.info(`Click on menu item ${key}.`);
-		}
-
-		const menu = (
-		  <Menu 
-		  	ref={option.id}
-		  	defaultSelectedKeys={['2']}
-		  	onClick={handleMenuClick}
-		  >
-		    {option.baseData.map((item, index) => {
-		    	return (
-		    		<Menu.Item key={index} value={item.value}>{item.label}</Menu.Item>
-		    	)
-		    })}
-		  </Menu>
-		);
-
-		return (
-			<Dropdown overlay={menu}>
-		      <Button 
-		      	ref={option.id}
-		      	size={'large'}
-		      	style={{ marginLeft: 8 }}>
-		        {option.label} <Icon type="down" />
-		      </Button>
-		    </Dropdown>
-		)
-	},
+	IFInputNumber: (option) => <IFInputNumber ref={option.id} option={option} />,
+	IFDropdown: (option) => <IFDropdown ref={option.id} option={option} />,
 	button: (option) => {
 		let evtHandlers = EventEngine.buildEventHandlers(option);
 		return (
@@ -99,6 +78,7 @@ const AntdComponents = {
 			</Button>
 		)
 	},
+	IFButton: (option) => <IFButton ref={option.id} option={option} />,
 	submit: (option) => {
 		let evtHandlers = EventEngine.buildEventHandlers(option);
 		function handleSubmit({ key }) {
@@ -116,6 +96,23 @@ const AntdComponents = {
 			</Button>
 		)
 	},
+	RadioGroup: (option) => {
+		let {
+			baseData,
+		} = option;
+
+		return (
+		  <RadioGroup value={option.value}>
+	        {
+	        	baseData.map((item) => {
+	        		return (
+						<Radio value={item.value}>{item.name}</Radio>
+	        		)
+	        	})
+	    	}
+	      </RadioGroup>
+	    )
+	},
 	rangePicker: (option) => {
 		const dateFormat = 'YYYY/MM/DD';
 
@@ -128,10 +125,10 @@ const AntdComponents = {
 		    />
 		)
 	},
-	treeSelect: () => {
-		let value = undefined;
+	treeSelect: (option) => {
 		let onChange = (e) => {
 			console.log('eee', e);
+			treeValue = e;
 		};
 
 		return (
@@ -139,20 +136,19 @@ const AntdComponents = {
 				size={'large'}
 		        showSearch
 		        style={{ width: '100%' }}
-		        value={value}
+		        value={treeValue}
 		        dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
 		        placeholder="Please select"
 		        allowClear
 		        treeDefaultExpandAll
 		        onChange={onChange}
 		      >
-		        <TreeNode value="parent 1" title="parent 1" key="0-1">
-		          <TreeNode value="parent 1-0" title="parent 1-0" key="0-1-1">
-		            <TreeNode value="leaf1" title="my leaf" key="random" />
-		            <TreeNode value="leaf2" title="your leaf" key="random1" />
+		        <TreeNode value="兔巢科技" title="兔巢科技" key="0-1">
+		          <TreeNode value="UED中心" title="UED中心" key="0-1-1">
+		            <TreeNode value="人员一" title="人员一" key="random" />
 		          </TreeNode>
-		          <TreeNode value="parent 1-1" title="parent 1-1" key="random2">
-		            <TreeNode value="sss" title={<b style={{ color: '#08c' }}>sss</b>} key="random3" />
+		          <TreeNode value="平台研发中心" title="平台研发中心" key="random2">
+		            <TreeNode value="人员二" title={<b style={{ color: '#08c' }}>人员二</b>} key="random3" />
 		          </TreeNode>
 		        </TreeNode>
 		      </TreeSelect>

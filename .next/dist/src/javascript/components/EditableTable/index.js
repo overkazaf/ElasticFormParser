@@ -34,6 +34,14 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = require('antd');
 
+var _Util = require('../../util/Util.js');
+
+var _Util2 = _interopRequireDefault(_Util);
+
+var _mathjs = require('mathjs');
+
+var _mathjs2 = _interopRequireDefault(_mathjs);
+
 require('./index.scss');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -80,11 +88,11 @@ var EditableCell = function (_Component) {
 
       return _react2.default.createElement('div', { className: 'editable-cell', __source: {
           fileName: _jsxFileName,
-          lineNumber: 27
+          lineNumber: 30
         }
       }, editable ? _react2.default.createElement('div', { className: 'editable-cell-input-wrapper', __source: {
           fileName: _jsxFileName,
-          lineNumber: 30
+          lineNumber: 33
         }
       }, _react2.default.createElement(_antd.Input, {
         value: value,
@@ -92,7 +100,7 @@ var EditableCell = function (_Component) {
         onPressEnter: this.check,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 31
+          lineNumber: 34
         }
       }), _react2.default.createElement(_antd.Icon, {
         type: 'check',
@@ -100,11 +108,11 @@ var EditableCell = function (_Component) {
         onClick: this.check,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 36
+          lineNumber: 39
         }
       })) : _react2.default.createElement('div', { className: 'editable-cell-text-wrapper', __source: {
           fileName: _jsxFileName,
-          lineNumber: 43
+          lineNumber: 46
         }
       }, value || ' ', _react2.default.createElement(_antd.Icon, {
         type: 'edit',
@@ -112,7 +120,7 @@ var EditableCell = function (_Component) {
         onClick: this.edit,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 45
+          lineNumber: 48
         }
       })));
     }
@@ -131,9 +139,32 @@ var EditableTable = function (_Component2) {
 
     _this2.onCellChange = function (index, key) {
       return function (value) {
-        var dataSource = [].concat((0, _toConsumableArray3.default)(_this2.state.dataSource));
-        dataSource[index][key] = value;
-        _this2.setState({ dataSource: dataSource });
+        var newDataSource = _Util2.default.deepClone(_this2.state.dataSource);
+        newDataSource[index][key] = value;
+
+        var autoCalcMap = {
+          price: true,
+          discount: true,
+          amount: true
+        };
+
+        var row = newDataSource[index];
+
+        if (key in autoCalcMap) {
+          var price = row.price,
+              amount = row.amount,
+              discount = row.discount;
+
+          newDataSource[index]['total'] = new Number(_mathjs2.default.eval(price + ' * ' + amount + ' * (100 - ' + discount + ') / 100')).toFixed(2);
+        }
+
+        _this2.setState({
+          dataSource: []
+        }, function () {
+          _this2.setState({
+            dataSource: newDataSource
+          });
+        });
       };
     };
 
@@ -150,9 +181,13 @@ var EditableTable = function (_Component2) {
 
       var newData = {
         key: count,
-        name: 'Edward King ' + count,
-        age: 32,
-        address: 'London, Park Lane no. ' + count
+        name: '\u65B0\u589E\u7269\u6599 ' + count,
+        amount: 1,
+        price: '00.00',
+        total: '00.00',
+        discount: '0',
+        buyer: '管理员',
+        date: '2016-10-24'
       };
       _this2.setState({
         dataSource: [].concat((0, _toConsumableArray3.default)(dataSource), [newData]),
@@ -161,56 +196,116 @@ var EditableTable = function (_Component2) {
     };
 
     _this2.columns = [{
-      title: 'name',
+      title: '物料名',
       dataIndex: 'name',
-      width: '30%',
       render: function render(text, record, index) {
         return _react2.default.createElement(EditableCell, {
           value: text,
           onChange: _this2.onCellChange(index, 'name'),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 66
+            lineNumber: 68
           }
         });
       }
     }, {
-      title: 'age',
-      dataIndex: 'age'
+      title: '数量(个)',
+      dataIndex: 'amount',
+      render: function render(text, record, index) {
+        return _react2.default.createElement(EditableCell, {
+          value: text,
+          onChange: _this2.onCellChange(index, 'amount'),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 77
+          }
+        });
+      }
     }, {
-      title: 'address',
-      dataIndex: 'address'
+      title: '单价(元)',
+      dataIndex: 'price',
+      render: function render(text, record, index) {
+        return _react2.default.createElement(EditableCell, {
+          value: text,
+          onChange: _this2.onCellChange(index, 'price'),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 86
+          }
+        });
+      }
     }, {
-      title: 'operation',
+      title: '折扣(%)',
+      dataIndex: 'discount',
+      render: function render(text, record, index) {
+        return _react2.default.createElement(EditableCell, {
+          value: text,
+          onChange: _this2.onCellChange(index, 'discount'),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 95
+          }
+        });
+      }
+    }, {
+      title: '总价(元)',
+      dataIndex: 'total',
+      render: function render(text, record, index) {
+        return _react2.default.createElement(EditableCell, {
+          value: text,
+          onChange: _this2.onCellChange(index, 'total'),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 104
+          }
+        });
+      }
+    }, {
+      title: '日期',
+      dataIndex: 'date',
+      render: function render(text, record, index) {
+        return _react2.default.createElement(EditableCell, {
+          value: text,
+          onChange: _this2.onCellChange(index, 'date'),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 113
+          }
+        });
+      }
+    }, {
+      title: '采购人',
+      dataIndex: 'buyer'
+    }, {
+      title: '操作',
       dataIndex: 'operation',
       render: function render(text, record, index) {
-        return _this2.state.dataSource.length > 1 ? _react2.default.createElement(_antd.Popconfirm, { title: 'Sure to delete?', onConfirm: function onConfirm() {
+        return _this2.state.dataSource.length > 1 ? _react2.default.createElement(_antd.Popconfirm, { title: '\u786E\u5B9A\u8981\u5220\u9664\u672C\u884C\u8BB0\u5F55?', onConfirm: function onConfirm() {
             return _this2.onDelete(index);
           }, __source: {
             fileName: _jsxFileName,
-            lineNumber: 84
+            lineNumber: 128
           }
         }, _react2.default.createElement('a', { href: '#', __source: {
             fileName: _jsxFileName,
-            lineNumber: 85
+            lineNumber: 129
           }
-        }, 'Delete')) : null;
+        }, '\u5220\u9664\u672C\u884C\u8BB0\u5F55')) : null;
       }
     }];
 
     _this2.state = {
       dataSource: [{
         key: '0',
-        name: 'Edward King 0',
-        age: '32',
-        address: 'London, Park Lane no. 0'
-      }, {
-        key: '1',
-        name: 'Edward King 1',
-        age: '32',
-        address: 'London, Park Lane no. 1'
+        name: '新增物料 0',
+        amount: '1',
+        price: '12.00',
+        total: '12.00',
+        discount: '0',
+        buyer: '管理员',
+        date: '2016-10-24'
       }],
-      count: 2
+      count: 1
     };
     return _this2;
   }
@@ -224,15 +319,20 @@ var EditableTable = function (_Component2) {
       return _react2.default.createElement('div', {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 136
+          lineNumber: 208
         }
       }, _react2.default.createElement(_antd.Button, { className: 'editable-add-btn', onClick: this.handleAdd, __source: {
           fileName: _jsxFileName,
-          lineNumber: 137
+          lineNumber: 209
         }
-      }, 'Add'), _react2.default.createElement(_antd.Table, { bordered: true, dataSource: dataSource, columns: columns, __source: {
+      }, 'Add'), _react2.default.createElement('br', {
+        __source: {
           fileName: _jsxFileName,
-          lineNumber: 138
+          lineNumber: 210
+        }
+      }), _react2.default.createElement(_antd.Table, { bordered: true, dataSource: dataSource, columns: columns, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 211
         }
       }));
     }

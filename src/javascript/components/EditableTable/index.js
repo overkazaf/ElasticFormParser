@@ -1,6 +1,9 @@
 import { Component } from 'react';
 import { Table, Input, Icon, Button, Popconfirm } from 'antd';
 
+import Util from '../../util/Util.js';
+import mathjs from 'mathjs';
+
 import './index.scss';
 
 class EditableCell extends Component {
@@ -59,9 +62,8 @@ class EditableTable extends Component {
   constructor(props) {
     super(props);
     this.columns = [{
-      title: 'name',
+      title: '物料名',
       dataIndex: 'name',
-      width: '30%',
       render: (text, record, index) => (
         <EditableCell
           value={text}
@@ -69,20 +71,62 @@ class EditableTable extends Component {
         />
       ),
     }, {
-      title: 'age',
-      dataIndex: 'age',
+      title: '数量(个)',
+      dataIndex: 'amount',
+      render: (text, record, index) => (
+        <EditableCell
+          value={text}
+          onChange={this.onCellChange(index, 'amount')}
+        />
+      ),
     }, {
-      title: 'address',
-      dataIndex: 'address',
+      title: '单价(元)',
+      dataIndex: 'price',
+      render: (text, record, index) => (
+        <EditableCell
+          value={text}
+          onChange={this.onCellChange(index, 'price')}
+        />
+      ),
+    },{
+      title: '折扣(%)',
+      dataIndex: 'discount',
+      render: (text, record, index) => (
+        <EditableCell
+          value={text}
+          onChange={this.onCellChange(index, 'discount')}
+        />
+      ),
+    },{
+      title: '总价(元)',
+      dataIndex: 'total',
+      render: (text, record, index) => (
+        <EditableCell
+          value={text}
+          onChange={this.onCellChange(index, 'total')}
+        />
+      ),
+    },{
+      title: '日期',
+      dataIndex: 'date',
+      render: (text, record, index) => (
+        <EditableCell
+          value={text}
+          onChange={this.onCellChange(index, 'date')}
+        />
+      ),
+    },{
+      title: '采购人',
+      dataIndex: 'buyer',
     }, {
-      title: 'operation',
+      title: '操作',
       dataIndex: 'operation',
       render: (text, record, index) => {
         return (
           this.state.dataSource.length > 1 ?
           (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.onDelete(index)}>
-              <a href="#">Delete</a>
+            <Popconfirm title="确定要删除本行记录?" onConfirm={() => this.onDelete(index)}>
+              <a href="#">删除本行记录</a>
             </Popconfirm>
           ) : null
         );
@@ -92,23 +136,47 @@ class EditableTable extends Component {
     this.state = {
       dataSource: [{
         key: '0',
-        name: 'Edward King 0',
-        age: '32',
-        address: 'London, Park Lane no. 0',
-      }, {
-        key: '1',
-        name: 'Edward King 1',
-        age: '32',
-        address: 'London, Park Lane no. 1',
+        name: '新增物料 0',
+        amount: '1',
+        price: '12.00',
+        total: '12.00',
+        discount: '0',
+        buyer: '管理员',
+        date: '2016-10-24',
       }],
-      count: 2,
+      count: 1,
     };
   }
   onCellChange = (index, key) => {
     return (value) => {
-      const dataSource = [...this.state.dataSource];
-      dataSource[index][key] = value;
-      this.setState({ dataSource });
+      const newDataSource = Util.deepClone(this.state.dataSource);
+      newDataSource[index][key] = value;
+
+      let autoCalcMap = {
+        price: true,
+        discount: true,
+        amount: true,
+      };
+
+      let row = newDataSource[index];
+
+      if (key in autoCalcMap) {
+        let {
+          price,
+          amount,
+          discount,
+        } = row;
+
+        newDataSource[index]['total'] = new Number(mathjs.eval(`${price} * ${amount} * (100 - ${discount}) / 100`)).toFixed(2);
+      }  
+
+      this.setState({ 
+        dataSource: [],
+      }, () => {
+        this.setState({
+          dataSource: newDataSource,
+        });
+      });
     };
   }
   onDelete = (index) => {
@@ -120,9 +188,13 @@ class EditableTable extends Component {
     const { count, dataSource } = this.state;
     const newData = {
       key: count,
-      name: `Edward King ${count}`,
-      age: 32,
-      address: `London, Park Lane no. ${count}`,
+      name: `新增物料 ${count}`,
+      amount: 1,
+      price: '00.00',
+      total: '00.00',
+      discount: '0',
+      buyer: '管理员',
+      date: '2016-10-24',
     };
     this.setState({
       dataSource: [...dataSource, newData],
@@ -135,6 +207,7 @@ class EditableTable extends Component {
     return (
       <div>
         <Button className="editable-add-btn" onClick={this.handleAdd}>Add</Button>
+        <br />
         <Table bordered dataSource={dataSource} columns={columns} />
       </div>
     );
