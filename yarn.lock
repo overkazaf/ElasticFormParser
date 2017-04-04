@@ -3738,6 +3738,10 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
+numbers.js@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/numbers.js/-/numbers.js-1.0.1.tgz#092772c23066ba6bc9cc24efc0770f45064c1dd5"
+
 oauth-sign@~0.8.1:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"

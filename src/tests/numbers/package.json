@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "numbers": "^0.6.0"
+  },
+  "devDependencies": {
+    "big.js": "^3.1.3"
+  }
+}
