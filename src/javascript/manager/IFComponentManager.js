@@ -5,19 +5,23 @@ const componentList = [];
 export default
 class IFComponentManager {
 	static register(id, component) {
-		componentMap[id] = component;
-		componentList.push(component);
+		try {
+			componentMap[id] = component;
+			componentList.push(component);
+		} catch(e) {
+			return false;
+		}
+
+		return true;
 	}
 
-	static listComponents() {
+	static list() {
 		componentList.map(console.log);
 
-		// Object.keys(componentMap).map((key) => {
-		// 	console.log('key', key, 'comp', componentMap[key]);
-		// });
+		return componentList;
 	}
 
-	static getComponent(id) {
+	static get(id) {
 		return componentMap[id];
 	}
 }

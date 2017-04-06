@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import {
 	Dropdown,
 	Menu,
@@ -7,7 +6,6 @@ import {
 	message,
 } from 'antd';
 
-
 import IFComponentBase from '../IFComponentBase/index.js';
 
 export default
@@ -15,11 +13,7 @@ class IFDropdown extends IFComponentBase {
 	constructor(props) {
 	  super(props);
 	}
-
-	componentDidMount() {
-
-	}
-
+	
 	handleMenuClick({ key }) {
 
 	  let selectedOption = this.state.option.get('baseData').toJS().filter((item, index) => {

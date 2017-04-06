@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux-immutable';
-import { demoReducer } from './demoReducer';
+import { componentReducer } from './componentReducer';
 
 const rootReducer = combineReducers({
-	demoReducer,
+	componentReducer,
 });
 
 export default rootReducer;

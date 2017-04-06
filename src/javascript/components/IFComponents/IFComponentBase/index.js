@@ -1,5 +1,7 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import Util from '../../../util/Util.js';
+import EventEngine from '../../../engine/EventEngine.js';
 import Immutable from 'immutable';
 
 const { is } = Immutable;
@@ -16,7 +18,6 @@ class IFComponentBase extends Component {
 	}
 
 	getFieldValue(field) {
-		console.log('this.state.option in IFComponentBase', this.state.option);
 		return this.state.option.get(field).toJS();
 	}
 
@@ -32,6 +33,18 @@ class IFComponentBase extends Component {
 		}, callback);
 	}
 
+	getFieldValues(array) {
+		let valueObj = {};
+
+		array.map((field) => {
+			console.log(`this.getFieldValue(${field})`, this.getFieldValue(field));
+			valueObj[field] = this.getFieldValue(field);
+		});
+
+		console.log('getFieldValues');
+		return valueObj;
+	}
+
 	getValue() {
 		return this.getFieldValue('value');
 	}
@@ -42,22 +55,54 @@ class IFComponentBase extends Component {
 		}, callback);
 	}
 
+	getDataModel() {
+		return this.getFieldValues([
+			'id',
+			'name',
+			'value',
+		]);
+	}
+
+	componentDidMount() {
+		// bind events
+		EventEngine.subscribe(this, {
+			option: this.state.option.toJS(),
+		}, (eventMap) => {
+			this.setState({
+				eventMap,
+			});
+		});
+	}
+
+	componentWillUnmount() {
+		let {
+			option,
+			eventMap,
+		} = this.state;
+
+		EventEngine.unsubscribe(option.get('id').toJS(), eventMap);
+	}
+
 
 	shouldComponentUpdate(nextProps, nextState) {
 		return !(this.props === nextProps || is(this.props, nextProps)) 
 			|| !(this.state === nextState || is(this.state, nextState));
 	}
 
-	componentWillUnmount() {
-		console.log('unmount');
+	componentWillMount() {
+		console.log('component will mount');
+	}
 
+	componentWillUnmount() {
 		console.log('unmount event listerner');
+		EventEngine.unsubscribe(this);
 	}
 
 	render() {
 		return (
 			<div>
-				You need to override the IFComponentBase Class in your SubClass
+				<h1>Warning</h1>
+				<p>You need to override the IFComponentBase Class in your SubClass</p>
 			</div>
 		)
 	}

@@ -18,11 +18,13 @@ const pageJson = {
 		},
 		eventList: [
 			{
-				type: 'onLoad',
-				action: 'bringBase',
-				params: ['comp4'],
-				operator: 'LOOKUP',
-				target: ['comp4']
+				eventType: 'onLoad',
+				options: {
+					action: 'BringBase',
+					params: [],
+					expression: 'LOOKUP',
+					target: ['comp4']
+				}
 			}
 		],
 		header: {

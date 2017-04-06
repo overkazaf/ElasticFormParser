@@ -1,7 +1,7 @@
-import demoEpic from './demoEpic.js';
+import componentEpic from './componentEpic.js';
 
 const rootEpics = [
-	demoEpic,
+	componentEpic,
 ];
 
 export default rootEpics;
