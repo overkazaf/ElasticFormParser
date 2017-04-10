@@ -62,9 +62,9 @@ var _RenderEngine = require('../src/javascript/engine/RenderEngine');
 
 var _RenderEngine2 = _interopRequireDefault(_RenderEngine);
 
-var _data = require('../src/javascript/mock/data');
+var _test = require('../src/javascript/mock/test');
 
-var _data2 = _interopRequireDefault(_data);
+var _test2 = _interopRequireDefault(_test);
 
 var _mitt = require('mitt');
 
@@ -164,7 +164,7 @@ var MainPage = function (_Component) {
       return {
         isServer: isServer,
         counter: 0,
-        data: _data2.default.data,
+        data: _test2.default.data,
         formData: null
       };
     }

@@ -6,10 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reduxImmutable = require('redux-immutable');
 
-var _demoReducer = require('./demoReducer');
+var _componentReducer = require('./componentReducer');
 
 var rootReducer = (0, _reduxImmutable.combineReducers)({
-	demoReducer: _demoReducer.demoReducer
+	componentReducer: _componentReducer.componentReducer
 });
 
 exports.default = rootReducer;

@@ -8,7 +8,7 @@ import Rx from 'rxjs/Rx';
 import antdStyle from '../src/css/index.min.css';
 import RenderEngine from '../src/javascript/engine/RenderEngine';
 
-import mock from '../src/javascript/mock/data';
+import mock from '../src/javascript/mock/test';
 
 import mitt from 'mitt';
 

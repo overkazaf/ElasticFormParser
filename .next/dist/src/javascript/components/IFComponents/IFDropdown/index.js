@@ -49,9 +49,6 @@ var IFDropdown = function (_IFComponentBase) {
 	}
 
 	(0, _createClass3.default)(IFDropdown, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {}
-	}, {
 		key: 'handleMenuClick',
 		value: function handleMenuClick(_ref) {
 			var key = _ref.key;
@@ -81,29 +78,29 @@ var IFDropdown = function (_IFComponentBase) {
 				onClick: this.handleMenuClick.bind(this),
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 48
+					lineNumber: 42
 				}
 			}, rawOption.baseData.map(function (item, index) {
 				return _react2.default.createElement(_antd.Menu.Item, { key: index, value: item.value, __source: {
 						fileName: _jsxFileName,
-						lineNumber: 54
+						lineNumber: 48
 					}
 				}, item.label);
 			}));
 
 			return _react2.default.createElement(_antd.Dropdown, { overlay: menu, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 61
+					lineNumber: 55
 				}
 			}, _react2.default.createElement(_antd.Button, {
 				size: 'large',
 				style: { marginLeft: 8 }, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 62
+					lineNumber: 56
 				}
 			}, rawOption.label, ' ', _react2.default.createElement(_antd.Icon, { type: 'down', __source: {
 					fileName: _jsxFileName,
-					lineNumber: 65
+					lineNumber: 59
 				}
 			})));
 		}

@@ -32,9 +32,15 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = require('react-redux');
+
 var _Util = require('../../../util/Util.js');
 
 var _Util2 = _interopRequireDefault(_Util);
+
+var _EventEngine = require('../../../engine/EventEngine.js');
+
+var _EventEngine2 = _interopRequireDefault(_EventEngine);
 
 var _immutable = require('immutable');
 
@@ -65,8 +71,7 @@ var IFComponentBase = function (_Component) {
 	(0, _createClass3.default)(IFComponentBase, [{
 		key: 'getFieldValue',
 		value: function getFieldValue(field) {
-			console.log('this.state.option in IFComponentBase', this.state.option);
-			return this.state.option.get(field).toJS();
+			return this.state.option.get(field);
 		}
 	}, {
 		key: 'setFieldValue',
@@ -84,6 +89,21 @@ var IFComponentBase = function (_Component) {
 			}, callback);
 		}
 	}, {
+		key: 'getFieldValues',
+		value: function getFieldValues(array) {
+			var _this2 = this;
+
+			var valueObj = {};
+
+			array.map(function (field) {
+				console.log('this.getFieldValue(' + field + ')', _this2.getFieldValue(field));
+				valueObj[field] = _this2.getFieldValue(field);
+			});
+
+			console.log('getFieldValues');
+			return valueObj;
+		}
+	}, {
 		key: 'getValue',
 		value: function getValue() {
 			return this.getFieldValue('value');
@@ -96,16 +116,49 @@ var IFComponentBase = function (_Component) {
 			}, callback);
 		}
 	}, {
+		key: 'getDataModel',
+		value: function getDataModel() {
+			return this.getFieldValues(['id', 'name', 'value']);
+		}
+	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this3 = this;
+
+			// bind events
+			_EventEngine2.default.subscribe(this, {
+				option: this.state.option.toJS()
+			}, function (eventMap) {
+				_this3.setState({
+					eventMap: eventMap
+				});
+			});
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			// let {
+			// 	option,
+			// 	eventMap,
+			// } = this.state;
+
+			// EventEngine.unsubscribe(option.get('id').toJS(), eventMap);
+		}
+	}, {
 		key: 'shouldComponentUpdate',
 		value: function shouldComponentUpdate(nextProps, nextState) {
 			return !(this.props === nextProps || is(this.props, nextProps)) || !(this.state === nextState || is(this.state, nextState));
 		}
 	}, {
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			console.log('component will mount');
+		}
+	}, {
 		key: 'componentWillUnmount',
 		value: function componentWillUnmount() {
-			console.log('unmount');
-
 			console.log('unmount event listerner');
+			_EventEngine2.default.unsubscribe(this);
 		}
 	}, {
 		key: 'render',
@@ -113,9 +166,19 @@ var IFComponentBase = function (_Component) {
 			return _react2.default.createElement('div', {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 59
+					lineNumber: 103
 				}
-			}, 'You need to override the IFComponentBase Class in your SubClass');
+			}, _react2.default.createElement('h1', {
+				__source: {
+					fileName: _jsxFileName,
+					lineNumber: 104
+				}
+			}, 'Warning'), _react2.default.createElement('p', {
+				__source: {
+					fileName: _jsxFileName,
+					lineNumber: 105
+				}
+			}, 'You need to override the IFComponentBase Class in your SubClass'));
 		}
 	}]);
 

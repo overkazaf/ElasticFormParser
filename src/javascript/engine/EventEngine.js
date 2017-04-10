@@ -77,7 +77,7 @@ export default class EventEngine {
 			// });
 		});
 
-		eventList.map((evtObj) => {
+		eventList && eventList.map((evtObj) => {
 			let {
 				eventType,
 				options,
@@ -87,9 +87,9 @@ export default class EventEngine {
 
 			console.log(`currentEvent : ${currentEvent}`);
 
-			eventMap[eventType] = (ev) => {
+			eventMap[eventType] = (e) => {
 				emmiter.emit(`${currentEvent}`, {
-					ev,
+					ev: e,
 					options,
 				});
 			};
@@ -110,7 +110,7 @@ export default class EventEngine {
 
 				// console.log(`callback , ${JSON.stringify(callback)}`);
 
-				ComponentManager.get(id).setValue(ev.target.value, callback)
+				ComponentManager.get(id).setValue(ev.target.value, callback);
 			});
 		});
 		

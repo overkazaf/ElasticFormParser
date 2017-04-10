@@ -3,11 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.demoReducer = undefined;
-
-var _assign = require('babel-runtime/core-js/object/assign');
-
-var _assign2 = _interopRequireDefault(_assign);
+exports.componentReducer = undefined;
 
 var _immutable = require('immutable');
 
@@ -15,22 +11,20 @@ var _immutable2 = _interopRequireDefault(_immutable);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var $$initState = {
-    formData: null
-};
+var $$initState = _immutable2.default.fromJS({
+    option: {},
+    evtMap: {}
+});
 
-var demoReducer = exports.demoReducer = function demoReducer() {
+var componentReducer = exports.componentReducer = function componentReducer() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : $$initState;
     var action = arguments[1];
 
     switch (action.type) {
-        case 'UPDATE_VIEW':
+        case 'UPDATE':
             {
-                var newState = (0, _assign2.default)({}, state);
-                newState.formData = action.payload;
-
-                console.log('newState', newState);
-                return newState;
+                console.log('action', action);
+                return state;
             }
         default:
             return state;

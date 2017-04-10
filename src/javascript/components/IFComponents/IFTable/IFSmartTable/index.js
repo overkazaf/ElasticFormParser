@@ -1,8 +1,10 @@
 import { Component } from 'react';
+import IFComponentBase from '../../IFComponentBase/index.js';
 import { Table, Input, Icon, Button, Popconfirm } from 'antd';
 
-import Util from '../../util/Util.js';
+import Util from '../../../../util/Util.js';
 import mathjs from 'mathjs';
+import Immutable from 'immutable';
 
 import './index.scss';
 
@@ -57,8 +59,10 @@ class EditableCell extends Component {
   }
 }
 
+
+
 export default
-class EditableTable extends Component {
+class IFSmartTable extends IFComponentBase {
   constructor(props) {
     super(props);
     this.columns = [{
@@ -123,17 +127,19 @@ class EditableTable extends Component {
       dataIndex: 'operation',
       render: (text, record, index) => {
         return (
-          this.state.dataSource.length > 1 ?
+          this.state.option.get('dataSource').length > 1 ?
           (
-            <Popconfirm title="确定要删除本行记录?" onConfirm={() => this.onDelete(index)}>
+            <Popconfirm title="确定要删除本行记录?" onConfirm={() => this._onDelete(index)}>
               <a href="#">删除本行记录</a>
             </Popconfirm>
           ) : null
         );
       },
     }];
+  }
 
-    this.state = {
+  componentDidMount() {
+    this.setFieldValue({
       dataSource: [{
         key: '0',
         name: '新增物料 0',
@@ -143,13 +149,17 @@ class EditableTable extends Component {
         discount: '0',
         buyer: '管理员',
         date: '2016-10-24',
+        fixed: 'right',
+        width: 100,
       }],
       count: 1,
-    };
+    });
   }
+
+
   onCellChange = (index, key) => {
     return (value) => {
-      const newDataSource = Util.deepClone(this.state.dataSource);
+      const newDataSource = this.state.option.get('dataSource');
       newDataSource[index][key] = value;
 
       let autoCalcMap = {
@@ -170,22 +180,36 @@ class EditableTable extends Component {
         newDataSource[index]['total'] = new Number(mathjs.eval(`${price} * ${amount} * (100 - ${discount}) / 100`)).toFixed(2);
       }  
 
-      this.setState({ 
+      // this.setState({ 
+      //   dataSource: [],
+      // }, () => {
+      //   this.setState({
+      //     dataSource: newDataSource,
+      //   });
+      // });
+
+      this.setFieldValue({
         dataSource: [],
       }, () => {
-        this.setState({
+        this.setFieldValue({
           dataSource: newDataSource,
         });
       });
+
     };
   }
-  onDelete = (index) => {
-    const dataSource = [...this.state.dataSource];
+
+  _onDelete = (index) => {
+    const dataSource = this.state.option.get('dataSource');
     dataSource.splice(index, 1);
-    this.setState({ dataSource });
+   
+    this.setFieldValue({
+      dataSource,
+    });
   }
-  handleAdd = () => {
-    const { count, dataSource } = this.state;
+
+  _handleAdd = () => {
+    const { count, dataSource } = this.state.option.toJS();
     const newData = {
       key: count,
       name: `新增物料 ${count}`,
@@ -195,20 +219,42 @@ class EditableTable extends Component {
       discount: '0',
       buyer: '管理员',
       date: '2016-10-24',
+      fixed: 'right',
+      width: 100,
     };
-    this.setState({
+
+    this.setFieldValue({
       dataSource: [...dataSource, newData],
       count: count + 1,
     });
   }
+
   render() {
-    const { dataSource } = this.state;
+    const { 
+      option,
+      eventMap,
+    } = this.state;
+
+    let {
+      dataSource,
+    } = option.toJS();
+
     const columns = this.columns;
     return (
       <div>
-        <Button className="editable-add-btn" onClick={this.handleAdd}>Add</Button>
-        <br />
-        <Table bordered dataSource={dataSource} columns={columns} />
+        <Button 
+          className="editable-add-btn"
+          style={{marginBottom: 10}}
+          onClick={this._handleAdd}>
+        <Icon type="plus-circle" />
+          New Row
+        </Button>
+        <Table 
+          size="small"
+          bordered 
+          dataSource={dataSource} 
+          scroll={{ x: 700 }}
+          columns={columns} />
       </div>
     );
   }

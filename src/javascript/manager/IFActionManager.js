@@ -24,7 +24,6 @@ const ActionStretagies = {
 		target,
 	}, ev) => {
 		// 变量占位符
-		console.log('setToTarget', target);
 		target.map((t) => {
 			let expRE = /\$\{(.*?)\}/g;
 			if (Util.isExisty(expression)) {
@@ -56,11 +55,42 @@ const ActionStretagies = {
 		console.log('commiting');
 
 		let models = ComponentManager.list().map((item) => {
-			console.log('item.getDataModel()', item.getDataModel());
-			return item.getDataModel();
+			return item.getFieldValues(['id', 'name', 'value', 'ctrlType', 'dataSource']);
 		});
 
 		console.log('models', models);
+	},
+	LockOrUnlock: (componentId, {
+		action,
+		params,
+		expression,
+		target,
+	}, ev) => {
+		target.map((t) => {
+			let $comp = ComponentManager.get(t);
+
+			let locked = $comp.getFieldValue('locked');
+
+			$comp.setFieldValue({
+				locked: !locked,
+			});
+		});
+	},
+	ShowOrHide: (componentId, {
+		action,
+		params,
+		expression,
+		target,
+	}, ev) => {
+		target.map((t) => {
+			let $comp = ComponentManager.get(t);
+
+			let visibility = $comp.getFieldValue('visibility');
+
+			$comp.setFieldValue({
+				visibility: !visibility,
+			});
+		});
 	}
 };
 

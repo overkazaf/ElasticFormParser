@@ -3,6 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _props;
+
 var pageJson = {
 	code: 0,
 	errorMsg: '',
@@ -37,6 +46,8 @@ var pageJson = {
 				props: {
 					id: 'comp0',
 					name: 'comp0',
+					ctrlType: 'IFInput',
+					placeholder: "输入数量呗",
 					addonBefore: "数量",
 					addonAfter: "只",
 					prefix: "",
@@ -45,7 +56,7 @@ var pageJson = {
 					value: 1,
 
 					visibility: 1,
-					locked: 1,
+					locked: 0,
 					mustInput: 1,
 					needToSum: 0,
 					lookUpType: null,
@@ -53,14 +64,22 @@ var pageJson = {
 					filterRules: [],
 
 					style: {},
-					eventList: []
+					eventList: [{
+						eventType: 'onKeyUp',
+						options: {
+							action: 'UpdateValue',
+							params: [],
+							expression: '',
+							target: ['comp0']
+						}
+					}]
 				}
 			}, {
-				key: 'comp1',
+				key: 'comp3',
 				type: 'IFInputNumber',
 				props: {
-					id: 'comp1',
-					name: 'comp1',
+					id: 'comp31',
+					name: 'comp3',
 					addonBefore: "数量",
 					addonAfter: "个",
 					prefix: "数量",
@@ -73,7 +92,8 @@ var pageJson = {
 					mustInput: 1,
 					needToSum: 0,
 					lookUpType: null,
-					lookUpStretagy: 'DROP_DOWN',
+					lookUpStretagy: null,
+					ctrlType: 'IFInput',
 					filterRules: [],
 
 					style: {},
@@ -81,18 +101,18 @@ var pageJson = {
 						eventType: 'onChange',
 						options: {
 							action: 'SetToTarget',
-							params: ['comp1', 'comp2'],
-							expression: '${comp1}*${comp2}',
-							target: ['comp3']
+							params: ['comp3', 'comp4'],
+							expression: '${comp3}*${comp4}',
+							target: ['comp5']
 						}
 					}]
 				}
 			}, {
-				key: 'comp2',
+				key: 'comp4',
 				type: 'IFInputNumber',
 				props: {
-					id: 'comp2',
-					name: 'comp2',
+					id: 'comp4',
+					name: 'comp4',
 					addonBefore: "单价",
 					addonAfter: "元",
 					prefix: "单价",
@@ -109,23 +129,23 @@ var pageJson = {
 					filterRules: [],
 
 					style: {},
-					ctrlType: 'double',
+					ctrlType: 'IFInput',
 					eventList: [{
 						eventType: 'onChange',
 						options: {
 							action: 'SetToTarget',
-							params: ['comp1', 'comp2'],
-							expression: '${comp1}*${comp2}',
-							target: ['comp3']
+							params: ['comp3', 'comp4'],
+							expression: '${comp3}*${comp4}',
+							target: ['comp5']
 						}
 					}]
 				}
 			}, {
-				key: 'comp3',
+				key: 'comp5',
 				type: 'IFInputNumber',
 				props: {
-					id: 'comp3',
-					name: 'comp3',
+					id: 'comp5',
+					name: 'comp5',
 					addonBefore: "总价",
 					addonAfter: "元",
 					prefix: "总价",
@@ -138,155 +158,19 @@ var pageJson = {
 					mustInput: 1,
 					needToSum: 0,
 					lookUpType: null,
-					lookUpStretagy: 'DROP_DOWN',
-					filterRules: [],
-
-					ctrlType: 'double',
-					style: {},
-					eventList: []
-				}
-			}, {
-				key: 'comp20',
-				type: 'IFInputNumber',
-				props: {
-					id: 'comp20',
-					name: 'comp20',
-					addonBefore: "单价",
-					addonAfter: "元",
-					prefix: "单价",
-					subfix: "元",
-					defaultValue: "0.00",
-					value: 88.88,
-
-					visibility: 1,
-					locked: 0,
-					mustInput: 1,
-					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: 'DROP_DOWN',
-					filterRules: [],
-
-					style: {},
-					ctrlType: 'double',
-					eventList: [{
-						eventType: 'onChange',
-						options: {
-							action: 'SetToTarget',
-							params: ['comp20', 'comp21', 'comp31'],
-							expression: '${comp20}*${comp21}*(100-${comp31})/100',
-							target: ['comp41']
-						}
-					}]
-				}
-			}, {
-				key: 'comp21',
-				type: 'IFInputNumber',
-				props: {
-					id: 'comp21',
-					name: 'comp21',
-					addonBefore: "采购数量",
-					addonAfter: "个",
-					prefix: "单价",
-					subfix: "元",
-					defaultValue: 1,
-					value: 1,
-
-					visibility: 1,
-					locked: 0,
-					mustInput: 1,
-					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: 'null',
-					filterRules: [],
-
-					style: {},
-					ctrlType: 'double',
-					eventList: [{
-						eventType: 'onChange',
-						options: {
-							action: 'SetToTarget',
-							params: ['comp20', 'comp21', 'comp31'],
-							expression: '${comp20}*${comp21}*(100-${comp31})/100',
-							target: ['comp41']
-						}
-					}]
-				}
-			}, {
-				key: 'comp31',
-				type: 'IFInputNumber',
-				props: {
-					id: 'comp31',
-					name: 'comp31',
-					addonBefore: "折扣",
-					addonAfter: "%",
-					defaultValue: "0.00",
-					value: 0,
-
-					visibility: 1,
-					locked: 0,
-					mustInput: 1,
-					needToSum: 0,
-					lookUpType: null,
 					lookUpStretagy: null,
 					filterRules: [],
 
-					ctrlType: 'double',
-					style: {},
-					eventList: [{
-						eventType: 'onChange',
-						options: {
-							action: 'SetToTarget',
-							params: ['comp20', 'comp21', 'comp31'],
-							expression: '${comp20}*${comp21}*(100 - ${comp31})/100',
-							target: ['comp41']
-						}
-					}]
-				}
-			}, {
-				key: 'comp41',
-				type: 'IFInputNumber',
-				props: {
-					id: 'comp41',
-					name: 'comp41',
-					addonBefore: "总金额",
-					addonAfter: "元",
-					prefix: "总价",
-					subfix: "元",
-					defaultValue: "0.00",
-					value: 0,
-
-					visibility: 1,
-					locked: 0,
-					mustInput: 1,
-					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: null,
-					filterRules: [],
-
-					ctrlType: 'double',
+					ctrlType: 'IFInput',
 					style: {},
 					eventList: []
 				}
 			}, {
-				key: 'comp4',
-				type: 'IFDropdown',
+				key: 'comp666',
+				type: 'IFTreeSelect',
 				props: {
-					id: 'comp4',
-					name: 'comp4',
-					label: "费用类型",
-					defaultValue: "0",
-					value: 0,
-					style: {},
-					baseData: [{ label: '水费', value: 0 }, { label: '电费', value: 1 }, { label: '网费', value: 2 }, { label: '清洁费', value: 3 }, { label: '油费', value: 4 }, { label: '租金', value: 5 }],
-					ctrlType: 'dropdown',
-					eventList: []
-				}
-			}, {
-				key: 'comp5',
-				type: 'rangePicker',
-				props: {
-					id: 'comp5',
-					name: 'comp5',
+					id: 'comp666',
+					name: 'comp666',
 
 					label: "==== 房租 ====",
 					defaultValue: "0",
@@ -297,41 +181,148 @@ var pageJson = {
 					mustInput: 1,
 					needToSum: 0,
 					lookUpType: null,
-					lookUpStretagy: 'DROP_DOWN',
-					filterRules: [],
-
-					style: {},
-					baseData: [{ label: '水费', value: 1 }, { label: '电费', value: 2 }, { label: '网费', value: 3 }],
-					ctrlType: 'dropdown',
-					eventList: []
-				}
-			}, {
-				key: 'comp6',
-				type: 'treeSelect',
-				props: {
-					id: 'comp6',
-					name: 'comp6',
-
-					label: "==== 房租 ====",
-					defaultValue: "0",
-					value: 0,
-
-					visibility: 1,
-					locked: 1,
-					mustInput: 1,
-					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: 'DROP_DOWN',
+					lookUpStretagy: null,
 					filterRules: [],
 
 					style: {},
 					baseData: [],
-					ctrlType: 'dropdown',
+					ctrlType: 'IFTree',
 					eventList: []
 				}
 			}, {
+				key: 'comp676',
+				type: 'IFRangePicker',
+				props: {
+					id: 'comp676',
+					name: 'comp676',
+					defaultValue: "0",
+					value: 0,
+
+					visibility: 1,
+					locked: 1,
+					mustInput: 1,
+					needToSum: 0,
+					lookUpType: null,
+					lookUpStretagy: null,
+					filterRules: [],
+
+					style: {},
+					baseData: [],
+					ctrlType: 'IFDate',
+					eventList: []
+				}
+			}, {
+				key: 'comp67336',
+				type: 'IFUploadImage',
+				props: {
+					id: 'comp67336',
+					name: 'comp67336',
+					defaultValue: "0",
+					value: 0,
+
+					visibility: 1,
+					locked: 1,
+					mustInput: 1,
+					needToSum: 0,
+					lookUpType: null,
+					lookUpStretagy: null,
+					filterRules: [],
+
+					style: {},
+					baseData: [],
+					ctrlType: 'IFDate',
+					eventList: []
+				}
+			}, {
+				key: 'comp611136',
+				type: 'IFCheckBoxGroupVertical',
+				props: {
+					id: 'comp611136',
+					name: 'comp611136',
+					defaultValue: "0",
+					value: 0,
+
+					visibility: 1,
+					locked: 1,
+					mustInput: 1,
+					needToSum: 0,
+					lookUpType: null,
+					lookUpStretagy: null,
+					filterRules: [],
+
+					style: {},
+					baseData: [],
+					ctrlType: 'IFDate',
+					eventList: []
+				}
+			}, {
+				key: 'comp1111',
+				type: 'IFRadioGroupVertical',
+				props: {
+					id: 'comp1111',
+					name: 'comp1111',
+					theme: 'dashed',
+					ghost: 0,
+					label: 'SetToTarget 222',
+					ctrlType: 'IFButton',
+
+					visibility: 1,
+					locked: 0,
+					mustInput: 1,
+					needToSum: 0,
+					lookUpType: null,
+					lookUpStretagy: null,
+					filterRules: [],
+					style: {},
+					eventList: []
+				}
+			}, {
+				key: 'comp1',
+				type: 'IFButtonNormal',
+				props: {
+					id: 'comp1',
+					name: 'comp1',
+					theme: 'dashed',
+					ghost: 0,
+					label: 'SetToTarget 222',
+					ctrlType: 'IFButton',
+
+					visibility: 1,
+					locked: 0,
+					mustInput: 1,
+					needToSum: 0,
+					lookUpType: null,
+					lookUpStretagy: null,
+					filterRules: [],
+					style: {},
+					eventList: [{
+						eventType: 'onClick',
+						options: {
+							action: 'SetToTarget',
+							params: ['comp0'],
+							expression: '222',
+							target: ['comp0']
+						}
+					}]
+				}
+			}, {
+				key: 'comp6',
+				type: 'IFDropdown',
+				props: (_props = {
+					id: 'comp6',
+					name: 'comp6',
+					theme: 'default',
+					label: 'Append',
+					ctrlType: 'IFDropdown',
+
+					visibility: 1,
+					locked: 0,
+					mustInput: 1,
+					needToSum: 0
+				}, (0, _defineProperty3.default)(_props, 'label', "费用类型"), (0, _defineProperty3.default)(_props, 'defaultValue', "0"), (0, _defineProperty3.default)(_props, 'value', 0), (0, _defineProperty3.default)(_props, 'style', {}), (0, _defineProperty3.default)(_props, 'baseData', [{ label: '水费', value: 0 }, { label: '电费', value: 1 }, { label: '网费', value: 2 }, { label: '清洁费', value: 3 }, { label: '油费', value: 4 }, { label: '租金', value: 5 }]), (0, _defineProperty3.default)(_props, 'filterRules', []), (0, _defineProperty3.default)(_props, 'style', {}), (0, _defineProperty3.default)(_props, 'eventList', []), _props)
+			}, {
 				key: 'comp7',
-				type: 'IFButton',
+				type: 'IFButtonNormal',
 				props: {
 					id: 'comp7',
 					name: 'comp7',
@@ -350,20 +341,20 @@ var pageJson = {
 
 					style: {},
 					baseData: [],
-					ctrlType: 'dropdown',
+					ctrlType: 'IFButton',
 					eventList: [{
 						eventType: 'onClick',
 						options: {
 							action: 'ShowOrHide',
 							params: [],
 							expression: null,
-							target: ['comp0', 'comp5']
+							target: ['comp0']
 						}
 					}]
 				}
 			}, {
 				key: 'comp8',
-				type: 'IFButton',
+				type: 'IFButtonNormal',
 				props: {
 					id: 'comp8',
 					name: 'comp8',
@@ -382,7 +373,7 @@ var pageJson = {
 
 					style: {},
 					baseData: [],
-					ctrlType: 'dropdown',
+					ctrlType: 'IFButton',
 					eventList: [{
 						eventType: 'onClick',
 						options: {
@@ -397,60 +388,55 @@ var pageJson = {
 		},
 		body: {
 			components: [{
-				key: 'kkkkkk',
-				type: 'RadioGroup',
+				key: 'compA',
+				type: 'IFSmartTable',
 				props: {
-					id: 'kkkkkk',
-					label: '',
-					value: 1,
-					baseData: [{ name: '男', value: 1 }, { name: '女', value: 2 }]
-				}
-			}, {
-				key: 'comp12',
-				type: 'editableTable',
-				props: {
-					id: 'comp12',
-					name: 'comp12',
-
-					label: "==== 房租 ====",
-					defaultValue: "0",
-					value: 0,
+					id: 'compA',
+					name: 'compA',
+					theme: 'default',
+					label: 'Append',
+					ctrlType: 'IFTable',
 
 					visibility: 1,
-					locked: 1,
+					locked: 0,
 					mustInput: 1,
 					needToSum: 0,
 					lookUpType: null,
-					lookUpStretagy: 'DROP_DOWN',
+					lookUpStretagy: null,
 					filterRules: [],
-
 					style: {},
-					baseData: [{ label: '水费', value: 1 }, { label: '电费', value: 2 }, { label: '网费', value: 3 }],
-					ctrlType: 'dropdown',
 					eventList: []
 				}
 			}]
 		},
 		footer: {
 			components: [{
-				key: 'comp10',
-				type: 'submit',
+				key: 'comp2',
+				type: 'IFButtonNormal',
 				props: {
-					id: 'comp10',
-					name: 'comp10',
-					label: "提交",
+					id: 'comp2',
+					name: 'comp2',
+					theme: 'primary',
+					label: 'CommitForm',
+					ctrlType: 'IFButton',
+					ghost: 0,
 
 					visibility: 1,
-					locked: 1,
-					mustInput: 1,
+					locked: 0,
+					mustInput: 0,
 					needToSum: 0,
 					lookUpType: null,
 					lookUpStretagy: null,
 					filterRules: [],
-
+					style: {},
 					eventList: [{
 						eventType: 'onClick',
-						options: ['comp1', 'comp2']
+						options: {
+							action: 'CommitForm',
+							params: [],
+							expression: 'EXEC_VALIDATE',
+							target: []
+						}
 					}]
 				}
 			}]

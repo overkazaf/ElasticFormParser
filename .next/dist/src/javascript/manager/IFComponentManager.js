@@ -25,21 +25,25 @@ var IFComponentManager = function () {
 	(0, _createClass3.default)(IFComponentManager, null, [{
 		key: "register",
 		value: function register(id, component) {
-			componentMap[id] = component;
-			componentList.push(component);
+			try {
+				componentMap[id] = component;
+				componentList.push(component);
+			} catch (e) {
+				return false;
+			}
+
+			return true;
 		}
 	}, {
-		key: "listComponents",
-		value: function listComponents() {
+		key: "list",
+		value: function list() {
 			componentList.map(console.log);
 
-			// Object.keys(componentMap).map((key) => {
-			// 	console.log('key', key, 'comp', componentMap[key]);
-			// });
+			return componentList;
 		}
 	}, {
-		key: "getComponent",
-		value: function getComponent(id) {
+		key: "get",
+		value: function get(id) {
 			return componentMap[id];
 		}
 	}]);

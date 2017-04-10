@@ -18,7 +18,7 @@ class IFComponentBase extends Component {
 	}
 
 	getFieldValue(field) {
-		return this.state.option.get(field).toJS();
+		return this.state.option.get(field);
 	}
 
 	setFieldValue(json, callback = () => {}) {
@@ -75,12 +75,12 @@ class IFComponentBase extends Component {
 	}
 
 	componentWillUnmount() {
-		let {
-			option,
-			eventMap,
-		} = this.state;
+		// let {
+		// 	option,
+		// 	eventMap,
+		// } = this.state;
 
-		EventEngine.unsubscribe(option.get('id').toJS(), eventMap);
+		// EventEngine.unsubscribe(option.get('id').toJS(), eventMap);
 	}
 
 

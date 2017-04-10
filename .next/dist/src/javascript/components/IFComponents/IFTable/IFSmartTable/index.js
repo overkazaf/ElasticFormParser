@@ -32,9 +32,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _index = require('../../IFComponentBase/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
 var _antd = require('antd');
 
-var _Util = require('../../util/Util.js');
+var _Util = require('../../../../util/Util.js');
 
 var _Util2 = _interopRequireDefault(_Util);
 
@@ -42,11 +46,15 @@ var _mathjs = require('mathjs');
 
 var _mathjs2 = _interopRequireDefault(_mathjs);
 
+var _immutable = require('immutable');
+
+var _immutable2 = _interopRequireDefault(_immutable);
+
 require('./index.scss');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = '/Users/overkazaf/Desktop/codes/git/playGround/IntelliParser/src/javascript/components/EditableTable/index.js';
+var _jsxFileName = '/Users/overkazaf/Desktop/codes/git/playGround/IntelliParser/src/javascript/components/IFComponents/IFTable/IFSmartTable/index.js';
 
 
 var EditableCell = function (_Component) {
@@ -88,11 +96,11 @@ var EditableCell = function (_Component) {
 
       return _react2.default.createElement('div', { className: 'editable-cell', __source: {
           fileName: _jsxFileName,
-          lineNumber: 30
+          lineNumber: 32
         }
       }, editable ? _react2.default.createElement('div', { className: 'editable-cell-input-wrapper', __source: {
           fileName: _jsxFileName,
-          lineNumber: 33
+          lineNumber: 35
         }
       }, _react2.default.createElement(_antd.Input, {
         value: value,
@@ -100,7 +108,7 @@ var EditableCell = function (_Component) {
         onPressEnter: this.check,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 34
+          lineNumber: 36
         }
       }), _react2.default.createElement(_antd.Icon, {
         type: 'check',
@@ -108,11 +116,11 @@ var EditableCell = function (_Component) {
         onClick: this.check,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 39
+          lineNumber: 41
         }
       })) : _react2.default.createElement('div', { className: 'editable-cell-text-wrapper', __source: {
           fileName: _jsxFileName,
-          lineNumber: 46
+          lineNumber: 48
         }
       }, value || ' ', _react2.default.createElement(_antd.Icon, {
         type: 'edit',
@@ -120,7 +128,7 @@ var EditableCell = function (_Component) {
         onClick: this.edit,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 48
+          lineNumber: 50
         }
       })));
     }
@@ -129,17 +137,17 @@ var EditableCell = function (_Component) {
   return EditableCell;
 }(_react.Component);
 
-var EditableTable = function (_Component2) {
-  (0, _inherits3.default)(EditableTable, _Component2);
+var IFSmartTable = function (_IFComponentBase) {
+  (0, _inherits3.default)(IFSmartTable, _IFComponentBase);
 
-  function EditableTable(props) {
-    (0, _classCallCheck3.default)(this, EditableTable);
+  function IFSmartTable(props) {
+    (0, _classCallCheck3.default)(this, IFSmartTable);
 
-    var _this2 = (0, _possibleConstructorReturn3.default)(this, (EditableTable.__proto__ || (0, _getPrototypeOf2.default)(EditableTable)).call(this, props));
+    var _this2 = (0, _possibleConstructorReturn3.default)(this, (IFSmartTable.__proto__ || (0, _getPrototypeOf2.default)(IFSmartTable)).call(this, props));
 
     _this2.onCellChange = function (index, key) {
       return function (value) {
-        var newDataSource = _Util2.default.deepClone(_this2.state.dataSource);
+        var newDataSource = _this2.state.option.get('dataSource');
         newDataSource[index][key] = value;
 
         var autoCalcMap = {
@@ -158,26 +166,37 @@ var EditableTable = function (_Component2) {
           newDataSource[index]['total'] = new Number(_mathjs2.default.eval(price + ' * ' + amount + ' * (100 - ' + discount + ') / 100')).toFixed(2);
         }
 
-        _this2.setState({
+        // this.setState({ 
+        //   dataSource: [],
+        // }, () => {
+        //   this.setState({
+        //     dataSource: newDataSource,
+        //   });
+        // });
+
+        _this2.setFieldValue({
           dataSource: []
         }, function () {
-          _this2.setState({
+          _this2.setFieldValue({
             dataSource: newDataSource
           });
         });
       };
     };
 
-    _this2.onDelete = function (index) {
-      var dataSource = [].concat((0, _toConsumableArray3.default)(_this2.state.dataSource));
+    _this2._onDelete = function (index) {
+      var dataSource = _this2.state.option.get('dataSource');
       dataSource.splice(index, 1);
-      _this2.setState({ dataSource: dataSource });
+
+      _this2.setFieldValue({
+        dataSource: dataSource
+      });
     };
 
-    _this2.handleAdd = function () {
-      var _this2$state = _this2.state,
-          count = _this2$state.count,
-          dataSource = _this2$state.dataSource;
+    _this2._handleAdd = function () {
+      var _this2$state$option$t = _this2.state.option.toJS(),
+          count = _this2$state$option$t.count,
+          dataSource = _this2$state$option$t.dataSource;
 
       var newData = {
         key: count,
@@ -187,9 +206,12 @@ var EditableTable = function (_Component2) {
         total: '00.00',
         discount: '0',
         buyer: '管理员',
-        date: '2016-10-24'
+        date: '2016-10-24',
+        fixed: 'right',
+        width: 100
       };
-      _this2.setState({
+
+      _this2.setFieldValue({
         dataSource: [].concat((0, _toConsumableArray3.default)(dataSource), [newData]),
         count: count + 1
       });
@@ -204,7 +226,7 @@ var EditableTable = function (_Component2) {
           onChange: _this2.onCellChange(index, 'name'),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 68
+            lineNumber: 72
           }
         });
       }
@@ -217,7 +239,7 @@ var EditableTable = function (_Component2) {
           onChange: _this2.onCellChange(index, 'amount'),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 77
+            lineNumber: 81
           }
         });
       }
@@ -230,7 +252,7 @@ var EditableTable = function (_Component2) {
           onChange: _this2.onCellChange(index, 'price'),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 86
+            lineNumber: 90
           }
         });
       }
@@ -243,7 +265,7 @@ var EditableTable = function (_Component2) {
           onChange: _this2.onCellChange(index, 'discount'),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 95
+            lineNumber: 99
           }
         });
       }
@@ -256,7 +278,7 @@ var EditableTable = function (_Component2) {
           onChange: _this2.onCellChange(index, 'total'),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 104
+            lineNumber: 108
           }
         });
       }
@@ -269,7 +291,7 @@ var EditableTable = function (_Component2) {
           onChange: _this2.onCellChange(index, 'date'),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 113
+            lineNumber: 117
           }
         });
       }
@@ -280,65 +302,82 @@ var EditableTable = function (_Component2) {
       title: '操作',
       dataIndex: 'operation',
       render: function render(text, record, index) {
-        return _this2.state.dataSource.length > 1 ? _react2.default.createElement(_antd.Popconfirm, { title: '\u786E\u5B9A\u8981\u5220\u9664\u672C\u884C\u8BB0\u5F55?', onConfirm: function onConfirm() {
-            return _this2.onDelete(index);
+        return _this2.state.option.get('dataSource').length > 1 ? _react2.default.createElement(_antd.Popconfirm, { title: '\u786E\u5B9A\u8981\u5220\u9664\u672C\u884C\u8BB0\u5F55?', onConfirm: function onConfirm() {
+            return _this2._onDelete(index);
           }, __source: {
             fileName: _jsxFileName,
-            lineNumber: 128
+            lineNumber: 132
           }
         }, _react2.default.createElement('a', { href: '#', __source: {
             fileName: _jsxFileName,
-            lineNumber: 129
+            lineNumber: 133
           }
         }, '\u5220\u9664\u672C\u884C\u8BB0\u5F55')) : null;
       }
     }];
-
-    _this2.state = {
-      dataSource: [{
-        key: '0',
-        name: '新增物料 0',
-        amount: '1',
-        price: '12.00',
-        total: '12.00',
-        discount: '0',
-        buyer: '管理员',
-        date: '2016-10-24'
-      }],
-      count: 1
-    };
     return _this2;
   }
 
-  (0, _createClass3.default)(EditableTable, [{
+  (0, _createClass3.default)(IFSmartTable, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.setFieldValue({
+        dataSource: [{
+          key: '0',
+          name: '新增物料 0',
+          amount: '1',
+          price: '12.00',
+          total: '12.00',
+          discount: '0',
+          buyer: '管理员',
+          date: '2016-10-24',
+          fixed: 'right',
+          width: 100
+        }],
+        count: 1
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var dataSource = this.state.dataSource;
+      var _state2 = this.state,
+          option = _state2.option,
+          eventMap = _state2.eventMap;
+
+      var _option$toJS = option.toJS(),
+          dataSource = _option$toJS.dataSource;
 
       var columns = this.columns;
       return _react2.default.createElement('div', {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 208
+          lineNumber: 244
         }
-      }, _react2.default.createElement(_antd.Button, { className: 'editable-add-btn', onClick: this.handleAdd, __source: {
+      }, _react2.default.createElement(_antd.Button, {
+        className: 'editable-add-btn',
+        style: { marginBottom: 10 },
+        onClick: this._handleAdd, __source: {
           fileName: _jsxFileName,
-          lineNumber: 209
+          lineNumber: 245
         }
-      }, 'Add'), _react2.default.createElement('br', {
-        __source: {
+      }, _react2.default.createElement(_antd.Icon, { type: 'plus-circle', __source: {
           fileName: _jsxFileName,
-          lineNumber: 210
+          lineNumber: 249
         }
-      }), _react2.default.createElement(_antd.Table, { bordered: true, dataSource: dataSource, columns: columns, __source: {
+      }), 'New Row'), _react2.default.createElement(_antd.Table, {
+        size: 'small',
+        bordered: true,
+        dataSource: dataSource,
+        scroll: { x: 700 },
+        columns: columns, __source: {
           fileName: _jsxFileName,
-          lineNumber: 211
+          lineNumber: 252
         }
       }));
     }
   }]);
 
-  return EditableTable;
-}(_react.Component);
+  return IFSmartTable;
+}(_index2.default);
 
-exports.default = EditableTable;
+exports.default = IFSmartTable;

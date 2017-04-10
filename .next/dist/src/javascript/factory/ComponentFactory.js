@@ -12,217 +12,105 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _antd = require('antd');
-
-var _IFComponentManager = require('../manager/IFComponentManager.js');
-
-var _IFComponentManager2 = _interopRequireDefault(_IFComponentManager);
-
-var _moment = require('moment');
-
-var _moment2 = _interopRequireDefault(_moment);
 
 var _EventEngine = require('../engine/EventEngine');
 
 var _EventEngine2 = _interopRequireDefault(_EventEngine);
 
-var _index = require('../components/EditableTable/index.js');
+var _IFComponents = require('../components/IFComponents');
 
-var _index2 = _interopRequireDefault(_index);
-
-var _index3 = require('../components/IFComponents/IFInputNumber/index.js');
-
-var _index4 = _interopRequireDefault(_index3);
-
-var _index5 = require('../components/IFComponents/IFButton/index.js');
-
-var _index6 = _interopRequireDefault(_index5);
-
-var _index7 = require('../components/IFComponents/IFDropdown/index.js');
-
-var _index8 = _interopRequireDefault(_index7);
+var _IFComponents2 = _interopRequireDefault(_IFComponents);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/Users/overkazaf/Desktop/codes/git/playGround/IntelliParser/src/javascript/factory/ComponentFactory.js';
 
 
-var RangePicker = _antd.DatePicker.RangePicker;
-
-var _RadioGroup = _antd.Radio.Group;
-
-var TreeNode = _antd.TreeSelect.TreeNode;
-
-var treeValue = undefined;
+var _IFInputNumber = _IFComponents2.default.IFInputNumber,
+    _IFDropdown = _IFComponents2.default.IFDropdown,
+    _IFButtonNormal = _IFComponents2.default.IFButtonNormal,
+    _IFSmartTable = _IFComponents2.default.IFSmartTable,
+    _IFTreeSelect = _IFComponents2.default.IFTreeSelect,
+    _IFRangePicker = _IFComponents2.default.IFRangePicker,
+    _IFRadioGroupHorizontal = _IFComponents2.default.IFRadioGroupHorizontal,
+    _IFRadioGroupVertical = _IFComponents2.default.IFRadioGroupVertical,
+    _IFUploadImage = _IFComponents2.default.IFUploadImage,
+    _IFCheckBoxGroupVertical = _IFComponents2.default.IFCheckBoxGroupVertical;
 
 var AntdComponents = {
-	input: function input(option) {
-		var evtHandlers = _EventEngine2.default.buildEventHandlers(option);
-
-		var prefix = option.prefix,
-		    subfix = option.subfix,
-		    addonBefore = option.addonBefore,
-		    addonAfter = option.addonAfter,
-		    defaultValue = option.defaultValue,
-		    value = option.value;
-
-		return _react2.default.createElement(_antd.Input, (0, _extends3.default)({
-			ref: option.id,
-			placeholder: 'input search text',
-			addonBefore: addonBefore,
-			addonAfter: addonAfter,
-			size: 'large',
-			value: value,
-			defaultValue: defaultValue
-		}, evtHandlers, {
-			__source: {
+	IFCheckBoxGroupVertical: function IFCheckBoxGroupVertical(option) {
+		return _react2.default.createElement(_IFCheckBoxGroupVertical, { ref: option.id, option: option, __source: {
 				fileName: _jsxFileName,
-				lineNumber: 53
+				lineNumber: 19
 			}
-		}));
+		});
 	},
+	//IFCheckBoxGroupVertical:(option) => <IFCheckBoxGroupVertical ref={option.id} option={option} />,
+	//IFCheckBoxGroupVertical:(option) => <IFCheckBoxGroupVertical ref={option.id} option={option} />,
+	//IFCheckBoxGroupVertical:(option) => <IFCheckBoxGroupVertical ref={option.id} option={option} />,
 	IFInputNumber: function IFInputNumber(option) {
-		return _react2.default.createElement(_index4.default, { ref: option.id, option: option, __source: {
+		return _react2.default.createElement(_IFInputNumber, { ref: option.id, option: option, __source: {
 				fileName: _jsxFileName,
-				lineNumber: 65
+				lineNumber: 23
 			}
 		});
 	},
 	IFDropdown: function IFDropdown(option) {
-		return _react2.default.createElement(_index8.default, { ref: option.id, option: option, __source: {
+		return _react2.default.createElement(_IFDropdown, { ref: option.id, option: option, __source: {
 				fileName: _jsxFileName,
-				lineNumber: 66
+				lineNumber: 24
 			}
 		});
 	},
-	button: function button(option) {
-		var evtHandlers = _EventEngine2.default.buildEventHandlers(option);
-		return _react2.default.createElement(_antd.Button, (0, _extends3.default)({
-			ref: option.id,
-			ghost: true,
-			size: 'large',
-			type: 'primary'
-		}, evtHandlers, {
-			__source: {
+	IFButtonNormal: function IFButtonNormal(option) {
+		return _react2.default.createElement(_IFButtonNormal, { ref: option.id, option: option, __source: {
 				fileName: _jsxFileName,
-				lineNumber: 70
-			}
-		}), option.label);
-	},
-	IFButton: function IFButton(option) {
-		return _react2.default.createElement(_index6.default, { ref: option.id, option: option, __source: {
-				fileName: _jsxFileName,
-				lineNumber: 81
+				lineNumber: 25
 			}
 		});
 	},
-	submit: function submit(option) {
-		var evtHandlers = _EventEngine2.default.buildEventHandlers(option);
-		function handleSubmit(_ref) {
-			var key = _ref.key;
-
-			_antd.message.success('Ready to commit form');
-		}
-		return _react2.default.createElement(_antd.Button, {
-			ref: option.id,
-			ghost: true,
-			size: 'large',
-			type: 'primary',
-			onClick: handleSubmit,
-			__source: {
+	IFUploadImage: function IFUploadImage(option) {
+		return _react2.default.createElement(_IFUploadImage, { ref: option.id, option: option, __source: {
 				fileName: _jsxFileName,
-				lineNumber: 88
-			}
-		}, option.label);
-	},
-	RadioGroup: function RadioGroup(option) {
-		var baseData = option.baseData;
-
-		return _react2.default.createElement(_RadioGroup, { value: option.value, __source: {
-				fileName: _jsxFileName,
-				lineNumber: 105
-			}
-		}, baseData.map(function (item) {
-			return _react2.default.createElement(_antd.Radio, { value: item.value, __source: {
-					fileName: _jsxFileName,
-					lineNumber: 109
-				}
-			}, item.name);
-		}));
-	},
-	rangePicker: function rangePicker(option) {
-		var dateFormat = 'YYYY/MM/DD';
-
-		return _react2.default.createElement(RangePicker, {
-			ref: option.id,
-			size: 'large',
-			defaultValue: [(0, _moment2.default)('2015/01/01', dateFormat), (0, _moment2.default)('2015/01/01', dateFormat)],
-			format: dateFormat,
-			__source: {
-				fileName: _jsxFileName,
-				lineNumber: 120
+				lineNumber: 26
 			}
 		});
 	},
-	treeSelect: function treeSelect(option) {
-		var onChange = function onChange(e) {
-			console.log('eee', e);
-			treeValue = e;
-		};
-
-		return _react2.default.createElement(_antd.TreeSelect, {
-			size: 'large',
-			showSearch: true,
-			style: { width: '100%' },
-			value: treeValue,
-			dropdownStyle: { maxHeight: 400, overflow: 'auto' },
-			placeholder: 'Please select',
-			allowClear: true,
-			treeDefaultExpandAll: true,
-			onChange: onChange,
-			__source: {
+	IFRadioGroupHorizontal: function IFRadioGroupHorizontal(option) {
+		return _react2.default.createElement(_IFRadioGroupHorizontal, { ref: option.id, option: option, __source: {
 				fileName: _jsxFileName,
-				lineNumber: 135
+				lineNumber: 27
 			}
-		}, _react2.default.createElement(TreeNode, { value: '\u5154\u5DE2\u79D1\u6280', title: '\u5154\u5DE2\u79D1\u6280', key: '0-1', __source: {
-				fileName: _jsxFileName,
-				lineNumber: 146
-			}
-		}, _react2.default.createElement(TreeNode, { value: 'UED\u4E2D\u5FC3', title: 'UED\u4E2D\u5FC3', key: '0-1-1', __source: {
-				fileName: _jsxFileName,
-				lineNumber: 147
-			}
-		}, _react2.default.createElement(TreeNode, { value: '\u4EBA\u5458\u4E00', title: '\u4EBA\u5458\u4E00', key: 'random', __source: {
-				fileName: _jsxFileName,
-				lineNumber: 148
-			}
-		})), _react2.default.createElement(TreeNode, { value: '\u5E73\u53F0\u7814\u53D1\u4E2D\u5FC3', title: '\u5E73\u53F0\u7814\u53D1\u4E2D\u5FC3', key: 'random2', __source: {
-				fileName: _jsxFileName,
-				lineNumber: 150
-			}
-		}, _react2.default.createElement(TreeNode, { value: '\u4EBA\u5458\u4E8C', title: _react2.default.createElement('b', { style: { color: '#08c' }, __source: {
-					fileName: _jsxFileName,
-					lineNumber: 151
-				}
-			}, '\u4EBA\u5458\u4E8C'), key: 'random3', __source: {
-				fileName: _jsxFileName,
-				lineNumber: 151
-			}
-		}))));
+		});
 	},
-	editableTable: function editableTable(option) {
-		return _react2.default.createElement(_index2.default, {
-			__source: {
+	IFRadioGroupVertical: function IFRadioGroupVertical(option) {
+		return _react2.default.createElement(_IFRadioGroupVertical, { ref: option.id, option: option, __source: {
 				fileName: _jsxFileName,
-				lineNumber: 159
+				lineNumber: 28
+			}
+		});
+	},
+	IFRangePicker: function IFRangePicker(option) {
+		return _react2.default.createElement(_IFRangePicker, { ref: option.id, option: option, __source: {
+				fileName: _jsxFileName,
+				lineNumber: 29
+			}
+		});
+	},
+	IFTreeSelect: function IFTreeSelect(option) {
+		return _react2.default.createElement(_IFTreeSelect, { ref: option.id, option: option, __source: {
+				fileName: _jsxFileName,
+				lineNumber: 30
+			}
+		});
+	},
+	IFSmartTable: function IFSmartTable(option) {
+		return _react2.default.createElement(_IFSmartTable, { ref: option.id, option: option, __source: {
+				fileName: _jsxFileName,
+				lineNumber: 31
 			}
 		});
 	}
@@ -236,6 +124,7 @@ var ComponentFactory = function () {
 	(0, _createClass3.default)(ComponentFactory, null, [{
 		key: 'create',
 		value: function create(type, option) {
+			console.log('component type ' + type);
 			return AntdComponents[type](option);
 		}
 	}]);
