@@ -26,7 +26,7 @@ var pageJson = {
 			position: 'relative',
 			width: '960px',
 			margin: '20px auto',
-			padding: '10px',
+			padding: '3px',
 			border: '2px solid #ccc',
 			borderRadius: '5px'
 		},
