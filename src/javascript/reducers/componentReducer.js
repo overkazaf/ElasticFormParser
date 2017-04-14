@@ -8,7 +8,7 @@ const $$initState = Immutable.fromJS({
 export const componentReducer = (state = $$initState, action) => {
     switch (action.type) {
         case 'UPDATE':{
-            console.log('action', action);
+        	console.log('update', action);
         	return state;
         }
         default: return state;

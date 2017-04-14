@@ -23,7 +23,7 @@ var componentReducer = exports.componentReducer = function componentReducer() {
     switch (action.type) {
         case 'UPDATE':
             {
-                console.log('action', action);
+                console.log('update', action);
                 return state;
             }
         default:
