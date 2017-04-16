@@ -23,6 +23,16 @@ export const queryReducer = (state = $$initState, action) => {
         	console.log('action in ROW_ITEM_SELECTED', action);
         	return state.set('selectedItem', action.payload.item);
         }
+
+        case 'ADD_ITEM': {
+        	console.log('action in ADD_ITEM', action);
+        	return state.set('itemId', action.payload.id);
+        }
+
+        case 'EDIT_ITEM': {
+        	console.log('action in EDIT_ITEM', action);
+        	return state.set('itemId', action.payload.id);
+        }
         default: return state;
     }
 };
