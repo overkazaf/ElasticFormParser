@@ -38,7 +38,6 @@ export default
 class ComponentFactory {
 
 	static create(type, option) {
-		console.log(`component type ${type}`);
 		return AntdComponents[type](option);
 	}
 

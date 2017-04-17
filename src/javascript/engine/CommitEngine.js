@@ -1,15 +1,16 @@
 export default
-clasee CommitEngine {
+class CommitEngine {
 
-	static getFormData() {
-		
+	static validateForm(models) {
+		return true;
 	}
 
-	static validateForm() {
+	static commitForm(models) {
 
+		CommitEngine.doCommit(models);
 	}
 
-	static commitForm() {
-
+	static doCommit(models) {
+		console.log('models in CommitEngine', models);
 	}
 }

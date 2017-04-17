@@ -11,6 +11,8 @@ import mock from '../src/javascript/mock/list';
 
 import QueryTable from '../src/javascript/components/List/QueryTable/index.js';
 import QueryView from '../src/javascript/components/LayoutComponents/QueryView/index.js';
+import DevTools from '../src/javascript/components/DevTools/index.js';
+
 
 import { 
  Row,
@@ -39,7 +41,6 @@ class ListMage extends Component {
   		data: mock.data,
   		modalVisible: false,
   		modalTitle: '',
-  		selectedItem: null,
   	};
   }
 
@@ -48,18 +49,17 @@ class ListMage extends Component {
   		data,
   		modalVisible,
   		modalTitle,
-  		selectedItem,
   	} = this.props;
 
     return (
       <div className="p-list">
         <style dangerouslySetInnerHTML={{ __html: antdStyle}} />
-		<QueryView 
-			modalVisible={modalVisible}
-			modalTitle={modalTitle}
-			data={data}
-			selectedItem={selectedItem}
-		/>
+        <DevTools />
+    		<QueryView 
+    			modalVisible={modalVisible}
+    			modalTitle={modalTitle}
+    			data={data}
+    		/>
       </div>
     )
   }

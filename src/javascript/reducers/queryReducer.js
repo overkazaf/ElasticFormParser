@@ -2,16 +2,16 @@ import Immutable from 'immutable';
 
 const $$initState = Immutable.fromJS({
     modalVisible: false,
-    modalTitle: '',
+    viewType: '',
+    selectedItem: null,
+    itemId: null,
 });
 
 export const queryReducer = (state = $$initState, action) => {
     switch (action.type) {
         case 'SHOW_MODAL': {
-        	console.log('showing modal', state);
-
         	let newState = state.set('modalVisible', true)
-        						.set('modalTitle', action.payload);
+        						.set('viewType', action.payload);
 
         	return newState;
         }
@@ -20,12 +20,12 @@ export const queryReducer = (state = $$initState, action) => {
         }
 
         case 'ROW_ITEM_SELECTED': {
-        	console.log('action in ROW_ITEM_SELECTED', action);
-        	return state.set('selectedItem', action.payload.item);
+			let newState = state.set('selectedItem', action.payload);
+			console.log('new State in ROW_ITEM_SELECTED', newState.get('selectedItem'));
+			return newState;
         }
 
         case 'ADD_ITEM': {
-        	console.log('action in ADD_ITEM', action);
         	return state.set('itemId', action.payload.id);
         }
 

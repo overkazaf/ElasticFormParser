@@ -18,9 +18,6 @@ import QueryTable from '../../List/QueryTable';
 const ButtonGroup = Button.Group;
 
 class QueryView extends Component {
-	_renderQueryTable() {
-		return <QueryTable />
-	}
 
 	_showModal(ctrlType) {
 		this.props.dispatch({
@@ -35,12 +32,24 @@ class QueryView extends Component {
 		});
 	}
 
+	_handleRowSelect(item, index) {
+		this.props.dispatch({
+			type: 'ROW_ITEM_SELECTED',
+			payload: item,
+		});
+	}
+
 	render() {
 
 		let {
-			modalTitle,
+			viewType,
 			modalVisible,
+			itemId,
+			selectedItem,
+			data,
 		} = this.props;
+
+		console.log('data in QueryView', data);
 
 	  	let dataSource = ['1', '2', '3'];
 	  	let onSelect = (value) => {
@@ -60,7 +69,7 @@ class QueryView extends Component {
 	  	};
 
 	  	return (
-	  		<div style={{width: '960px', margin: '20px auto', padding: '10px', borderRadius: '5px', border: '1px solid #ddd'}}>
+	  		<div style={{width: '960px', margin: '120px auto', padding: '10px'}}>
 	  			<Row gutter={16}>
 			      <Col className="gutter-row" span={12}>
 			        <div className="gutter-box">
@@ -89,7 +98,7 @@ class QueryView extends Component {
 
 			    <Row gutter={16}>
 			      <Col className="gutter-row" span={12}>
-			        <div className="gutter-box" style={{margin: '20px'}}>
+			        <div className="gutter-box" style={{margin: '10px 0 20px 0'}}>
 			        	<ButtonGroup>
 					      <Button type="default" onClick={handleForm.bind(this, 'add')} icon="plus-circle">Add</Button>
 					      <Button type="default" onClick={handleForm.bind(this, 'edit')} icon="edit">Edit</Button>
@@ -102,17 +111,35 @@ class QueryView extends Component {
 			    <Row gutter={16}>
 			      <Col className="gutter-row" span={24}>
 			        <div className="gutter-box">
-						{this._renderQueryTable()}
+						<QueryTable 
+						    data={data.list}
+							handleRowSelect={this._handleRowSelect.bind(this)}
+						/>
 			        </div>
 
-			        <Modal title={modalTitle} visible={modalVisible}
-			          onOk={this._hideModal.bind(this)} 
-			          onCancel={this._hideModal.bind(this)}
-			          okText="OK" cancelText="Cancel"
+			        <Modal 
+			        	title={viewType} 
+			        	visible={modalVisible}
+			        	width="1000"
+			        	style={{ top: 20 }}
+			        	wrapClassName="vertical-center-modal"
+			          	onOk={this._hideModal.bind(this)} 
+			          	onCancel={this._hideModal.bind(this)}
+			          	okText="OK" cancelText="Cancel"
+			          	confirmLoading="true"
+			          	maskClosable="false"
+			          	footer={null}
 			        >
-			          <p>Bla bla ...</p>
-			          <p>Bla bla ...</p>
-			          <p>Bla bla ...</p>
+			        	<div>
+			        		SelectedItem:
+			        		{JSON.stringify(selectedItem)}
+
+			        		<iframe
+								src="http://localhost:3000/index?pageId={0}"
+								frameBorder="0"
+								style={{ width: '100%', height: '640px'}}
+			        		></iframe>
+			        	</div>
 			        </Modal>
 
 			      </Col>

@@ -13,7 +13,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var $$initState = _immutable2.default.fromJS({
     modalVisible: false,
-    modalTitle: ''
+    viewType: '',
+    selectedItem: null,
+    itemId: null
 });
 
 var queryReducer = exports.queryReducer = function queryReducer() {
@@ -23,9 +25,7 @@ var queryReducer = exports.queryReducer = function queryReducer() {
     switch (action.type) {
         case 'SHOW_MODAL':
             {
-                console.log('showing modal', state);
-
-                var newState = state.set('modalVisible', true).set('modalTitle', action.payload);
+                var newState = state.set('modalVisible', true).set('viewType', action.payload);
 
                 return newState;
             }
@@ -36,8 +36,20 @@ var queryReducer = exports.queryReducer = function queryReducer() {
 
         case 'ROW_ITEM_SELECTED':
             {
-                console.log('action in ROW_ITEM_SELECTED', action);
-                return state.set('selectedItem', action.payload.item);
+                var _newState = state.set('selectedItem', action.payload);
+                console.log('new State in ROW_ITEM_SELECTED', _newState.get('selectedItem'));
+                return _newState;
+            }
+
+        case 'ADD_ITEM':
+            {
+                return state.set('itemId', action.payload.id);
+            }
+
+        case 'EDIT_ITEM':
+            {
+                console.log('action in EDIT_ITEM', action);
+                return state.set('itemId', action.payload.id);
             }
         default:
             return state;

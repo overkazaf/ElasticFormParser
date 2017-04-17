@@ -2,6 +2,7 @@ import ComponentManager from './IFComponentManager.js';
 import Util from '../util/Util.js';
 import mathjs from 'mathjs';
 
+import CommitEngine from '../engine/CommitEngine.js';
 
 /**
  * [ActionStretagies 动作策略类，在这里实现不同的策略]
@@ -14,7 +15,6 @@ const ActionStretagies = {
 		expression,
 		target,
 	}, ev) => {
-		console.log('ev', ev);
 		ComponentManager.get(componentId).setValue(ev.target.value);
 	},
 	SetToTarget: (componentId, {
@@ -58,7 +58,11 @@ const ActionStretagies = {
 			return item.getFieldValues(['id', 'name', 'value', 'ctrlType', 'dataSource']);
 		});
 
-		console.log('models', models);
+		if (CommitEngine.validateForm(models)) {
+			CommitEngine.commitForm(models);
+		} else {
+			ComponentManager.get('__message__');
+		}
 	},
 	LockOrUnlock: (componentId, {
 		action,

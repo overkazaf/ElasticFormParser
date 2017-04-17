@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -53,16 +57,6 @@ var QueryView = function (_Component) {
 	}
 
 	(0, _createClass3.default)(QueryView, [{
-		key: '_renderQueryTable',
-		value: function _renderQueryTable() {
-			return _react2.default.createElement(_QueryTable2.default, {
-				__source: {
-					fileName: _jsxFileName,
-					lineNumber: 22
-				}
-			});
-		}
-	}, {
 		key: '_showModal',
 		value: function _showModal(ctrlType) {
 			this.props.dispatch({
@@ -78,13 +72,26 @@ var QueryView = function (_Component) {
 			});
 		}
 	}, {
+		key: '_handleRowSelect',
+		value: function _handleRowSelect(item, index) {
+			this.props.dispatch({
+				type: 'ROW_ITEM_SELECTED',
+				payload: item
+			});
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			var _this2 = this;
 
 			var _props = this.props,
-			    modalTitle = _props.modalTitle,
-			    modalVisible = _props.modalVisible;
+			    viewType = _props.viewType,
+			    modalVisible = _props.modalVisible,
+			    itemId = _props.itemId,
+			    selectedItem = _props.selectedItem,
+			    data = _props.data;
+
+			console.log('data in QueryView', data);
 
 			var dataSource = ['1', '2', '3'];
 			var onSelect = function onSelect(value) {
@@ -103,21 +110,21 @@ var QueryView = function (_Component) {
 				_this2._showModal(ctrlType);
 			};
 
-			return _react2.default.createElement('div', { style: { width: '960px', margin: '20px auto', padding: '10px', borderRadius: '5px', border: '1px solid #ddd' }, __source: {
+			return _react2.default.createElement('div', { style: { width: '960px', margin: '120px auto', padding: '10px' }, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 63
+					lineNumber: 72
 				}
 			}, _react2.default.createElement(_antd.Row, { gutter: 16, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 64
+					lineNumber: 73
 				}
 			}, _react2.default.createElement(_antd.Col, { className: 'gutter-row', span: 12, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 65
+					lineNumber: 74
 				}
 			}, _react2.default.createElement('div', { className: 'gutter-box', __source: {
 					fileName: _jsxFileName,
-					lineNumber: 66
+					lineNumber: 75
 				}
 			}, _react2.default.createElement(_antd.AutoComplete, {
 				dataSource: dataSource,
@@ -127,97 +134,110 @@ var QueryView = function (_Component) {
 				placeholder: 'input here',
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 67
+					lineNumber: 76
 				}
 			}))), _react2.default.createElement(_antd.Col, { className: 'gutter-row', span: 4, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 76
+					lineNumber: 85
 				}
 			}, _react2.default.createElement('div', { className: 'gutter-box', __source: {
 					fileName: _jsxFileName,
-					lineNumber: 77
+					lineNumber: 86
 				}
 			}, _react2.default.createElement(_antd.Button, { type: 'primary', icon: 'search', __source: {
 					fileName: _jsxFileName,
-					lineNumber: 78
+					lineNumber: 87
 				}
 			}, 'Search'))), _react2.default.createElement(_antd.Col, { className: 'gutter-row', span: 4, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 81
+					lineNumber: 90
 				}
 			}, _react2.default.createElement('div', { className: 'gutter-box', __source: {
 					fileName: _jsxFileName,
-					lineNumber: 82
+					lineNumber: 91
 				}
 			}, _react2.default.createElement(_antd.Button, { type: 'default', __source: {
 					fileName: _jsxFileName,
-					lineNumber: 83
+					lineNumber: 92
 				}
 			}, 'Advanced Query')))), _react2.default.createElement(_antd.Row, { gutter: 16, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 90
+					lineNumber: 99
 				}
 			}, _react2.default.createElement(_antd.Col, { className: 'gutter-row', span: 12, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 91
+					lineNumber: 100
 				}
-			}, _react2.default.createElement('div', { className: 'gutter-box', style: { margin: '20px' }, __source: {
+			}, _react2.default.createElement('div', { className: 'gutter-box', style: { margin: '10px 0 20px 0' }, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 92
+					lineNumber: 101
 				}
 			}, _react2.default.createElement(ButtonGroup, {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 93
+					lineNumber: 102
 				}
 			}, _react2.default.createElement(_antd.Button, { type: 'default', onClick: handleForm.bind(this, 'add'), icon: 'plus-circle', __source: {
 					fileName: _jsxFileName,
-					lineNumber: 94
+					lineNumber: 103
 				}
 			}, 'Add'), _react2.default.createElement(_antd.Button, { type: 'default', onClick: handleForm.bind(this, 'edit'), icon: 'edit', __source: {
 					fileName: _jsxFileName,
-					lineNumber: 95
+					lineNumber: 104
 				}
 			}, 'Edit'), _react2.default.createElement(_antd.Button, { type: 'default', onClick: handleForm.bind(this, 'view'), icon: 'eye', __source: {
 					fileName: _jsxFileName,
-					lineNumber: 96
+					lineNumber: 105
 				}
 			}, 'View'))))), _react2.default.createElement(_antd.Row, { gutter: 16, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 102
+					lineNumber: 111
 				}
 			}, _react2.default.createElement(_antd.Col, { className: 'gutter-row', span: 24, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 103
+					lineNumber: 112
 				}
 			}, _react2.default.createElement('div', { className: 'gutter-box', __source: {
 					fileName: _jsxFileName,
-					lineNumber: 104
-				}
-			}, this._renderQueryTable()), _react2.default.createElement(_antd.Modal, { title: modalTitle, visible: modalVisible,
-				onOk: this._hideModal.bind(this),
-				onCancel: this._hideModal.bind(this),
-				okText: 'OK', cancelText: 'Cancel',
-				__source: {
-					fileName: _jsxFileName,
-					lineNumber: 108
-				}
-			}, _react2.default.createElement('p', {
-				__source: {
-					fileName: _jsxFileName,
 					lineNumber: 113
 				}
-			}, 'Bla bla ...'), _react2.default.createElement('p', {
+			}, _react2.default.createElement(_QueryTable2.default, {
+				data: data.list,
+				handleRowSelect: this._handleRowSelect.bind(this),
 				__source: {
 					fileName: _jsxFileName,
 					lineNumber: 114
 				}
-			}, 'Bla bla ...'), _react2.default.createElement('p', {
+			})), _react2.default.createElement(_antd.Modal, {
+				title: viewType,
+				visible: modalVisible,
+				width: '1000',
+				style: { top: 20 },
+				wrapClassName: 'vertical-center-modal',
+				onOk: this._hideModal.bind(this),
+				onCancel: this._hideModal.bind(this),
+				okText: 'OK', cancelText: 'Cancel',
+				confirmLoading: 'true',
+				maskClosable: 'false',
+				footer: null,
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 115
+					lineNumber: 120
 				}
-			}, 'Bla bla ...')))));
+			}, _react2.default.createElement('div', {
+				__source: {
+					fileName: _jsxFileName,
+					lineNumber: 133
+				}
+			}, 'SelectedItem:', (0, _stringify2.default)(selectedItem), _react2.default.createElement('iframe', {
+				src: 'http://localhost:3000/index?pageId={0}',
+				frameBorder: '0',
+				style: { width: '100%', height: '640px' },
+				__source: {
+					fileName: _jsxFileName,
+					lineNumber: 137
+				}
+			}))))));
 		}
 	}]);
 

@@ -66,6 +66,10 @@ var _index3 = require('../src/javascript/components/LayoutComponents/QueryView/i
 
 var _index4 = _interopRequireDefault(_index3);
 
+var _index5 = require('../src/javascript/components/DevTools/index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
 var _antd = require('antd');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -90,8 +94,7 @@ var ListMage = function (_Component) {
       var _props = this.props,
           data = _props.data,
           modalVisible = _props.modalVisible,
-          modalTitle = _props.modalTitle,
-          selectedItem = _props.selectedItem;
+          modalTitle = _props.modalTitle;
 
       return _react2.default.createElement('div', { className: 'p-list', __source: {
           fileName: _jsxFileName,
@@ -101,14 +104,18 @@ var ListMage = function (_Component) {
           fileName: _jsxFileName,
           lineNumber: 56
         }
+      }), _react2.default.createElement(_index6.default, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 57
+        }
       }), _react2.default.createElement(_index4.default, {
         modalVisible: modalVisible,
         modalTitle: modalTitle,
         data: data,
-        selectedItem: selectedItem,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 57
+          lineNumber: 58
         }
       }));
     }
@@ -126,8 +133,7 @@ var ListMage = function (_Component) {
         isServer: isServer,
         data: _list2.default.data,
         modalVisible: false,
-        modalTitle: '',
-        selectedItem: null
+        modalTitle: ''
       };
     }
   }]);

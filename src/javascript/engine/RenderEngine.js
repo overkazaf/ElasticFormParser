@@ -119,8 +119,23 @@ class RenderEngine {
 		)
 	}
 
-	static renderComponent(type, props) {
+	static renderComponent(type, props, mode = 'read') {
 		let componentContent = ComponentFactory.create(type, props);
+		let {
+			label,
+			value,
+			defaultValue,
+			ctrlType,
+		} = props;
+
+		if (mode === 'read' && ctrlType !== 'IFButton') {
+			return (
+				<div style={props.style}>
+					<span>{label}:</span><span>{value}</span>
+				</div>
+			)
+		}
+
 		return (
 			<div style={props.style}>
 				{componentContent}

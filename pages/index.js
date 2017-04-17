@@ -11,6 +11,7 @@ import RenderEngine from '../src/javascript/engine/RenderEngine';
 import mock from '../src/javascript/mock/test';
 
 import ComponentManager from '../src/javascript/manager/IFComponentManager.js';
+import DevTools from '../src/javascript/components/DevTools/index.js';
 
 
 import { 
@@ -24,7 +25,6 @@ class MainPage extends Component {
     store.subscribe(() => {
       console.log('Index State', store.getState());
     });
-
 
     let that = this;
 
@@ -56,6 +56,7 @@ class MainPage extends Component {
       <div className="p-main">
         <style dangerouslySetInnerHTML={{ __html: antdStyle}} />
         {this.renderFormView()}
+        <DevTools />
       </div>
     )
   }

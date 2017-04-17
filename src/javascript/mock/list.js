@@ -12,15 +12,96 @@ const listJson = {
 		amount: 100,
 		list: [
 			{
-				id: 1, 
-				title: '采购2016-08-05',
-				creater: '001',
-				createTs: 0,
-				status: 0,
+			  key: '1',
+			  id: 'IntelligentForm-00000011',
+			  formType: 'SingleForm',
+			  formName: 'TestForm 1111',
+			  formCategory: 32,
+			  description: 'Form description',
+			  version: 'V1.0.0',
+			  synchronize: false,
+			  control: 'ddd',
+			},
+			{
+			  key: '2',
+			  id: 'IntelligentForm-00000012',
+			  formType: 'SingleForm',
+			  formName: 'TestForm 1111',
+			  formCategory: 32,
+			  description: 'Form description',
+			  version: 'V1.0.0',
+			  synchronize: false,
+			  control: 'ddd',
+			},
+			{
+			  key: '3',
+			  id: 'IntelligentForm-00000013',
+			  formType: 'SingleForm',
+			  formName: 'TestForm 1111',
+			  formCategory: 32,
+			  description: 'Form description',
+			  version: 'V1.0.0',
+			  synchronize: false,
+			  control: 'ddd',
+			},
+			{
+			  key: '4',
+			  id: 'IntelligentForm-00000014',
+			  formType: 'SingleForm',
+			  formName: 'TestForm 1111',
+			  formCategory: 32,
+			  description: 'Form description',
+			  version: 'V1.0.0',
+			  synchronize: false,
+			  control: 'ddd',
 			}
 		]
 	}
 };
+
+/**
+ *
+ * {
+        title: 'ID',
+        dataIndex: 'id',
+        key: 'id',
+      },
+      {
+        title: 'FormType',
+        dataIndex: 'formType',
+        key: 'formType',
+      },
+      {
+        title: 'FormName',
+        dataIndex: 'formName',
+        key: 'formName',
+      },
+      {
+        title: 'Category',
+        dataIndex: 'formCategory',
+        key: 'formCategory',
+      },
+      {
+        title: 'Description',
+        dataIndex: 'description',
+        key: 'description',
+      },
+      {
+        title: 'Version',
+        dataIndex: 'version',
+        key: 'version',
+      },
+      {
+        title: 'Synchronize',
+        dataIndex: 'synchronize',
+        key: 'synchronize',
+      },
+      {
+        title: 'Control',
+        dataIndex: 'control',
+        key: 'control',
+      },
+ */
 
 
 module.exports = listJson;

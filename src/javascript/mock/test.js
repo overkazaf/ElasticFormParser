@@ -9,12 +9,9 @@ const pageJson = {
 		createTS: 1488133454806,
 		contentMinHeight: 450,
 		style: {
-			position: 'relative',
 			width: '960px', 
-			margin: '20px auto',
+			margin: 'auto',
 			padding: '3px',
-			border: '2px solid #ccc',
-			borderRadius: '5px'
 		},
 		eventList: [
 			{
@@ -35,6 +32,7 @@ const pageJson = {
 					props: {
 						id: 'comp0',
 					    name: 'comp0',
+					    label: '商品数量',
 					    ctrlType: 'IFInput',
 					    placeholder: "输入数量呗",
 					    addonBefore: "数量",
@@ -73,6 +71,7 @@ const pageJson = {
 					props: {
 						id: 'comp31',
 					    name: 'comp3',
+					    label: '商品数量',
 					    addonBefore: "数量",
 					    addonAfter: "个",
 					    prefix: "数量",
@@ -110,6 +109,7 @@ const pageJson = {
 					props: {
 						id: 'comp4',
 					    name: 'comp4',
+					    label: '商品单价',
 					    addonBefore: "单价",
 					    addonAfter: "元",
 					    prefix: "单价",
@@ -147,6 +147,7 @@ const pageJson = {
 					props: {
 						id: 'comp5',
 					    name: 'comp5',
+					    label: '商品总价',
 					    addonBefore: "总价",
 					    addonAfter: "元",
 					    prefix: "总价",
@@ -174,8 +175,8 @@ const pageJson = {
 					props: {
 						id: 'comp666',
 					    name: 'comp666',
+					    label: "房租",
 
-					    label: "==== 房租 ====",
 	  					defaultValue: "0",
 	  					value: 0,
 
@@ -200,8 +201,10 @@ const pageJson = {
 					props: {
 						id: 'comp676',
 					    name: 'comp676',
+					    label: '起始时间',
+
 	  					defaultValue: "0",
-	  					value: 0,
+	  					value: '2016-02-03 ~ 2017-04-05',
 
 	  					visibility: 1,
 	  					locked: 1,
@@ -224,6 +227,9 @@ const pageJson = {
 					props: {
 						id: 'comp67336',
 					    name: 'comp67336',
+
+					    label: '图片',
+
 	  					defaultValue: "0",
 	  					value: 0,
 
@@ -248,6 +254,7 @@ const pageJson = {
 					props: {
 						id: 'comp611136',
 					    name: 'comp611136',
+					    label: '多选',
 	  					defaultValue: "0",
 	  					value: 0,
 
@@ -272,6 +279,7 @@ const pageJson = {
 					props: {
 						id: 'comp1111',
 					    name: 'comp1111',
+					    label: '按钮',
 					    theme: 'dashed',
 					    ghost: 0,
 					    label: 'SetToTarget 222',
@@ -296,6 +304,7 @@ const pageJson = {
 					props: {
 						id: 'comp1',
 					    name: 'comp1',
+					    label: '按钮',
 					    theme: 'dashed',
 					    ghost: 0,
 					    label: 'SetToTarget 222',
@@ -329,15 +338,14 @@ const pageJson = {
 					props: {
 						id: 'comp6',
 					    name: 'comp6',
+					    label: "费用类型",
 					    theme: 'default',
-					    label: 'Append',
 					    ctrlType: 'IFDropdown',
 
 	  					visibility: 1,
 	  					locked: 0,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					label: "费用类型",
 	  					defaultValue: "0",
 	  					value: 0,
 	  					style: {},
@@ -361,7 +369,6 @@ const pageJson = {
 					props: {
 						id: 'comp7',
 					    name: 'comp7',
-
 					    label: "显示/隐藏",
 	  					defaultValue: "0",
 	  					value: 0,

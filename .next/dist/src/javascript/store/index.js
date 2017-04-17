@@ -35,6 +35,10 @@ var _epics = require('../epics');
 
 var _epics2 = _interopRequireDefault(_epics);
 
+var _index = require('../components/DevTools/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // It will raise an error while running in server side enviroment
@@ -44,7 +48,7 @@ var composeEnhancers = typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_
 var epicMiddleware = (0, _reduxObservable.createEpicMiddleware)(_reduxObservable.combineEpics.apply(undefined, (0, _toConsumableArray3.default)(_epics2.default)));
 
 var initStore = exports.initStore = function initStore(initialState) {
-  return (0, _redux.createStore)(_reducers2.default, _immutable2.default.fromJS(initialState), composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default, epicMiddleware)));
+  return (0, _redux.createStore)(_reducers2.default, _immutable2.default.fromJS(initialState), composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default, epicMiddleware), _index2.default.instrument()));
 };
 
 var nextConnect = exports.nextConnect = (0, _nextConnectRedux2.default)(initStore);
