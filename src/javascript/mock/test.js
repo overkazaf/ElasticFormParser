@@ -34,11 +34,13 @@ const pageJson = {
 					    name: 'comp0',
 					    label: '商品数量',
 					    ctrlType: 'IFInput',
+
 					    placeholder: "输入数量呗",
 					    addonBefore: "数量",
 					    addonAfter: "只",
 					    prefix: "",
 					    subfix: "",
+	  					
 	  					defaultValue: 0,
 	  					value: 1,
 
@@ -46,8 +48,8 @@ const pageJson = {
 	  					locked: 0,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: 'DROP_DOWN',
+	  					
+	  					dataSource: [],
 	  					filterRules: [],
 
 	  					style: {
@@ -83,8 +85,8 @@ const pageJson = {
 	  					locked: 0,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: null,
+
+	  					dataSource: [],
 	  					ctrlType: 'IFInput',
 	  					filterRules: [],
 
@@ -121,8 +123,8 @@ const pageJson = {
 	  					locked: 0,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: 'DROP_DOWN',
+
+	  					dataSource: [],
 	  					filterRules: [],
 
 
@@ -159,10 +161,9 @@ const pageJson = {
 	  					locked: 0,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: null,
-	  					filterRules: [],
 
+	  					dataSource: [],
+	  					filterRules: [],
 	  					ctrlType: 'IFInput',
 	  					style: {},
 						eventList: [
@@ -184,13 +185,11 @@ const pageJson = {
 	  					locked: 1,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: null,
+	  					
+	  					dataSource: [],
 	  					filterRules: [],
 
 	  					style: {},
-	  					baseData: [
-	  					],
 	  					ctrlType: 'IFTree',
 						eventList: [],
 					},
@@ -210,13 +209,11 @@ const pageJson = {
 	  					locked: 1,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: null,
+	  					
+	  					dataSource: [],
 	  					filterRules: [],
 
 	  					style: {},
-	  					baseData: [
-	  					],
 	  					ctrlType: 'IFDate',
 						eventList: [],
 					},
@@ -237,13 +234,11 @@ const pageJson = {
 	  					locked: 1,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: null,
+	  					
+	  					dataSource: [],
 	  					filterRules: [],
 
 	  					style: {},
-	  					baseData: [
-	  					],
 	  					ctrlType: 'IFDate',
 						eventList: [],
 					},
@@ -262,13 +257,11 @@ const pageJson = {
 	  					locked: 1,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: null,
-	  					filterRules: [],
 
+	  					dataSource: [],
+
+	  					filterRules: [],
 	  					style: {},
-	  					baseData: [
-	  					],
 	  					ctrlType: 'IFDate',
 						eventList: [],
 					},
@@ -289,8 +282,8 @@ const pageJson = {
 	  					locked: 0,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: null,
+	  					
+	  					dataSource: [],
 	  					filterRules: [],
 	  					style: {
 	  					},
@@ -314,8 +307,8 @@ const pageJson = {
 	  					locked: 0,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: null,
+	  					
+	  					dataSource: [],
 	  					filterRules: [],
 	  					style: {
 	  					},
@@ -349,7 +342,8 @@ const pageJson = {
 	  					defaultValue: "0",
 	  					value: 0,
 	  					style: {},
-	  					baseData: [
+
+	  					dataSource: [
 	  						{label: '水费', value: 0},
 	  						{label: '电费', value: 1},
 	  						{label: '网费', value: 2},
@@ -377,16 +371,13 @@ const pageJson = {
 	  					locked: 0,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: null,
+	  					
+	  					dataSource: [],
 	  					filterRules: [
 	  						{'value': '>1'}
 	  					],
 
 	  					style: {},
-	  					baseData: [
-	  						
-	  					],
 	  					ctrlType: 'IFButton',
 						eventList: [
 							{
@@ -416,15 +407,13 @@ const pageJson = {
 	  					locked: 0,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: null,
+	  					
+	  					dataSource: [],
 	  					filterRules: [
 	  						{'value': '>1'}
 	  					],
 
 	  					style: {},
-	  					baseData: [
-	  					],
 	  					ctrlType: 'IFButton',
 						eventList: [
 							{
@@ -457,11 +446,11 @@ const pageJson = {
 	  					locked: 0,
 	  					mustInput: 1,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: null,
+	  					
+	  					columns: [],
+	  					dataSource: [],
 	  					filterRules: [],
-	  					style: {
-	  					},
+	  					style: {},
 						eventList: [
 						]
 					},
@@ -479,14 +468,13 @@ const pageJson = {
 					    theme: 'primary',
 					    label: 'CommitForm',
 					    ctrlType: 'IFButton',
-					    ghost: 0,
 
 	  					visibility: 1,
 	  					locked: 0,
 	  					mustInput: 0,
 	  					needToSum: 0,
-	  					lookUpType: null,
-	  					lookUpStretagy: null,
+	  					
+	  					dataSource: [],
 	  					filterRules: [],
 	  					style: {
 	  					},
