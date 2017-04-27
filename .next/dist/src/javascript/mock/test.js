@@ -45,11 +45,13 @@ var pageJson = {
 					name: 'comp0',
 					label: '商品数量',
 					ctrlType: 'IFInput',
+
 					placeholder: "输入数量呗",
 					addonBefore: "数量",
 					addonAfter: "只",
 					prefix: "",
 					subfix: "",
+
 					defaultValue: 0,
 					value: 1,
 
@@ -57,8 +59,8 @@ var pageJson = {
 					locked: 0,
 					mustInput: 1,
 					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: 'DROP_DOWN',
+
+					dataSource: [],
 					filterRules: [],
 
 					style: {},
@@ -90,8 +92,8 @@ var pageJson = {
 					locked: 0,
 					mustInput: 1,
 					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: null,
+
+					dataSource: [],
 					ctrlType: 'IFInput',
 					filterRules: [],
 
@@ -124,8 +126,8 @@ var pageJson = {
 					locked: 0,
 					mustInput: 1,
 					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: 'DROP_DOWN',
+
+					dataSource: [],
 					filterRules: [],
 
 					style: {},
@@ -158,10 +160,9 @@ var pageJson = {
 					locked: 0,
 					mustInput: 1,
 					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: null,
-					filterRules: [],
 
+					dataSource: [],
+					filterRules: [],
 					ctrlType: 'IFInput',
 					style: {},
 					eventList: []
@@ -181,12 +182,11 @@ var pageJson = {
 					locked: 1,
 					mustInput: 1,
 					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: null,
+
+					dataSource: [],
 					filterRules: [],
 
 					style: {},
-					baseData: [],
 					ctrlType: 'IFTree',
 					eventList: []
 				}
@@ -205,12 +205,11 @@ var pageJson = {
 					locked: 1,
 					mustInput: 1,
 					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: null,
+
+					dataSource: [],
 					filterRules: [],
 
 					style: {},
-					baseData: [],
 					ctrlType: 'IFDate',
 					eventList: []
 				}
@@ -230,12 +229,11 @@ var pageJson = {
 					locked: 1,
 					mustInput: 1,
 					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: null,
+
+					dataSource: [],
 					filterRules: [],
 
 					style: {},
-					baseData: [],
 					ctrlType: 'IFDate',
 					eventList: []
 				}
@@ -253,12 +251,11 @@ var pageJson = {
 					locked: 1,
 					mustInput: 1,
 					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: null,
-					filterRules: [],
 
+					dataSource: [],
+
+					filterRules: [],
 					style: {},
-					baseData: [],
 					ctrlType: 'IFDate',
 					eventList: []
 				}
@@ -271,7 +268,7 @@ var pageJson = {
 					label: '按钮',
 					theme: 'dashed',
 					ghost: 0
-				}, (0, _defineProperty3.default)(_props, 'label', 'SetToTarget 222'), (0, _defineProperty3.default)(_props, 'ctrlType', 'IFButton'), (0, _defineProperty3.default)(_props, 'visibility', 1), (0, _defineProperty3.default)(_props, 'locked', 0), (0, _defineProperty3.default)(_props, 'mustInput', 1), (0, _defineProperty3.default)(_props, 'needToSum', 0), (0, _defineProperty3.default)(_props, 'lookUpType', null), (0, _defineProperty3.default)(_props, 'lookUpStretagy', null), (0, _defineProperty3.default)(_props, 'filterRules', []), (0, _defineProperty3.default)(_props, 'style', {}), (0, _defineProperty3.default)(_props, 'eventList', []), _props)
+				}, (0, _defineProperty3.default)(_props, 'label', 'SetToTarget 222'), (0, _defineProperty3.default)(_props, 'ctrlType', 'IFButton'), (0, _defineProperty3.default)(_props, 'visibility', 1), (0, _defineProperty3.default)(_props, 'locked', 0), (0, _defineProperty3.default)(_props, 'mustInput', 1), (0, _defineProperty3.default)(_props, 'needToSum', 0), (0, _defineProperty3.default)(_props, 'dataSource', []), (0, _defineProperty3.default)(_props, 'filterRules', []), (0, _defineProperty3.default)(_props, 'style', {}), (0, _defineProperty3.default)(_props, 'eventList', []), _props)
 			}, {
 				key: 'comp1',
 				type: 'IFButtonNormal',
@@ -281,7 +278,7 @@ var pageJson = {
 					label: '按钮',
 					theme: 'dashed',
 					ghost: 0
-				}, (0, _defineProperty3.default)(_props2, 'label', 'SetToTarget 222'), (0, _defineProperty3.default)(_props2, 'ctrlType', 'IFButton'), (0, _defineProperty3.default)(_props2, 'visibility', 1), (0, _defineProperty3.default)(_props2, 'locked', 0), (0, _defineProperty3.default)(_props2, 'mustInput', 1), (0, _defineProperty3.default)(_props2, 'needToSum', 0), (0, _defineProperty3.default)(_props2, 'lookUpType', null), (0, _defineProperty3.default)(_props2, 'lookUpStretagy', null), (0, _defineProperty3.default)(_props2, 'filterRules', []), (0, _defineProperty3.default)(_props2, 'style', {}), (0, _defineProperty3.default)(_props2, 'eventList', [{
+				}, (0, _defineProperty3.default)(_props2, 'label', 'SetToTarget 222'), (0, _defineProperty3.default)(_props2, 'ctrlType', 'IFButton'), (0, _defineProperty3.default)(_props2, 'visibility', 1), (0, _defineProperty3.default)(_props2, 'locked', 0), (0, _defineProperty3.default)(_props2, 'mustInput', 1), (0, _defineProperty3.default)(_props2, 'needToSum', 0), (0, _defineProperty3.default)(_props2, 'dataSource', []), (0, _defineProperty3.default)(_props2, 'filterRules', []), (0, _defineProperty3.default)(_props2, 'style', {}), (0, _defineProperty3.default)(_props2, 'eventList', [{
 					eventType: 'onClick',
 					options: {
 						action: 'SetToTarget',
@@ -307,7 +304,8 @@ var pageJson = {
 					defaultValue: "0",
 					value: 0,
 					style: {},
-					baseData: [{ label: '水费', value: 0 }, { label: '电费', value: 1 }, { label: '网费', value: 2 }, { label: '清洁费', value: 3 }, { label: '油费', value: 4 }, { label: '租金', value: 5 }],
+
+					dataSource: [{ label: '水费', value: 0 }, { label: '电费', value: 1 }, { label: '网费', value: 2 }, { label: '清洁费', value: 3 }, { label: '油费', value: 4 }, { label: '租金', value: 5 }],
 					filterRules: []
 				}, (0, _defineProperty3.default)(_props3, 'style', {}), (0, _defineProperty3.default)(_props3, 'eventList', []), _props3)
 			}, {
@@ -324,12 +322,11 @@ var pageJson = {
 					locked: 0,
 					mustInput: 1,
 					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: null,
+
+					dataSource: [],
 					filterRules: [{ 'value': '>1' }],
 
 					style: {},
-					baseData: [],
 					ctrlType: 'IFButton',
 					eventList: [{
 						eventType: 'onClick',
@@ -356,12 +353,11 @@ var pageJson = {
 					locked: 0,
 					mustInput: 1,
 					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: null,
+
+					dataSource: [],
 					filterRules: [{ 'value': '>1' }],
 
 					style: {},
-					baseData: [],
 					ctrlType: 'IFButton',
 					eventList: [{
 						eventType: 'onClick',
@@ -390,8 +386,9 @@ var pageJson = {
 					locked: 0,
 					mustInput: 1,
 					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: null,
+
+					columns: [],
+					dataSource: [],
 					filterRules: [],
 					style: {},
 					eventList: []
@@ -408,14 +405,13 @@ var pageJson = {
 					theme: 'primary',
 					label: 'CommitForm',
 					ctrlType: 'IFButton',
-					ghost: 0,
 
 					visibility: 1,
 					locked: 0,
 					mustInput: 0,
 					needToSum: 0,
-					lookUpType: null,
-					lookUpStretagy: null,
+
+					dataSource: [],
 					filterRules: [],
 					style: {},
 					eventList: [{
