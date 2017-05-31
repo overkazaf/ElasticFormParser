@@ -1,38 +1,121 @@
+import React, { Component } from 'react';
+
 import {
 	Row,
 	Col,
+	Layout,
+	Icon,
+	Button,
+	Popconfirm,
 } from 'antd';
 
-export default 
-class LayoutEngine {
+let {
+	Header,
+	Content,
+	Footer,
+} = Layout;
 
-	/**
-	 * [renderLayout 进行布局渲染，可以对移动端设备进行相应的适配]
-	 * @Author   JohnNong
-	 * @Email    overkazaf@gmail.com
-	 * @Github   https://github.com/overkazaf
-	 * @DateTime 2017-04-06T14:55:32+0800
-	 * @param    {[type]}                     componentGroup [IFComponent列表]
-	 * @param    {Number}                     colSpan        [宽度]
-	 * @param    {Number}                     rowGutter      [行内单元间隔]
-	 * @return   {[type]}                                    [description]
-	 */
-	static renderLayout(componentGroup, colSpan = 6, rowGutter = 16) {
+import ComponentFactory from '../factory/ComponentFactory.js';
+import ReactGridLayout from 'react-grid-layout';
 
-		return componentGroup.map((group, indexX) => {
-			let groupContent = group.map((item, indexY) => {
-				return (
-					<Col key={`${indexX}-${indexY}`} className="gutter-row" span={colSpan}>
-						{item}
-					</Col>
-				)
-			});
+let activeElemId = null;
+class ComponentsView extends Component {
+	constructor(props) {
+		super(props);
+	}
 
-			return (
-				<Row key={`row-${indexX}`} gutter={rowGutter} style={{marginBottom: '15px'}}>
-					{groupContent}
-				</Row>
-			)
+	render() {
+		let that = this;
+
+		let {
+			layouts,
+			dispatch,
+			position,
+		} = this.props;
+
+		let gridLayout = layouts.map(layout => {
+			layout.grid.static = true;
+			return layout.grid;
 		});
+
+		return (
+			<ReactGridLayout 
+				className="layout" 
+				layout={gridLayout}
+				rowHeight={5} 
+				width={960}
+				height={500}
+				margin={[0, 0]}
+				containerPadding={[0,0]}
+				autoSize={true}
+			>
+	      {
+	      	layouts.map((item, index) => {
+	      		let {
+	      			grid,
+	      			component,
+	      		} = item;
+
+	      		let {
+	      			type,
+	      			props,
+	      		} = component;
+
+	      		let clazz = props.id === activeElemId ? 'draggable-item active' : 'draggable-item';
+
+	      		return (
+	      			<div key={grid.i} className={clazz}>
+			        	{ ComponentFactory.create(type, props) }
+			        </div>
+	      		)
+	      	})
+	      }
+      </ReactGridLayout>
+		)
+	}
+}
+
+export default
+class LayoutEngine {
+	static renderLayout(page = {}, dispatch) {
+		let {
+			name,
+			title,
+			style,
+			layouts: {
+				header,
+				body,
+				footer,
+			},
+		} = page;
+
+		return (
+			<div className="form-view" style={{ margin: '0 auto', width: style.width, }}>
+				<Layout>
+					<Header>
+						<h1 style={{textAlign: 'center', color: '#fff'}}>{title}</h1>
+					</Header>
+					<Content>
+						<ComponentsView 
+							layouts={header}
+							dispatch={dispatch}
+							position={'header'}
+						/>
+						<ComponentsView 
+							layouts={body}
+							dispatch={dispatch}
+							position={'body'}
+						/>
+					</Content>
+					<Footer style={{ background: '#e7e7e7'}}>
+						<ComponentsView 
+							layouts={footer}
+							dispatch={dispatch}
+							position={'footer'}
+						/>
+					</Footer>
+				</Layout>
+			</div>
+		)
 	}
 }

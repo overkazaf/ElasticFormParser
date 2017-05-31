@@ -1,7 +1,5 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import Util from '../../../util/Util.js';
-import EventEngine from '../../../engine/EventEngine.js';
 import Immutable from 'immutable';
 
 const { is } = Immutable;
@@ -12,7 +10,7 @@ class IFComponentBase extends Component {
 	  super(props);
 	
 	  this.state = {
-	  	option: Immutable.fromJS(props.option),
+	  	option: props.option,
 	  	eventMap: {},
 	  };
 	}
@@ -33,15 +31,13 @@ class IFComponentBase extends Component {
 		}, callback);
 	}
 
-	getFieldValues(array) {
+	getFieldsValue(array) {
 		let valueObj = {};
 
 		array.map((field) => {
-			console.log(`this.getFieldValue(${field})`, this.getFieldValue(field));
 			valueObj[field] = this.getFieldValue(field);
 		});
 
-		console.log('getFieldValues');
 		return valueObj;
 	}
 
@@ -55,54 +51,24 @@ class IFComponentBase extends Component {
 		}, callback);
 	}
 
-	getDataModel() {
-		return this.getFieldValues([
-			'id',
-			'name',
-			'value',
-		]);
+	componentWillReceiveProps(nextProps) {
+		let newState = Object.assign(this.state.option, nextProps.option);
+
+		this.setState({
+			option: newState,
+		}, console.log(this.state.option))
 	}
-
-	componentDidMount() {
-		// bind events
-		EventEngine.subscribe(this, {
-			option: this.state.option.toJS(),
-		}, (eventMap) => {
-			this.setState({
-				eventMap,
-			});
-		});
-	}
-
-	componentWillUnmount() {
-		// let {
-		// 	option,
-		// 	eventMap,
-		// } = this.state;
-
-		// EventEngine.unsubscribe(option.get('id').toJS(), eventMap);
-	}
-
 
 	shouldComponentUpdate(nextProps, nextState) {
 		return !(this.props === nextProps || is(this.props, nextProps)) 
 			|| !(this.state === nextState || is(this.state, nextState));
 	}
-
-	componentWillMount() {
-		console.log('component will mount');
-	}
-
-	componentWillUnmount() {
-		console.log('unmount event listerner');
-		EventEngine.unsubscribe(this);
-	}
-
+	
 	render() {
 		return (
 			<div>
 				<h1>Warning</h1>
-				<p>You need to override the IFComponentBase Class in your SubClass</p>
+				<p style={{ color: 'red' }}>You need to override the IFComponentBase Class in your SubClass</p>
 			</div>
 		)
 	}

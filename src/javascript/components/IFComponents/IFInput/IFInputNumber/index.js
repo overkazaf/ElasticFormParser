@@ -1,10 +1,13 @@
 import IFComponentBase from '../../IFComponentBase/index.js';
 
 import {
-	Input,
+	InputNumber,
+	Form,
+	Icon,
 } from 'antd';
+import Util from '../../../../utils/Util.js';
 
-import Util from '../../../../../javascript/util/Util.js';
+const FormItem = Form.Item;
 
 export default
 class IFInputNumber extends IFComponentBase {
@@ -12,55 +15,42 @@ class IFInputNumber extends IFComponentBase {
 	  super(props);
 	}
 
-	getDataModel() {
-
-	}
-
 	render() {
 
 		let {
 			option,
-			eventMap,
-		} = this.state;
-
+		} = this.props;
+	
+		let model = Util.parseDataModel(option);
 		let {
-			placeholder,
-			prefix,
-			subfix,
-			addonBefore,
-			addonAfter,
-			defaultValue,
-			value,
-			locked,
-			visibility,
-		} = option.toJS();
-
-		let {
-			onClick,
-			onChange,
-			onKeyUp,
-			onKeyDown,
-		} = eventMap;
+			size, theme, label, fontFamily, fontSize, lineHeight, textAlign, visibility, locked, mustInput,
+			defaultValue, value, link, linkTarget, placeholder, carry,
+			addonBefore, addonAfter, prefix, suffix,
+			extraStyle,
+		} = model;
 
 		if (!visibility) {
-			return <div></div>;
+			return <div style={{textAlign: 'center'}}><Icon type="eye" /></div>;
 		}
-
+	
 		return (
-			<Input 
-				 placeholder={placeholder}
-				 addonBefore={addonBefore}
-				 addonAfter={addonAfter}
-				 disabled={!!locked}
-				 size={'large'}
-				 value={value}
-				 defaultValue={defaultValue}
-
-				 onClick={onClick ? onClick.bind(this, event) : null}
-				 onChange={onChange ? onChange.bind(this, event) : null}
-				 onKeyUp={onKeyUp ? onKeyUp.bind(this, event) : null}
-				 onKeyDown={onKeyDown ? onKeyDown.bind(this, event) : null}
-			/>
+			<FormItem
+				label={label}
+				required={!!mustInput}
+			>
+				<InputNumber 
+					 min={-Infinity}
+					 max={Infinity}
+					 prefix={prefix}
+					 suffix={suffix}
+					 step={1}
+					 disabled={!!locked}
+					 size={size}
+					 value={value}
+					 defaultValue={defaultValue}
+					 style={{ width: '100%' }}
+				/>
+			</FormItem>
 		)
 	}
 }

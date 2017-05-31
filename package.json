@@ -23,7 +23,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "antd": "^2.7.2",
+    "antd": "^2.10.2",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.3.2",
     "babel-plugin-import": "^1.1.1",
@@ -64,6 +64,7 @@
     "raw-loader": "^0.5.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-grid-layout": "^0.14.6",
     "react-no-ssr": "^1.1.0",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
@@ -76,5 +77,8 @@
     "rxjs": "^5.2.0",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.2"
+  },
+  "devDependencies": {
+    "redux-devtools": "@3.4.0"
   }
 }

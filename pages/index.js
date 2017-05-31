@@ -7,8 +7,9 @@ import Immutable from 'immutable';
 import Rx from 'rxjs/Rx';
 import antdStyle from '../src/css/index.min.css';
 import RenderEngine from '../src/javascript/engine/RenderEngine';
+import LayoutEngine from '../src/javascript/engine/LayoutEngine';
 
-import mock from '../src/javascript/mock/test';
+import mock from '../src/javascript/mock/testPageData.js';
 
 import ComponentManager from '../src/javascript/manager/IFComponentManager.js';
 import DevTools from '../src/javascript/components/DevTools/index.js';
@@ -31,7 +32,7 @@ class MainPage extends Component {
     return { 
       isServer, 
       counter: 0,
-      data: mock.data,
+      data: mock,
       formData: null,
     };
   }
@@ -42,21 +43,17 @@ class MainPage extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-  }
-
-  renderFormView() {
-    return (
-      RenderEngine.renderPageView(this.props.data)
-    );
-  }
 
   render() {
+    let {
+      dispatch,
+      data,
+    } = this.props;
+
     return (
       <div className="p-main">
         <style dangerouslySetInnerHTML={{ __html: antdStyle}} />
-        {this.renderFormView()}
-        <DevTools />
+        {LayoutEngine.renderLayout(data, dispatch)}
       </div>
     )
   }

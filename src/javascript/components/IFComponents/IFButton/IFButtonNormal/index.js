@@ -1,17 +1,19 @@
 import {
 	Button,
 } from 'antd';
-
+import Immutable from 'immutable';
 import IFComponentBase from '../../IFComponentBase/index.js';
+import Util from '../../../../utils/Util.js';
 
 export default
 class IFButtonNormal extends IFComponentBase {
 	constructor(props) {
 	  super(props);
-	}
 
-	getDataModel() {
-
+	  this.state = {
+	  	option: props.option,
+	  	eventMap: {},
+	  };
 	}
 
 	render() {
@@ -19,15 +21,20 @@ class IFButtonNormal extends IFComponentBase {
 		let {
 			option,
 			eventMap,
-		} = this.state;
-
+		} = this.props;
+	
+		let model = Util.parseDataModel(option);
 		let {
-			label,
-			visibility,
-			locked,
-			theme,
-			ghost,
-		} = option.toJS();
+			size, theme, label, fontFamily, fontSize, lineHeight, textAlign, visibility, locked,
+			extraStyle,
+		} = model;
+
+		let fontStyleObj = {
+			fontSize,
+			fontFamily,
+			lineHeight,
+			...extraStyle,
+		};
 
 		let {
 			onClick,
@@ -36,12 +43,13 @@ class IFButtonNormal extends IFComponentBase {
 		return (
 			<Button 
 				ghost={!!ghost}
-			    size={'large'}
+			  	size={size || 'large'}
 				type={theme}
 				disabled={!!locked}
-				onClick={onClick}
+				onClick={onClick || null}
+				style={{ width: '100%'}}
 			>
-				{label}
+				<span style={fontStyleObj}>{label}</span>
 			</Button>
 		)
 	}

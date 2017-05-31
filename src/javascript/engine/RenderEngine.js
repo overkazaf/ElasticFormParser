@@ -13,27 +13,40 @@ let {
 	Content,
 } = Layout;
 
-import ArrayUtil from '../util/ArrayUtil';
+import ArrayUtil from '../utils/ArrayUtil';
 
 export default
 class RenderEngine {
 
 	static renderPageView(pageJson) {
 		let {
-	      id,
-	      name,
-	      label,
-	      creater,
-	      createTS,
-	      style,
-	      contentMinHeight,
-	      eventList,
-	      header,
-	      body,
-	      footer,
+	      id, // 设计器系统生成的id
+		  key, // 可自定义的id
+		  name,　// 名字
+		  title,
+		  description,
+		  formType,
+		  pageIndex,
+		  theme,
+		  creater, // 创建者名字
+		  createTS,
+		  style,
+		  nextId, // 下推表单
+		  plugIns,
+		  basicProps,
+		  dataSource,
+		  eventList,
+		  advanced,
+		  layouts,
 	    } = pageJson;
 
-	    let formProps = { eventList, header, body, footer };
+	    let formProps = { 
+	    	eventList, 
+	    	layouts: {
+	    		header, body, footer,
+	    	}, 
+		};
+
 	    let contentStyle = { background: '#fff', padding: 24, minHeight: `${contentMinHeight}` };
 
 	    const userMap = {
@@ -128,7 +141,7 @@ class RenderEngine {
 			ctrlType,
 		} = props;
 
-		if (mode === 'read' && ctrlType !== 'IFButton') {
+		if (mode === 'read' && ctrlType !== 'IFButton' && ctrlType !== 'IFInput') {
 			return (
 				<div style={props.style}>
 					<span>{label}:</span><span>{value}</span>

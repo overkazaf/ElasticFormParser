@@ -1,8 +1,6 @@
 import { Component } from 'react';
 import IFComponentBase from '../../IFComponentBase/index.js';
 import { Table, Input, Icon, Button, Popconfirm } from 'antd';
-
-import Util from '../../../../util/Util.js';
 import mathjs from 'mathjs';
 import Immutable from 'immutable';
 
