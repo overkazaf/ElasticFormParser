@@ -160,6 +160,7 @@ var ComponentFactory = function () {
 	(0, _createClass3.default)(ComponentFactory, null, [{
 		key: 'create',
 		value: function create(type, option) {
+			console.log('creating component::', type, option);
 			return AntdComponents[type](option);
 		}
 	}]);

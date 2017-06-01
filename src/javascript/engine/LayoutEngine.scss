@@ -1,0 +1,14 @@
+.form-view {
+	padding: 10px;
+	min-height: 620px;
+	box-sizing: border-box;
+
+	.layout {
+		position: relative;
+	}
+
+	.draggable-item {
+		padding: 5px;
+		box-sizing: border-box;
+	}
+}

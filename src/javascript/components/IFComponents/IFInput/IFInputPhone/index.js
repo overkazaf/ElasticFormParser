@@ -21,6 +21,8 @@ class IFInputPhone extends IFComponentBase {
 		let {
 			option,
 		} = this.props;
+
+		console.log('this.props', this.props);
 	
 		let model = Util.parseDataModel(option);
 		let {
@@ -41,11 +43,13 @@ class IFInputPhone extends IFComponentBase {
 			return <div style={{textAlign: 'center'}}><Icon type="eye" /></div>;
 		}
 
+		console.log('option', option);
+
 		return (
 			<FormItem
 				label={label}
 			>
-				{getFieldDecorator(option.id, {
+				{getFieldDecorator(`${option.id}`, {
 	        rules: [
 	          { required: !!mustInput, message: '请输入手机号码' },
 	          { pattern: '/^{1}[3,4,5]{\d}9$/', message: '请输入合法的手机号码!' },
@@ -53,14 +57,14 @@ class IFInputPhone extends IFComponentBase {
 	        initialValue: defaultValue || '',
 	      })(
 	        <Input 
-						 placeholder={placeholder}
-						 addonBefore={addonBefore}
-						 addonAfter={addonAfter}
-						 suffix={suffix}
-						 prefix={prefix}
-						 disabled={!!locked}
-						 size={size || 'large'}
-					/>
+				 placeholder={placeholder}
+				 addonBefore={addonBefore}
+				 addonAfter={addonAfter}
+				 suffix={suffix}
+				 prefix={prefix}
+				 disabled={!!locked}
+				 size={size || 'large'}
+			/>
 	      )}
 			</FormItem>
 		)

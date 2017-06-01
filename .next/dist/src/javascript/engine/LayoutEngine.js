@@ -38,6 +38,10 @@ var _reactGridLayout = require('react-grid-layout');
 
 var _reactGridLayout2 = _interopRequireDefault(_reactGridLayout);
 
+var _LayoutEngine = require('./LayoutEngine.scss');
+
+var _LayoutEngine2 = _interopRequireDefault(_LayoutEngine);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/Users/overkazaf/Desktop/codes/git/playGround/IntelliParser/src/javascript/engine/LayoutEngine.js';
@@ -68,6 +72,8 @@ var ComponentsView = function (_Component) {
 			    dispatch = _props.dispatch,
 			    position = _props.position;
 
+			console.log('layouts', layouts);
+
 			var gridLayout = layouts.map(function (layout) {
 				layout.grid.static = true;
 				return layout.grid;
@@ -84,7 +90,7 @@ var ComponentsView = function (_Component) {
 				autoSize: true,
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 42
+					lineNumber: 46
 				}
 			}, layouts.map(function (item, index) {
 				var grid = item.grid,
@@ -92,11 +98,9 @@ var ComponentsView = function (_Component) {
 				var type = component.type,
 				    props = component.props;
 
-				var clazz = props.id === activeElemId ? 'draggable-item active' : 'draggable-item';
-
-				return _react2.default.createElement('div', { key: grid.i, className: clazz, __source: {
+				return _react2.default.createElement('div', { key: grid.i, className: 'draggable-item static', __source: {
 						fileName: _jsxFileName,
-						lineNumber: 67
+						lineNumber: 69
 					}
 				}, _ComponentFactory2.default.create(type, props));
 			}));
@@ -126,26 +130,30 @@ var LayoutEngine = function () {
 
 			return _react2.default.createElement('div', { className: 'form-view', style: { margin: '0 auto', width: style.width }, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 93
+					lineNumber: 95
 				}
-			}, _react2.default.createElement(_antd.Layout, {
+			}, _react2.default.createElement('style', { dangerouslySetInnerHTML: { __html: _LayoutEngine2.default }, __source: {
+					fileName: _jsxFileName,
+					lineNumber: 96
+				}
+			}), _react2.default.createElement(_antd.Layout, {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 94
+					lineNumber: 97
 				}
 			}, _react2.default.createElement(Header, {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 95
+					lineNumber: 98
 				}
 			}, _react2.default.createElement('h1', { style: { textAlign: 'center', color: '#fff' }, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 96
+					lineNumber: 99
 				}
 			}, title)), _react2.default.createElement(Content, {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 98
+					lineNumber: 101
 				}
 			}, _react2.default.createElement(ComponentsView, {
 				layouts: header,
@@ -153,7 +161,7 @@ var LayoutEngine = function () {
 				position: 'header',
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 99
+					lineNumber: 102
 				}
 			}), _react2.default.createElement(ComponentsView, {
 				layouts: body,
@@ -161,11 +169,11 @@ var LayoutEngine = function () {
 				position: 'body',
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 104
+					lineNumber: 107
 				}
 			})), _react2.default.createElement(Footer, { style: { background: '#e7e7e7' }, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 110
+					lineNumber: 113
 				}
 			}, _react2.default.createElement(ComponentsView, {
 				layouts: footer,
@@ -173,7 +181,7 @@ var LayoutEngine = function () {
 				position: 'footer',
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 111
+					lineNumber: 114
 				}
 			}))));
 		}

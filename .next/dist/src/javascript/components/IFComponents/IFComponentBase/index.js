@@ -65,16 +65,21 @@ var IFComponentBase = function (_Component) {
 	}
 
 	(0, _createClass3.default)(IFComponentBase, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			console.log('mounting component::', this.props);
+		}
+	}, {
 		key: 'getFieldValue',
 		value: function getFieldValue(field) {
-			return this.state.option.get(field);
+			return this.state.option[field];
 		}
 	}, {
 		key: 'setFieldValue',
 		value: function setFieldValue(json) {
 			var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
-			var $$option = this.state.option;
+			var option = this.state.option;
 
 			(0, _keys2.default)(json).map(function (field) {
 				$$option = $$option.set(field, json[field]);
@@ -129,16 +134,16 @@ var IFComponentBase = function (_Component) {
 			return _react2.default.createElement('div', {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 69
+					lineNumber: 73
 				}
 			}, _react2.default.createElement('h1', {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 70
+					lineNumber: 74
 				}
 			}, 'Warning'), _react2.default.createElement('p', { style: { color: 'red' }, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 71
+					lineNumber: 75
 				}
 			}, 'You need to override the IFComponentBase Class in your SubClass'));
 		}

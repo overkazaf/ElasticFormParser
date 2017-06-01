@@ -15,12 +15,16 @@ class IFComponentBase extends Component {
 	  };
 	}
 
+	componentDidMount() {
+		console.log('mounting component::', this.props);
+	}
+
 	getFieldValue(field) {
-		return this.state.option.get(field);
+		return this.state.option[field];
 	}
 
 	setFieldValue(json, callback = () => {}) {
-		let $$option = this.state.option;
+		let option = this.state.option;
 
 		Object.keys(json).map((field) => {
 			$$option = $$option.set(field, json[field]);

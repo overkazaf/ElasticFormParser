@@ -42,6 +42,7 @@ const AntdComponents = {
 export default
 class ComponentFactory {
 	static create(type, option) {
+		console.log('creating component::', type, option);
 		return AntdComponents[type](option);
 	}
 }

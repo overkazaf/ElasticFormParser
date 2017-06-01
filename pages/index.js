@@ -9,10 +9,9 @@ import antdStyle from '../src/css/index.min.css';
 import RenderEngine from '../src/javascript/engine/RenderEngine';
 import LayoutEngine from '../src/javascript/engine/LayoutEngine';
 
-import mock from '../src/javascript/mock/testPageData.js';
+import mock from '../src/javascript/mock/page.json';
 
 import ComponentManager from '../src/javascript/manager/IFComponentManager.js';
-import DevTools from '../src/javascript/components/DevTools/index.js';
 
 
 import { 

@@ -18,6 +18,8 @@ let {
 import ComponentFactory from '../factory/ComponentFactory.js';
 import ReactGridLayout from 'react-grid-layout';
 
+import layoutStyle from './LayoutEngine.scss';
+
 let activeElemId = null;
 class ComponentsView extends Component {
 	constructor(props) {
@@ -32,6 +34,8 @@ class ComponentsView extends Component {
 			dispatch,
 			position,
 		} = this.props;
+
+		console.log('layouts', layouts);
 
 		let gridLayout = layouts.map(layout => {
 			layout.grid.static = true;
@@ -49,28 +53,26 @@ class ComponentsView extends Component {
 				containerPadding={[0,0]}
 				autoSize={true}
 			>
-	      {
-	      	layouts.map((item, index) => {
-	      		let {
-	      			grid,
-	      			component,
-	      		} = item;
+		      {
+		      	layouts.map((item, index) => {
+		      		let {
+		      			grid,
+		      			component,
+		      		} = item;
 
-	      		let {
-	      			type,
-	      			props,
-	      		} = component;
+		      		let {
+		      			type,
+		      			props,
+		      		} = component;
 
-	      		let clazz = props.id === activeElemId ? 'draggable-item active' : 'draggable-item';
-
-	      		return (
-	      			<div key={grid.i} className={clazz}>
-			        	{ ComponentFactory.create(type, props) }
-			        </div>
-	      		)
-	      	})
-	      }
-      </ReactGridLayout>
+		      		return (
+		      			<div key={grid.i} className="draggable-item static">
+				        	{ ComponentFactory.create(type, props) }
+				        </div>
+		      		)
+		      	})
+		      }
+	      </ReactGridLayout>
 		)
 	}
 }
@@ -91,6 +93,7 @@ class LayoutEngine {
 
 		return (
 			<div className="form-view" style={{ margin: '0 auto', width: style.width, }}>
+				<style dangerouslySetInnerHTML={{ __html: layoutStyle}} />
 				<Layout>
 					<Header>
 						<h1 style={{textAlign: 'center', color: '#fff'}}>{title}</h1>

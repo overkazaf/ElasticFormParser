@@ -66,17 +66,13 @@ var _LayoutEngine = require('../src/javascript/engine/LayoutEngine');
 
 var _LayoutEngine2 = _interopRequireDefault(_LayoutEngine);
 
-var _testPageData = require('../src/javascript/mock/testPageData.js');
+var _page = require('../src/javascript/mock/page.json');
 
-var _testPageData2 = _interopRequireDefault(_testPageData);
+var _page2 = _interopRequireDefault(_page);
 
 var _IFComponentManager = require('../src/javascript/manager/IFComponentManager.js');
 
 var _IFComponentManager2 = _interopRequireDefault(_IFComponentManager);
-
-var _index = require('../src/javascript/components/DevTools/index.js');
-
-var _index2 = _interopRequireDefault(_index);
 
 var _antd = require('antd');
 
@@ -112,11 +108,11 @@ var MainPage = function (_Component) {
 
       return _react2.default.createElement('div', { className: 'p-main', __source: {
           fileName: _jsxFileName,
-          lineNumber: 54
+          lineNumber: 53
         }
       }, _react2.default.createElement('style', { dangerouslySetInnerHTML: { __html: _indexMin2.default }, __source: {
           fileName: _jsxFileName,
-          lineNumber: 55
+          lineNumber: 54
         }
       }), _LayoutEngine2.default.renderLayout(data, dispatch));
     }
@@ -135,7 +131,7 @@ var MainPage = function (_Component) {
       return {
         isServer: isServer,
         counter: 0,
-        data: _testPageData2.default,
+        data: _page2.default,
         formData: null
       };
     }

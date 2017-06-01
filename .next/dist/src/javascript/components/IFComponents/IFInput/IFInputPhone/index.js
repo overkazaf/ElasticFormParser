@@ -68,6 +68,8 @@ var IFInputPhone = function (_IFComponentBase) {
 			var getFieldDecorator = this.props.form.getFieldDecorator;
 			var option = this.props.option;
 
+			console.log('this.props', this.props);
+
 			var model = _Util2.default.parseDataModel(option);
 			var size = model.size,
 			    theme = model.theme,
@@ -100,22 +102,24 @@ var IFInputPhone = function (_IFComponentBase) {
 			if (!visibility) {
 				return _react2.default.createElement('div', { style: { textAlign: 'center' }, __source: {
 						fileName: _jsxFileName,
-						lineNumber: 41
+						lineNumber: 43
 					}
 				}, _react2.default.createElement(_antd.Icon, { type: 'eye', __source: {
 						fileName: _jsxFileName,
-						lineNumber: 41
+						lineNumber: 43
 					}
 				}));
 			}
+
+			console.log('option', option);
 
 			return _react2.default.createElement(FormItem, {
 				label: label,
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 45
+					lineNumber: 49
 				}
-			}, getFieldDecorator(option.id, {
+			}, getFieldDecorator('' + option.id, {
 				rules: [{ required: !!mustInput, message: '请输入手机号码' }, { pattern: '/^{1}[3,4,5]{\d}9$/', message: '请输入合法的手机号码!' }],
 				initialValue: defaultValue || ''
 			})(_react2.default.createElement(_antd.Input, {
@@ -128,7 +132,7 @@ var IFInputPhone = function (_IFComponentBase) {
 				size: size || 'large',
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 55
+					lineNumber: 59
 				}
 			})));
 		}
