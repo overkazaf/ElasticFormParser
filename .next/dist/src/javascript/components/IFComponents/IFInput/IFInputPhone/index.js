@@ -46,6 +46,10 @@ var _Util = require('../../../../utils/Util.js');
 
 var _Util2 = _interopRequireDefault(_Util);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/Users/overkazaf/Desktop/codes/git/playGround/IntelliParser/src/javascript/components/IFComponents/IFInput/IFInputPhone/index.js';
@@ -59,16 +63,63 @@ var IFInputPhone = function (_IFComponentBase) {
 	function IFInputPhone(props) {
 		(0, _classCallCheck3.default)(this, IFInputPhone);
 
-		return (0, _possibleConstructorReturn3.default)(this, (IFInputPhone.__proto__ || (0, _getPrototypeOf2.default)(IFInputPhone)).call(this, props));
+		var _this = (0, _possibleConstructorReturn3.default)(this, (IFInputPhone.__proto__ || (0, _getPrototypeOf2.default)(IFInputPhone)).call(this, props));
+
+		_this.state = {
+			option: props.option,
+			eventMap: {},
+			validateStatus: ""
+		};
+		return _this;
 	}
 
 	(0, _createClass3.default)(IFInputPhone, [{
+		key: 'changeValue',
+		value: function changeValue(_ref) {
+			var _this2 = this;
+
+			var target = _ref.target;
+
+			// calling prototype class
+
+			this.setValue(target.value, function () {
+				_this2.validateField();
+			});
+		}
+	}, {
+		key: 'validateField',
+		value: function validateField() {
+			var re = /1[3|5|7|8|][0-9]{9}/;
+			var digitReg = /\d+/;
+			var phoneNumber = this.getValue();
+			var validateStatus = void 0;
+
+			if (phoneNumber.length < 11) {
+				if (!digitReg.test(phoneNumber)) {
+					validateStatus = 'error';
+				} else {
+					validateStatus = 'warning';
+				}
+			} else {
+				validateStatus = 'error';
+
+				if (phoneNumber.length === 11 && re.test(phoneNumber)) {
+					validateStatus = 'success';
+				}
+			}
+
+			this.setState({
+				validateStatus: validateStatus
+			}, function () {
+				validateStatus == 'error' && _antd.message.error('Phone number is invalid');
+			});
+		}
+	}, {
 		key: 'render',
 		value: function render() {
-			var getFieldDecorator = this.props.form.getFieldDecorator;
-			var option = this.props.option;
-
-			console.log('this.props', this.props);
+			var _state = this.state,
+			    option = _state.option,
+			    validateStatus = _state.validateStatus;
 
 			var model = _Util2.default.parseDataModel(option);
 			var size = model.size,
@@ -100,47 +151,50 @@ var IFInputPhone = function (_IFComponentBase) {
 			}, extraStyle);
 
 			if (!visibility) {
-				return _react2.default.createElement('div', { style: { textAlign: 'center' }, __source: {
+				return _react2.default.createElement('div', {
+					__source: {
 						fileName: _jsxFileName,
-						lineNumber: 43
+						lineNumber: 85
 					}
-				}, _react2.default.createElement(_antd.Icon, { type: 'eye', __source: {
-						fileName: _jsxFileName,
-						lineNumber: 43
-					}
-				}));
+				});
 			}
 
 			console.log('option', option);
 
 			return _react2.default.createElement(FormItem, {
 				label: label,
+				required: mustInput,
+				validateStatus: validateStatus,
+				hasFeedback: true,
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 49
+					lineNumber: 92
 				}
-			}, getFieldDecorator('' + option.id, {
-				rules: [{ required: !!mustInput, message: '请输入手机号码' }, { pattern: '/^{1}[3,4,5]{\d}9$/', message: '请输入合法的手机号码!' }],
-				initialValue: defaultValue || ''
-			})(_react2.default.createElement(_antd.Input, {
+			}, _react2.default.createElement(_antd.Input, {
 				placeholder: placeholder,
 				addonBefore: addonBefore,
 				addonAfter: addonAfter,
 				suffix: suffix,
 				prefix: prefix,
 				disabled: !!locked,
+				value: value,
+				defaultValue: defaultValue,
+				onChange: _lodash2.default.throttle(this.changeValue.bind(this), 200),
+				onBlur: _lodash2.default.throttle(this.validateField.bind(this), 200),
 				size: size || 'large',
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 59
+					lineNumber: 98
 				}
-			})));
+			}));
 		}
 	}]);
 
 	return IFInputPhone;
 }(_index2.default);
 
-var wrappedIFInputPhone = _antd.Form.create({})(IFInputPhone);
+exports.default = IFInputPhone;
 
-exports.default = wrappedIFInputPhone;
+// const wrappedIFInputPhone = Form.create({})(IFInputPhone);
+
+// export default wrappedIFInputPhone;

@@ -7,6 +7,7 @@ import {
 } from 'antd';
 
 import IFComponentBase from '../IFComponentBase/index.js';
+import _ from 'lodash';
 
 export default
 class IFDropdown extends IFComponentBase {
@@ -16,7 +17,7 @@ class IFDropdown extends IFComponentBase {
 	
 	handleMenuClick({ key }) {
 
-		console.log('this.state.option.dataSource', this.props.option.dataSource);
+	console.log('this.state.option.dataSource', this.props.option.dataSource);
 
 	  let selectedOption = this.props.option.dataSource.filter((item, index) => {
 	  	return index == key;
@@ -26,8 +27,10 @@ class IFDropdown extends IFComponentBase {
 
 	  if (selectedOption) {
 		this.setFieldValue({
-			label: selectedOption.label,
-			value: selectedOption.value,
+			inputValue: {
+				label: { value: selectedOption.label },
+				value: { value: selectedOption.value },
+			},
 		});
 	  }
 	}
@@ -57,13 +60,14 @@ class IFDropdown extends IFComponentBase {
 		let {
 			basicProps: {
 				componentTheme: {
-	        backgroundColor,
-	        fontColor,
-	        layoutStyle,
-	        size,
-	        theme,
-	      },
-				inputValue: {
+		        backgroundColor,
+		        fontColor,
+		        layoutStyle,
+		        size,
+		        theme,
+	      	},
+		
+		  inputValue: {
 	        carry,
 	        defaultValue,
 	        label,
@@ -71,7 +75,7 @@ class IFDropdown extends IFComponentBase {
 	        linkTarget,
 	        placeholder,
 	        value,
-	      },
+	      	},
 	      formStatus: {
 	      	visibility,
 	      	locked,
@@ -114,15 +118,15 @@ class IFDropdown extends IFComponentBase {
 		return (
 			<div style={{backgroundColor}}>
 				<Dropdown overlay={menu}>
-		      <Button 
-		        disabled={!!locked}
-		      	size={size}
-		      	type={theme || 'default'}
-		      	style={{ width: '100%', textAlign}}>
-		      	<span style={fontStyleObj}>{label}</span> 
-		        <Icon type="down" />
-		      </Button>
-		    </Dropdown>
+					<Button 
+						disabled={!!locked}
+						size={size}
+						type={theme || 'default'}
+						style={{ width: '100%', textAlign}}>
+						<span style={fontStyleObj}>{label}</span> 
+						<Icon type="down" />
+					</Button>
+				</Dropdown>
 			</div>
 		)
 

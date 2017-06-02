@@ -1,6 +1,6 @@
 import ActionManager from '../manager/IFActionManager.js';
 import ComponentManager from '../manager/IFComponentManager.js';
-import Util from '../util/Util.js';
+import Util from '../utils/Util.js';
 import mitt from 'mitt';
 
 let emmiter = mitt();
@@ -42,76 +42,51 @@ export default class EventEngine {
 			// wheel events
 			'onWheel',
 		].map((eventName) => {
-
-			// let currentEvent = `${id}-${eventName}`;
-
-			// let eventOption = eventList.filter((item) => {
-			// 						return item.eventType === eventName;
-			// 					})[0];
-			// if (!Util.isExisty(eventOption)) {
-			// 	return;
-			// }
-
-			// eventMap[eventName] = (ev) => {
-			// 	emmiter.emit(`${currentEvent}`, {
-			// 		value: ev.target.value,
-			// 		eventOption,
-			// 	});
-			// };
-
-			// emmiter.on(`${currentEvent}`, ({
-			// 	value,
-			// 	eventOption,
-			// }) => {
-			// 	let callback = () => {};
-
-			// 	if (Util.isExisty(eventOption) && Util.isExisty(eventOption.options)) {
-			// 		callback = () => {
-			// 			ActionManager.execute(id, eventOption.options);
-			// 		};
-			// 	} else {
-			// 		throw new Error('Null parameters found while executing emmiter');
-			// 	}
-
-			// 	component.setValue(value, callback);
-			// });
 		});
 
 		eventList && eventList.map((evtObj) => {
+			
 			let {
 				eventType,
-				options,
+				actionList,
 			} = evtObj;
 
 			let currentEvent = `${id}-${eventType}`;
 
-			console.log(`currentEvent : ${currentEvent}`);
-
 			eventMap[eventType] = (e) => {
 				emmiter.emit(`${currentEvent}`, {
 					ev: e,
-					options,
+					actionList,
 				});
 			};
 
 			emmiter.on(`${currentEvent}`, ({
 				ev,
-				options,
+				actionList,
 			}) => {
 				let callback = () => {};
 
-				if (Util.isExisty(options)) {
+				if (Util.isExisty(actionList)) {
 					callback = () => {
-						ActionManager.execute(id, options, ev);
+						ActionManager.execute(id, actionList, ev);
 					};
 				} else {
 					throw new Error('Null parameters found while executing emmiter');
 				}
 
-				// console.log(`callback , ${JSON.stringify(callback)}`);
-
-				ComponentManager.get(id).setValue(ev.target.value, callback);
+				ComponentManager.get(id).setFieldValue({
+					inputValue: {
+						value: {
+							value: ev.target.value ? ev.target.value : '', // 如果有值的话可以直接设置
+						},
+					},
+				}, callback);
 			});
+
+			component.setState({
+				eventMap,
+			});
+
 		});
 		
 

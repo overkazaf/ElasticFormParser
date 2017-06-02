@@ -67,6 +67,11 @@ var IFButtonSubmit = function (_IFButtonNormal) {
 	}
 
 	(0, _createClass3.default)(IFButtonSubmit, [{
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			console.log('nextProps in IFButtonSubmit', nextProps);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			var model = _Util2.default.parseDataModel(this.props.option);
@@ -87,19 +92,30 @@ var IFButtonSubmit = function (_IFButtonNormal) {
 				lineHeight: lineHeight
 			}, extraStyle);
 
+			var onClick = this.state.eventMap.onClick;
+
+			if (!visibility) {
+				return _react2.default.createElement('div', {
+					__source: {
+						fileName: _jsxFileName,
+						lineNumber: 47
+					}
+				});
+			}
+
 			return _react2.default.createElement(_antd.Button, {
 				size: size || 'large',
 				type: theme || 'primary',
 				disabled: !!locked,
-				onClick: null,
+				onClick: onClick,
 				style: { width: '100%' },
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 34
+					lineNumber: 53
 				}
 			}, _react2.default.createElement('span', { style: fontStyleObj, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 41
+					lineNumber: 60
 				}
 			}, label));
 		}

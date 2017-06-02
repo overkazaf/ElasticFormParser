@@ -8,6 +8,7 @@ import Rx from 'rxjs/Rx';
 import antdStyle from '../src/css/index.min.css';
 import RenderEngine from '../src/javascript/engine/RenderEngine';
 import LayoutEngine from '../src/javascript/engine/LayoutEngine';
+import EventEngine from '../src/javascript/engine/EventEngine';
 
 import mock from '../src/javascript/mock/page.json';
 
@@ -37,9 +38,22 @@ class MainPage extends Component {
   }
 
   componentDidMount() {
-    Object.keys(this.refs).map( (compId, index) => {
-      ComponentManager.register(compId, this.refs[compId]);
+    Object.keys(this.refs).map( (key, index) => {
+      let position = this.refs[key];
+      let posRefs = position.refs;
+      Object.keys(posRefs).map((compId, idx) => {
+        let component = posRefs[compId];
+        ComponentManager.register(compId, component);
+
+        EventEngine.subscribe(component, component.props, () => {
+          console.log('callback in EventEngine subscription');
+        });
+
+      });
     });
+
+    global.ComponentManager = ComponentManager;
+    
   }
 
 

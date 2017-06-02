@@ -26,6 +26,10 @@ class ComponentsView extends Component {
 		super(props);
 	}
 
+	componentDidMount() {
+		console.log('this.refs in LayoutEngine.js', this.refs);
+	}
+
 	render() {
 		let that = this;
 
@@ -34,8 +38,6 @@ class ComponentsView extends Component {
 			dispatch,
 			position,
 		} = this.props;
-
-		console.log('layouts', layouts);
 
 		let gridLayout = layouts.map(layout => {
 			layout.grid.static = true;
@@ -103,11 +105,13 @@ class LayoutEngine {
 							layouts={header}
 							dispatch={dispatch}
 							position={'header'}
+							ref="header"
 						/>
 						<ComponentsView 
 							layouts={body}
 							dispatch={dispatch}
 							position={'body'}
+							ref="body"
 						/>
 					</Content>
 					<Footer style={{ background: '#e7e7e7'}}>
@@ -115,6 +119,7 @@ class LayoutEngine {
 							layouts={footer}
 							dispatch={dispatch}
 							position={'footer'}
+							ref="footer"
 						/>
 					</Footer>
 				</Layout>

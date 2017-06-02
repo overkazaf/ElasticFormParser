@@ -88,19 +88,30 @@ var IFButtonReset = function (_IFButtonNormal) {
 				lineHeight: lineHeight
 			}, extraStyle);
 
+			var onClick = this.state.eventMap.onClick;
+
+			if (!visibility) {
+				return _react2.default.createElement('div', {
+					__source: {
+						fileName: _jsxFileName,
+						lineNumber: 43
+					}
+				});
+			}
+
 			return _react2.default.createElement(_antd.Button, {
 				size: size || 'large',
 				type: 'default',
 				disabled: !!locked,
-				onClick: null,
+				onClick: onClick,
 				style: { width: '100%' },
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 35
+					lineNumber: 48
 				}
 			}, _react2.default.createElement('span', { style: fontStyleObj, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 42
+					lineNumber: 55
 				}
 			}, label));
 		}

@@ -31,12 +31,25 @@ class IFButtonReset extends IFButtonNormal {
 			...extraStyle,
 		};
 
+		let {
+			eventMap: {
+				onClick,
+			},
+		} = this.state;
+
+
+		if (!visibility) {
+			return (
+				<div></div>
+			)
+		}
+
 		return (
 			<Button 
 			  size={size || 'large'}
 				type={'default'}
 				disabled={!!locked}
-				onClick={null}
+				onClick={onClick}
 				style={{ width: '100%'}}
 			>
 				<span style={fontStyleObj}>{label}</span>

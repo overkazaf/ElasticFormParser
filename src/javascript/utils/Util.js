@@ -93,6 +93,8 @@ class Util {
 
     static parseDataModel(option) {
         let {
+            id,
+            name,
             basicProps: {
                 componentTheme: {
                     backgroundColor,
@@ -132,8 +134,7 @@ class Util {
             },
         } = option;
 
-        console.log('=================inside Util.js==================');
-        console.log('mustInput', mustInput);
+        console.log(`=================${name} inside Util.js==================`);
 
         [size, theme, label, fontFamily, fontSize, lineHeight, textAlign, visibility, locked, mustInput, autoSum,
             defaultValue, value, link, linkTarget, placeholder, carry,
@@ -154,7 +155,7 @@ class Util {
             });
         }
 
-        return {
+        let model = {
             size,
             theme,
             label,
@@ -177,7 +178,9 @@ class Util {
             prefix,
             suffix,
             extraStyle,
-        }
+        };
+
+        return model;
     }
 
     static overrideObject(src = {}, option = {}, deep = false) {

@@ -133,7 +133,9 @@ var Util = function () {
     }, {
         key: 'parseDataModel',
         value: function parseDataModel(option) {
-            var _option$basicProps = option.basicProps,
+            var id = option.id,
+                name = option.name,
+                _option$basicProps = option.basicProps,
                 _option$basicProps$co = _option$basicProps.componentTheme,
                 backgroundColor = _option$basicProps$co.backgroundColor,
                 fontColor = _option$basicProps$co.fontColor,
@@ -165,8 +167,7 @@ var Util = function () {
                 lineHeight = _option$basicProps$fo2.lineHeight,
                 textAlign = _option$basicProps$fo2.textAlign;
 
-            console.log('=================inside Util.js==================');
-            console.log('mustInput', mustInput);
+            console.log('=================' + name + ' inside Util.js==================');
 
             var _map = [size, theme, label, fontFamily, fontSize, lineHeight, textAlign, visibility, locked, mustInput, autoSum, defaultValue, value, link, linkTarget, placeholder, carry, addonBefore, addonAfter, prefix, suffix].map(function (item) {
                 return item.value;
@@ -217,7 +218,7 @@ var Util = function () {
                 });
             }
 
-            return {
+            var model = {
                 size: size,
                 theme: theme,
                 label: label,
@@ -241,6 +242,8 @@ var Util = function () {
                 suffix: suffix,
                 extraStyle: extraStyle
             };
+
+            return model;
         }
     }, {
         key: 'overrideObject',

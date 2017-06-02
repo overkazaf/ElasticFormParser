@@ -16,6 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var componentMap = {};
 var componentList = [];
+var componentKeys = [];
 
 var IFComponentManager = function () {
 	function IFComponentManager() {
@@ -26,6 +27,7 @@ var IFComponentManager = function () {
 		key: "register",
 		value: function register(id, component) {
 			try {
+				componentKeys.push(id);
 				componentMap[id] = component;
 				componentList.push(component);
 			} catch (e) {
@@ -33,6 +35,11 @@ var IFComponentManager = function () {
 			}
 
 			return true;
+		}
+	}, {
+		key: "keys",
+		value: function keys() {
+			return componentKeys;
 		}
 	}, {
 		key: "list",

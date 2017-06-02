@@ -12,6 +12,10 @@ var _keys = require('babel-runtime/core-js/object/keys');
 
 var _keys2 = _interopRequireDefault(_keys);
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -67,37 +71,65 @@ var IFComponentBase = function (_Component) {
 	(0, _createClass3.default)(IFComponentBase, [{
 		key: 'componentDidMount',
 		value: function componentDidMount() {
-			console.log('mounting component::', this.props);
+			this._buildEventMap();
 		}
 	}, {
-		key: 'getFieldValue',
-		value: function getFieldValue(field) {
-			return this.state.option[field];
-		}
-	}, {
-		key: 'setFieldValue',
-		value: function setFieldValue(json) {
-			var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+		key: '_buildEventMap',
+		value: function _buildEventMap() {
+			var eventList = this.props.option.eventList;
 
-			var option = this.state.option;
+			var eventMap = {};
+			eventList.map(function (evtObj) {
+				var eventType = evtObj.eventType,
+				    actionList = evtObj.actionList;
 
-			(0, _keys2.default)(json).map(function (field) {
-				$$option = $$option.set(field, json[field]);
+				eventMap[eventType] = actionList;
 			});
 
 			this.setState({
-				option: $$option
-			}, callback);
+				eventMap: eventMap
+			});
+		}
+	}, {
+		key: 'getFieldValue',
+		value: function getFieldValue(keyPath) {
+			var basicProps = this.state.option.basicProps;
+
+			var target = void 0;
+			var pre = basicProps;
+			keyPath.map(function (key) {
+				target = pre[key];
+				pre = target;
+			});
+
+			return target;
+		}
+	}, {
+		key: 'setFieldValue',
+		value: function setFieldValue(fields) {
+			var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+			var option = this.state.option;
+
+			var newOption = _.merge(option, {
+				basicProps: (0, _extends3.default)({}, fields)
+			});
+
+			this.setState({
+				option: newOption
+			}, function () {
+				callback();
+			});
 		}
 	}, {
 		key: 'getFieldsValue',
-		value: function getFieldsValue(array) {
+		value: function getFieldsValue(keyPathMap) {
 			var _this2 = this;
 
 			var valueObj = {};
 
-			array.map(function (field) {
-				valueObj[field] = _this2.getFieldValue(field);
+			(0, _keys2.default)(keyPathMap).map(function (keyName) {
+				var keyPath = keyPathMap[keyName];
+				valueObj[keyName] = _this2.getFieldValue(keyPath);
 			});
 
 			return valueObj;
@@ -105,18 +137,23 @@ var IFComponentBase = function (_Component) {
 	}, {
 		key: 'getValue',
 		value: function getValue() {
-			return this.getFieldValue('value');
+			return this.getFieldValue(['inputValue', 'value', 'value']);
 		}
 	}, {
 		key: 'setValue',
 		value: function setValue(value, callback) {
 			this.setFieldValue({
-				value: value
+				inputValue: {
+					value: {
+						value: value
+					}
+				}
 			}, callback);
 		}
 	}, {
 		key: 'componentWillReceiveProps',
 		value: function componentWillReceiveProps(nextProps) {
+			console.log('IFComponentBase received', nextProps);
 			var newState = (0, _assign2.default)(this.state.option, nextProps.option);
 
 			this.setState({
@@ -126,6 +163,8 @@ var IFComponentBase = function (_Component) {
 	}, {
 		key: 'shouldComponentUpdate',
 		value: function shouldComponentUpdate(nextProps, nextState) {
+			return true;
+
 			return !(this.props === nextProps || is(this.props, nextProps)) || !(this.state === nextState || is(this.state, nextState));
 		}
 	}, {
@@ -134,16 +173,16 @@ var IFComponentBase = function (_Component) {
 			return _react2.default.createElement('div', {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 73
+					lineNumber: 122
 				}
 			}, _react2.default.createElement('h1', {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 74
+					lineNumber: 123
 				}
 			}, 'Warning'), _react2.default.createElement('p', { style: { color: 'red' }, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 75
+					lineNumber: 124
 				}
 			}, 'You need to override the IFComponentBase Class in your SubClass'));
 		}

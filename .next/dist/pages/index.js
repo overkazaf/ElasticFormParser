@@ -66,6 +66,10 @@ var _LayoutEngine = require('../src/javascript/engine/LayoutEngine');
 
 var _LayoutEngine2 = _interopRequireDefault(_LayoutEngine);
 
+var _EventEngine = require('../src/javascript/engine/EventEngine');
+
+var _EventEngine2 = _interopRequireDefault(_EventEngine);
+
 var _page = require('../src/javascript/mock/page.json');
 
 var _page2 = _interopRequireDefault(_page);
@@ -95,9 +99,20 @@ var MainPage = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      (0, _keys2.default)(this.refs).map(function (compId, index) {
-        _IFComponentManager2.default.register(compId, _this2.refs[compId]);
+      (0, _keys2.default)(this.refs).map(function (key, index) {
+        var position = _this2.refs[key];
+        var posRefs = position.refs;
+        (0, _keys2.default)(posRefs).map(function (compId, idx) {
+          var component = posRefs[compId];
+          _IFComponentManager2.default.register(compId, component);
+
+          _EventEngine2.default.subscribe(component, component.props, function () {
+            console.log('callback in EventEngine subscription');
+          });
+        });
       });
+
+      global.ComponentManager = _IFComponentManager2.default;
     }
   }, {
     key: 'render',
@@ -108,11 +123,11 @@ var MainPage = function (_Component) {
 
       return _react2.default.createElement('div', { className: 'p-main', __source: {
           fileName: _jsxFileName,
-          lineNumber: 53
+          lineNumber: 67
         }
       }, _react2.default.createElement('style', { dangerouslySetInnerHTML: { __html: _indexMin2.default }, __source: {
           fileName: _jsxFileName,
-          lineNumber: 54
+          lineNumber: 68
         }
       }), _LayoutEngine2.default.renderLayout(data, dispatch));
     }

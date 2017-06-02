@@ -42,6 +42,10 @@ var _index = require('../IFComponentBase/index.js');
 
 var _index2 = _interopRequireDefault(_index);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/Users/overkazaf/Desktop/codes/git/playGround/IntelliParser/src/javascript/components/IFComponents/IFDropdown/index.js';
@@ -71,8 +75,10 @@ var IFDropdown = function (_IFComponentBase) {
 
 			if (selectedOption) {
 				this.setFieldValue({
-					label: selectedOption.label,
-					value: selectedOption.value
+					inputValue: {
+						label: { value: selectedOption.label },
+						value: { value: selectedOption.value }
+					}
 				});
 			}
 		}
@@ -90,12 +96,12 @@ var IFDropdown = function (_IFComponentBase) {
 				onClick: this.handleMenuClick.bind(this),
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 45
+					lineNumber: 48
 				}
 			}, rawOption.dataSource && rawOption.dataSource.map(function (item, index) {
 				return _react2.default.createElement(_antd.Menu.Item, { key: index, value: item.value, __source: {
 						fileName: _jsxFileName,
-						lineNumber: 51
+						lineNumber: 54
 					}
 				}, item.label);
 			}));
@@ -173,18 +179,18 @@ var IFDropdown = function (_IFComponentBase) {
 				return _react2.default.createElement('div', {
 					__source: {
 						fileName: _jsxFileName,
-						lineNumber: 111
+						lineNumber: 115
 					}
 				});
 			}
 
 			return _react2.default.createElement('div', { style: { backgroundColor: backgroundColor }, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 115
+					lineNumber: 119
 				}
 			}, _react2.default.createElement(_antd.Dropdown, { overlay: menu, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 116
+					lineNumber: 120
 				}
 			}, _react2.default.createElement(_antd.Button, {
 				disabled: !!locked,
@@ -192,15 +198,15 @@ var IFDropdown = function (_IFComponentBase) {
 				type: theme || 'default',
 				style: { width: '100%', textAlign: textAlign }, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 117
+					lineNumber: 121
 				}
 			}, _react2.default.createElement('span', { style: fontStyleObj, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 122
+					lineNumber: 126
 				}
 			}, label), _react2.default.createElement(_antd.Icon, { type: 'down', __source: {
 					fileName: _jsxFileName,
-					lineNumber: 123
+					lineNumber: 127
 				}
 			}))));
 		}

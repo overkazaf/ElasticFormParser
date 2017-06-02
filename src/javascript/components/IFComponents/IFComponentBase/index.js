@@ -16,46 +16,93 @@ class IFComponentBase extends Component {
 	}
 
 	componentDidMount() {
-		console.log('mounting component::', this.props);
+		this._buildEventMap();
 	}
 
-	getFieldValue(field) {
-		return this.state.option[field];
-	}
+	_buildEventMap() {
+		let {
+			option: {
+				eventList,
+			},
+		} = this.props;
 
-	setFieldValue(json, callback = () => {}) {
-		let option = this.state.option;
-
-		Object.keys(json).map((field) => {
-			$$option = $$option.set(field, json[field]);
+		let eventMap = {};
+		eventList.map((evtObj) => {
+			let {
+				eventType,
+				actionList,
+			} = evtObj;
+			
+			eventMap[eventType] = actionList;
 		});
 
 		this.setState({
-			option: $$option,
-		}, callback);
+			eventMap,
+		});
 	}
 
-	getFieldsValue(array) {
+	getFieldValue(keyPath) {
+		let { 
+			option: {
+				basicProps,
+			},
+		} = this.state;
+
+		let target;
+		let pre = basicProps;
+		keyPath.map((key) => {
+			target = pre[key];
+			pre = target;
+		})
+
+		return target;
+	}
+
+	setFieldValue(fields, callback = () => {}) {
+		let {
+			option,
+		} = this.state;
+
+		let newOption = _.merge(option, {
+			basicProps: {
+				...fields,
+			}
+		});
+
+		this.setState({
+			option: newOption,
+		}, () => {
+			callback();
+		});
+	}
+
+	getFieldsValue(keyPathMap) {
 		let valueObj = {};
 
-		array.map((field) => {
-			valueObj[field] = this.getFieldValue(field);
+		Object.keys(keyPathMap).map((keyName) => {
+			let keyPath = keyPathMap[keyName];
+			valueObj[keyName] = this.getFieldValue(keyPath);
 		});
 
 		return valueObj;
 	}
 
 	getValue() {
-		return this.getFieldValue('value');
+		return this.getFieldValue(['inputValue', 'value', 'value']);
 	}
 
 	setValue(value, callback) {
 		this.setFieldValue({
-			value,
+			inputValue: {
+				value: {
+					value,
+				},
+			},
 		}, callback);
 	}
 
 	componentWillReceiveProps(nextProps) {
+		console.log('IFComponentBase received', nextProps);
 		let newState = Object.assign(this.state.option, nextProps.option);
 
 		this.setState({
@@ -64,6 +111,8 @@ class IFComponentBase extends Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
+		return true;
+
 		return !(this.props === nextProps || is(this.props, nextProps)) 
 			|| !(this.state === nextState || is(this.state, nextState));
 	}

@@ -16,6 +16,10 @@ class IFButtonSubmit extends IFButtonNormal {
 	  };
 	}
 
+	componentWillReceiveProps(nextProps) {
+		console.log('nextProps in IFButtonSubmit', nextProps);
+	}
+
 	render() {
 		let model = Util.parseDataModel(this.props.option);
 		let {
@@ -30,12 +34,27 @@ class IFButtonSubmit extends IFButtonNormal {
 			...extraStyle,
 		};
 
+
+		let {
+			eventMap: {
+				onClick,
+			},
+		} = this.state;
+
+
+		if (!visibility) {
+			return (
+				<div></div>
+			)
+		}
+
+
 		return (
 			<Button 
 			  size={size || 'large'}
 				type={theme || 'primary'}
 				disabled={!!locked}
-				onClick={null}
+				onClick={onClick}
 				style={{ width: '100%'}}
 			>
 				<span style={fontStyleObj}>{label}</span>
