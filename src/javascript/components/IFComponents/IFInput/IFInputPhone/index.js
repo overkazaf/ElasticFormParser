@@ -53,8 +53,6 @@ class IFInputPhone extends IFComponentBase {
 
 		this.setState({
 			validateStatus,
-		}, () => {
-			validateStatus == 'error' && message.error('Phone number is invalid');
 		});
 	}
 

@@ -78,6 +78,10 @@ var _IFComponentManager = require('../src/javascript/manager/IFComponentManager.
 
 var _IFComponentManager2 = _interopRequireDefault(_IFComponentManager);
 
+var _CommitEngine = require('../src/javascript/engine/CommitEngine.js');
+
+var _CommitEngine2 = _interopRequireDefault(_CommitEngine);
+
 var _antd = require('antd');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -112,7 +116,20 @@ var MainPage = function (_Component) {
         });
       });
 
+      _CommitEngine2.default.init(this._getFormInfo());
+
       global.ComponentManager = _IFComponentManager2.default;
+      global.CommitEngine = _CommitEngine2.default;
+    }
+  }, {
+    key: '_getFormInfo',
+    value: function _getFormInfo() {
+      var id = this.props.data.id;
+
+      return {
+        formId: id,
+        submitter: 'u-001'
+      };
     }
   }, {
     key: 'render',
@@ -123,11 +140,11 @@ var MainPage = function (_Component) {
 
       return _react2.default.createElement('div', { className: 'p-main', __source: {
           fileName: _jsxFileName,
-          lineNumber: 67
+          lineNumber: 84
         }
       }, _react2.default.createElement('style', { dangerouslySetInnerHTML: { __html: _indexMin2.default }, __source: {
           fileName: _jsxFileName,
-          lineNumber: 68
+          lineNumber: 85
         }
       }), _LayoutEngine2.default.renderLayout(data, dispatch));
     }

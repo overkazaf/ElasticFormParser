@@ -110,8 +110,6 @@ var IFInputPhone = function (_IFComponentBase) {
 
 			this.setState({
 				validateStatus: validateStatus
-			}, function () {
-				validateStatus == 'error' && _antd.message.error('Phone number is invalid');
 			});
 		}
 	}, {
@@ -154,7 +152,7 @@ var IFInputPhone = function (_IFComponentBase) {
 				return _react2.default.createElement('div', {
 					__source: {
 						fileName: _jsxFileName,
-						lineNumber: 85
+						lineNumber: 83
 					}
 				});
 			}
@@ -168,7 +166,7 @@ var IFInputPhone = function (_IFComponentBase) {
 				hasFeedback: true,
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 92
+					lineNumber: 90
 				}
 			}, _react2.default.createElement(_antd.Input, {
 				placeholder: placeholder,
@@ -184,7 +182,7 @@ var IFInputPhone = function (_IFComponentBase) {
 				size: size || 'large',
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 98
+					lineNumber: 96
 				}
 			}));
 		}

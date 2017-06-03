@@ -74,6 +74,13 @@ var IFComponentBase = function (_Component) {
 			this._buildEventMap();
 		}
 	}, {
+		key: 'getCtrlType',
+		value: function getCtrlType() {
+			var ctrlType = this.state.option.ctrlType;
+
+			return ctrlType;
+		}
+	}, {
 		key: '_buildEventMap',
 		value: function _buildEventMap() {
 			var eventList = this.props.option.eventList;
@@ -173,16 +180,16 @@ var IFComponentBase = function (_Component) {
 			return _react2.default.createElement('div', {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 122
+					lineNumber: 132
 				}
 			}, _react2.default.createElement('h1', {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 123
+					lineNumber: 133
 				}
 			}, 'Warning'), _react2.default.createElement('p', { style: { color: 'red' }, __source: {
 					fileName: _jsxFileName,
-					lineNumber: 124
+					lineNumber: 134
 				}
 			}, 'You need to override the IFComponentBase Class in your SubClass'));
 		}

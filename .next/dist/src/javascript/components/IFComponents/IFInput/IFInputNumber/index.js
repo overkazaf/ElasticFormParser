@@ -38,6 +38,10 @@ var _Util = require('../../../../utils/Util.js');
 
 var _Util2 = _interopRequireDefault(_Util);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/Users/overkazaf/Desktop/codes/git/playGround/IntelliParser/src/javascript/components/IFComponents/IFInput/IFInputNumber/index.js';
@@ -51,13 +55,29 @@ var IFInputNumber = function (_IFComponentBase) {
 	function IFInputNumber(props) {
 		(0, _classCallCheck3.default)(this, IFInputNumber);
 
-		return (0, _possibleConstructorReturn3.default)(this, (IFInputNumber.__proto__ || (0, _getPrototypeOf2.default)(IFInputNumber)).call(this, props));
+		var _this = (0, _possibleConstructorReturn3.default)(this, (IFInputNumber.__proto__ || (0, _getPrototypeOf2.default)(IFInputNumber)).call(this, props));
+
+		_this.state = {
+			option: props.option,
+			eventMap: {}
+		};
+		return _this;
 	}
 
 	(0, _createClass3.default)(IFInputNumber, [{
+		key: 'changeValue',
+		value: function changeValue(value) {
+			// calling prototype class
+			// this input param is different from the value passed in Input Component
+
+			this.setValue(value, function () {});
+		}
+	}, {
 		key: 'render',
 		value: function render() {
-			var option = this.props.option;
+			var _state = this.state,
+			    option = _state.option,
+			    validateStatus = _state.validateStatus;
 
 			var model = _Util2.default.parseDataModel(option);
 			var size = model.size,
@@ -83,23 +103,22 @@ var IFInputNumber = function (_IFComponentBase) {
 			    extraStyle = model.extraStyle;
 
 			if (!visibility) {
-				return _react2.default.createElement('div', { style: { textAlign: 'center' }, __source: {
+				return _react2.default.createElement('div', {
+					__source: {
 						fileName: _jsxFileName,
-						lineNumber: 33
+						lineNumber: 50
 					}
-				}, _react2.default.createElement(_antd.Icon, { type: 'eye', __source: {
-						fileName: _jsxFileName,
-						lineNumber: 33
-					}
-				}));
+				});
 			}
 
 			return _react2.default.createElement(FormItem, {
 				label: label,
 				required: !!mustInput,
+				validateStatus: validateStatus,
+				hasFeedback: true,
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 37
+					lineNumber: 55
 				}
 			}, _react2.default.createElement(_antd.InputNumber, {
 				min: -Infinity,
@@ -111,10 +130,11 @@ var IFInputNumber = function (_IFComponentBase) {
 				size: size,
 				value: value,
 				defaultValue: defaultValue,
+				onChange: _lodash2.default.throttle(this.changeValue.bind(this), 200),
 				style: { width: '100%' },
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 41
+					lineNumber: 61
 				}
 			}));
 		}

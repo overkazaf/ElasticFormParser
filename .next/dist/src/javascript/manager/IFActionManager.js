@@ -12,6 +12,12 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
+var _antd = require('antd');
+
 var _IFComponentManager = require('./IFComponentManager.js');
 
 var _IFComponentManager2 = _interopRequireDefault(_IFComponentManager);
@@ -67,7 +73,70 @@ var ActionStretagies = {
 				}
 			});
 		});
+	},
+	UNLOCK_ELEM: function UNLOCK_ELEM(componentId, _ref3, ev) {
+		var expr = _ref3.expr,
+		    target = _ref3.target;
+
+		target.map(function (key) {
+			var comp = _IFComponentManager2.default.get(key);
+			comp.setFieldValue({
+				formStatus: {
+					locked: {
+						value: false
+					}
+				}
+			});
+		});
+	},
+	LOCK_ELEM: function LOCK_ELEM(componentId, _ref4, ev) {
+		var expr = _ref4.expr,
+		    target = _ref4.target;
+
+		target.map(function (key) {
+			var comp = _IFComponentManager2.default.get(key);
+			comp.setFieldValue({
+				formStatus: {
+					locked: {
+						value: true
+					}
+				}
+			});
+		});
+	},
+	VALIDATE_FORM: function VALIDATE_FORM(componentId, _ref5, ev) {
+		var expr = _ref5.expr,
+		    target = _ref5.target;
+
+		var model = {};
+		target.map(function (key) {
+			var comp = _IFComponentManager2.default.get(key);
+			var value = comp.getValue();
+			model[key] = value;
+		});
+
+		// 如果失败， 返回1作为错误标识
+		// return {
+		// 	code: 1,
+		// 	message: 'ERROR while executing VALIDATE_FORM'
+		// };
+	},
+	SUBMIT_FORM: function SUBMIT_FORM(componentId, _ref6, ev) {
+		var expr = _ref6.expr,
+		    target = _ref6.target;
+
+		var model = {};
+		target.map(function (key) {
+			var comp = _IFComponentManager2.default.get(key);
+			var value = comp.getValue();
+			model[key] = value;
+		});
+
+		_antd.message.info('Submitting form model..' + (0, _stringify2.default)(model));
+
+		_CommitEngine2.default.submitForm(model);
 	}
+
 };
 
 var IFActionManager = function () {
@@ -79,6 +148,7 @@ var IFActionManager = function () {
 		key: 'execute',
 		value: function execute(componentId, actionList) {
 
+			var pre = void 0;
 			actionList.map(function (action) {
 				var type = action.type,
 				    expr = action.expr,
@@ -86,16 +156,24 @@ var IFActionManager = function () {
 
 				var actionType = type.split(':')[1];
 
-				IFActionManager.dispatchAction(actionType, componentId, {
+				pre = IFActionManager.dispatchAction(actionType, componentId, {
 					expr: expr,
 					target: target
 				});
+
+				if (pre && pre.message) {
+
+					_antd.message.error(pre.message);
+
+					throw new Error('Error occurs in pre dispaching action');
+				}
 			});
 		}
 	}, {
 		key: 'dispatchAction',
 		value: function dispatchAction(actionType, componentId, actionOptions) {
-			ActionStretagies[actionType](componentId, actionOptions);
+			console.log('dispaching action::' + actionType);
+			return ActionStretagies[actionType](componentId, actionOptions);
 		}
 	}]);
 

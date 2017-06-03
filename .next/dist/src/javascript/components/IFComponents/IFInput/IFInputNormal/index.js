@@ -42,6 +42,10 @@ var _Util = require('../../../../utils/Util.js');
 
 var _Util2 = _interopRequireDefault(_Util);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/Users/overkazaf/Desktop/codes/git/playGround/IntelliParser/src/javascript/components/IFComponents/IFInput/IFInputNormal/index.js';
@@ -59,9 +63,25 @@ var IFInputNormal = function (_IFComponentBase) {
 	}
 
 	(0, _createClass3.default)(IFInputNormal, [{
+		key: 'changeValue',
+		value: function changeValue(_ref) {
+			var _this2 = this;
+
+			var target = _ref.target;
+
+			// calling prototype class
+
+			this.setValue(target.value, function () {
+				_this2.validateField();
+			});
+		}
+	}, {
+		key: 'validateField',
+		value: function validateField() {}
+	}, {
 		key: 'render',
 		value: function render() {
-			var option = this.props.option;
+			var option = this.state.option;
 
 			var model = _Util2.default.parseDataModel(option);
 			var size = model.size,
@@ -87,15 +107,12 @@ var IFInputNormal = function (_IFComponentBase) {
 			    extraStyle = model.extraStyle;
 
 			if (!visibility) {
-				return _react2.default.createElement('div', { style: { textAlign: 'center' }, __source: {
+				return _react2.default.createElement('div', {
+					__source: {
 						fileName: _jsxFileName,
-						lineNumber: 34
+						lineNumber: 47
 					}
-				}, _react2.default.createElement(_antd.Icon, { type: 'eye', __source: {
-						fileName: _jsxFileName,
-						lineNumber: 34
-					}
-				}));
+				});
 			}
 
 			return _react2.default.createElement(FormItem, {
@@ -103,7 +120,7 @@ var IFInputNormal = function (_IFComponentBase) {
 				required: !!mustInput,
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 38
+					lineNumber: 51
 				}
 			}, _react2.default.createElement(_antd.Input, {
 				placeholder: placeholder,
@@ -115,9 +132,10 @@ var IFInputNormal = function (_IFComponentBase) {
 				size: size || 'large',
 				value: value,
 				defaultValue: defaultValue,
+				onChange: _lodash2.default.throttle(this.changeValue.bind(this), 200),
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 42
+					lineNumber: 55
 				}
 			}));
 		}

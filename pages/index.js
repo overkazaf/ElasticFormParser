@@ -13,6 +13,7 @@ import EventEngine from '../src/javascript/engine/EventEngine';
 import mock from '../src/javascript/mock/page.json';
 
 import ComponentManager from '../src/javascript/manager/IFComponentManager.js';
+import CommitEngine from '../src/javascript/engine/CommitEngine.js';
 
 
 import { 
@@ -52,8 +53,24 @@ class MainPage extends Component {
       });
     });
 
-    global.ComponentManager = ComponentManager;
     
+
+    CommitEngine.init(this._getFormInfo()); 
+
+    global.ComponentManager = ComponentManager;
+    global.CommitEngine = CommitEngine;
+  }
+
+  _getFormInfo() {
+    let { data: {
+        id,
+      },
+    } = this.props;
+
+    return {
+      formId: id,
+      submitter: 'u-001',
+    };
   }
 
 

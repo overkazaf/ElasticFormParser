@@ -6,6 +6,7 @@ import {
 	Icon,
 } from 'antd';
 import Util from '../../../../utils/Util.js';
+import _ from 'lodash';
 
 const FormItem = Form.Item;
 
@@ -13,13 +14,28 @@ export default
 class IFInputNumber extends IFComponentBase {
 	constructor(props) {
 	  super(props);
+
+	  this.state = {
+	  	option: props.option,
+	  	eventMap: {},
+	  };
+	}
+
+	changeValue(value) {
+		// calling prototype class
+		// this input param is different from the value passed in Input Component
+
+		this.setValue(value, () => {
+			
+		});
 	}
 
 	render() {
 
 		let {
 			option,
-		} = this.props;
+			validateStatus,
+		} = this.state;
 	
 		let model = Util.parseDataModel(option);
 		let {
@@ -30,13 +46,17 @@ class IFInputNumber extends IFComponentBase {
 		} = model;
 
 		if (!visibility) {
-			return <div style={{textAlign: 'center'}}><Icon type="eye" /></div>;
+			return (
+				<div></div>
+			)
 		}
 	
 		return (
 			<FormItem
 				label={label}
 				required={!!mustInput}
+				validateStatus={validateStatus}
+				hasFeedback={true}
 			>
 				<InputNumber 
 					 min={-Infinity}
@@ -48,6 +68,7 @@ class IFInputNumber extends IFComponentBase {
 					 size={size}
 					 value={value}
 					 defaultValue={defaultValue}
+					 onChange={_.throttle(this.changeValue.bind(this), 200)}
 					 style={{ width: '100%' }}
 				/>
 			</FormItem>

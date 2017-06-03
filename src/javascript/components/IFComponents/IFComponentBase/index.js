@@ -19,6 +19,16 @@ class IFComponentBase extends Component {
 		this._buildEventMap();
 	}
 
+	getCtrlType() {
+		let {
+			option: {
+				ctrlType,
+			},
+		} = this.state;
+		
+		return ctrlType;
+	}
+
 	_buildEventMap() {
 		let {
 			option: {

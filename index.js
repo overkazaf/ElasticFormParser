@@ -8,15 +8,32 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
+const mongoose = require('mongoose');
+
 const ssrCache = new LRUCache({
   max: 100,
   maxAge: 1000 * 60 * 60 // 1hour
 })
 
+
+// routes
+var formRecord = require('./routes/formRecordCtrl');
+
+
 app.prepare()
 .then(() => {
   const server = new Koa()
   const router = new Router()
+
+  mongoose.connect('mongodb://localhost/test');
+  const db = mongoose.connection;
+
+
+  db.on('error', function(err) {
+    console.error('error occurs:', JSON.stringify(err));
+    mongoose.disconnect();
+  });
+
 
   // page routers
   router.get('/index', function *() {
@@ -54,6 +71,12 @@ app.prepare()
   })
 
   server.use(router.routes())
+
+
+  // controllers
+  // 
+  server.use('/form/submit/:fid', formRecord);
+
   server.listen(3000, (err) => {
     if (err) throw err
     console.log('> Ready on http://localhost:3000')

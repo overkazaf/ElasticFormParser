@@ -7,6 +7,7 @@ import {
 	Icon,
 } from 'antd';
 import Util from '../../../../utils/Util.js';
+import _ from 'lodash';
 
 const FormItem = Form.Item;
 
@@ -16,11 +17,23 @@ class IFInputNormal extends IFComponentBase {
 	  super(props);
 	}
 
+	changeValue({ target }) {
+		// calling prototype class
+		
+		this.setValue(target.value, () => {
+			this.validateField();
+		});
+	}
+
+	validateField() {
+		
+	}
+
 	render() {
 
 		let {
 			option,
-		} = this.props;
+		} = this.state;
 	
 		let model = Util.parseDataModel(option);
 		let {
@@ -31,7 +44,7 @@ class IFInputNormal extends IFComponentBase {
 		} = model;
 
 		if (!visibility) {
-			return <div style={{textAlign: 'center'}}><Icon type="eye" /></div>;
+			return ( <div></div> )
 		}
 	
 		return (
@@ -49,6 +62,7 @@ class IFInputNormal extends IFComponentBase {
 					 size={size || 'large'}
 					 value={value}
 					 defaultValue={defaultValue}
+					 onChange={_.throttle(this.changeValue.bind(this), 200)}
 				/>
 			</FormItem>
 		)

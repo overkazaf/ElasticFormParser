@@ -1,7 +1,10 @@
+import {
+	message,
+} from 'antd';
+
 import ComponentManager from './IFComponentManager.js';
 import Util from '../utils/Util.js';
 import mathjs from 'mathjs';
-
 import CommitEngine from '../engine/CommitEngine.js';
 
 /**
@@ -42,6 +45,69 @@ const ActionStretagies = {
 			});
 		});
 	},
+	UNLOCK_ELEM: (componentId, {
+		expr, 
+		target,
+	}, ev) => {
+		target.map((key) => {
+			let comp = ComponentManager.get(key);
+			comp.setFieldValue({
+				formStatus: {
+					locked: {
+						value: false,
+					},
+				},
+			});
+		});
+	},
+	LOCK_ELEM: (componentId, {
+		expr, 
+		target,
+	}, ev) => {
+		target.map((key) => {
+			let comp = ComponentManager.get(key);
+			comp.setFieldValue({
+				formStatus: {
+					locked: {
+						value: true,
+					},
+				},
+			});
+		});
+	},
+	VALIDATE_FORM: (componentId, {
+		expr, 
+		target,
+	}, ev) => {
+		let model = {};
+		target.map((key) => {
+			let comp = ComponentManager.get(key);
+			let value = comp.getValue();
+			model[key] = value;
+		});
+
+		// 如果失败， 返回1作为错误标识
+		// return {
+		// 	code: 1,
+		// 	message: 'ERROR while executing VALIDATE_FORM'
+		// };
+	},
+	SUBMIT_FORM: (componentId, {
+		expr, 
+		target,
+	}, ev) => {
+		let model = {};
+		target.map((key) => {
+			let comp = ComponentManager.get(key);
+			let value = comp.getValue();
+			model[key] = value;
+		});
+
+		message.info(`Submitting form model..${JSON.stringify(model)}`);
+
+		CommitEngine.submitForm(model);
+	},
+
 	// UpdateValue: (componentId, {
 	// 	action,
 	// 	params,
@@ -136,7 +202,9 @@ export default
 class IFActionManager {
 	static execute(componentId, actionList) {
 
+		let pre;
 		actionList.map((action) => {
+
 			let {
 				type,
 				expr,
@@ -145,16 +213,24 @@ class IFActionManager {
 
 			let actionType = type.split(':')[1];
 
-			IFActionManager.dispatchAction(actionType, componentId, {
+			pre = IFActionManager.dispatchAction(actionType, componentId, {
 				expr,
 				target,
 			});
+
+			if (pre && pre.message) {
+
+				message.error(pre.message);
+
+				throw new Error('Error occurs in pre dispaching action');
+			}
 		});
 	}
 
 
 	static dispatchAction(actionType, componentId, actionOptions) {
-		ActionStretagies[actionType](componentId, actionOptions);
+		console.log(`dispaching action::${actionType}`);
+		return ActionStretagies[actionType](componentId, actionOptions);
 	}
 
 }
