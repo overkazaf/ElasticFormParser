@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import Head from 'next/head'
 import { initStore } from '../src/javascript/store';
 import withRedux from 'next-redux-wrapper';
 import fetch from 'isomorphic-fetch';
 import NoSSR from 'react-no-ssr';
 import Immutable from 'immutable';
 import Rx from 'rxjs/Rx';
-import antdStyle from '../src/css/index.min.css';
 import RenderEngine from '../src/javascript/engine/RenderEngine';
 import LayoutEngine from '../src/javascript/engine/LayoutEngine';
 import EventEngine from '../src/javascript/engine/EventEngine';
@@ -15,11 +15,8 @@ import mock from '../src/javascript/mock/page.json';
 import ComponentManager from '../src/javascript/manager/IFComponentManager.js';
 import CommitEngine from '../src/javascript/engine/CommitEngine.js';
 
-
-import { 
- Row,
- Col,
-} from 'antd';
+import { Form, Select, InputNumber, DatePicker, Switch, Slider, Button, LocaleProvider } from 'antd'
+import enUS from 'antd/lib/locale-provider/en_US'
 
 class MainPage extends Component {
   static getInitialProps ({ store, isServer }) {
@@ -81,12 +78,19 @@ class MainPage extends Component {
     } = this.props;
 
     return (
-      <div className="p-main">
-        <style dangerouslySetInnerHTML={{ __html: antdStyle}} />
-        {LayoutEngine.renderLayout(data, dispatch)}
-      </div>
+      <LocaleProvider locale={enUS}>
+        <div>
+          <Head>
+            <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/antd/2.10.2/antd.min.css' />
+          </Head>
+          <div className="p-main">
+            {LayoutEngine.renderLayout(data, dispatch)}
+          </div>
+        </div>
+      </LocaleProvider>
     )
   }
 }
 
 export default withRedux(initStore)(MainPage);
+

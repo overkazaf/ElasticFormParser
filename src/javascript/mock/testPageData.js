@@ -120,30 +120,33 @@ let layouts = {
 
 let data = {
   id: 'IntelliForm-00001', // 设计器系统生成的id
-  key: 'IntelliForm-00001', // 可自定义的id
+  fid: 'IntelliForm-00001', // 表单id
+  key: 'IntelliForm-00001', // 可自定义的表单id，用于扩展
   name: 'form1',　// 名字
   title: '测试表单一',
   description: '测试表单一',
   formType: 0,
   pageIndex: 1,
   theme: 'default',
-  creater: 'u-001', // 创建者名字
+  creater: 'u-001', // 创建者ID
   createTS: 1488133454806,
   style: {
     width: 960,
   },
-  nextId: 'IntelliForm-00002', // 下推表单
+  nextFid: 'IntelliForm-00002', // 下推表单ID，用于表单关联
   plugIns: [],
   basicProps: {},
   dataSource: [],
   eventList: [
     {
       eventType: 'onLoad',
-      options: {
-        action: 'BringDataSource',
-        expression: 'LOOKUP',
-        target: ['comp4']
-      }
+      actionList: [
+        {
+          type: 'LoadDataSource',
+          expr: 'xxx|yyy|zzz',
+          target: [],
+        }
+      ]
     }
   ],
   advanced: {},

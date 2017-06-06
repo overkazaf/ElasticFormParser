@@ -22,7 +22,7 @@ class CommitEngine {
 
 		// combine model
 		let dataModel = {
-			formId,
+			fid: formId,
 			submitter,
 			createDate: +new Date(),
 			model,
@@ -32,17 +32,24 @@ class CommitEngine {
 
 	static doSubmit(dataModel) {
 
-		let submitUrl = `http://localhost:3005/form/submit/${dataModel.formId}`;
+		let submitUrl = `http://localhost:3001/form/submit`;
 		
-		fetch(submitUrl, dataModel)
+		fetch(submitUrl, {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(dataModel)
+		})
 			.then(function(response) {
 		        if (response.status >= 400) {
 		            throw new Error("Bad response from server");
 		        }
 		        return response.json();
 		    })
-		    .then(function(stories) {
-		        console.log(stories);
+		    .then(function(data) {
+		        console.log('data from remote server', data);
 		    });
 
 		//console.log('models in CommitEngine', dataModel);
